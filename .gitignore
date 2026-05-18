@@ -1,0 +1,9 @@
+# Local source copies already normalized under assets/
+2bab4209-dd2b-4048-bb69-a353bbf07764.png
+433094ec-6aec-466a-8cb6-25677bc119cb.png
+
+# Browser / OS leftovers
+.DS_Store
+Thumbs.db
+preview-*.png
+chrome-profile/
