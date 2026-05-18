@@ -470,7 +470,7 @@ function setAuthUi(user) {
 
   toolbar?.classList.toggle("is-hidden", !activeAdmin);
   if (loginButton) {
-    loginButton.textContent = activeAdmin ? "Edit Modu Açık" : "Admin Girişi";
+    loginButton.textContent = activeAdmin ? "Giriş Yapıldı" : "Kullanıcı Girişi";
   }
   if (emailLabel) {
     emailLabel.textContent = activeAdmin?.email || "";

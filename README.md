@@ -1,4 +1,4 @@
-# Quagame Studios
+﻿# Quagame Studios
 
 Static website for Quagame Studios and American Ice Cream Simulator.
 
@@ -9,7 +9,7 @@ There is no build command and the output is served from the repository root.
 
 ## Inline admin editing
 
-Open the live site and use the `Admin Girişi` button in the header:
+Open the live site and use the `Kullanıcı Girişi` button in the header:
 
 ```text
 https://quagame.vercel.app

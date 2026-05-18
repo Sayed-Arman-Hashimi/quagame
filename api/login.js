@@ -29,7 +29,7 @@ module.exports = async function handler(request, response) {
 
   if (!adminPassword || !getSecret()) {
     response.status(500).json({
-      error: "Admin ayarı eksik: Vercel'de ADMIN_PASSWORD ve ADMIN_SECRET eklenmeli.",
+      error: "Giriş ayarı eksik: Vercel'de ADMIN_PASSWORD ve ADMIN_SECRET eklenmeli.",
     });
     return;
   }

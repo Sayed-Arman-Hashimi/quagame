@@ -104,7 +104,7 @@ async function putFile({ owner, repo, branch, filePath, contentBase64, message }
 module.exports = async function handler(request, response) {
   if (request.method === "GET") {
     if (!verifySession(request)) {
-      response.status(401).json({ error: "Admin girişi gerekiyor" });
+      response.status(401).json({ error: "Kullanıcı girişi gerekiyor" });
       return;
     }
     response.status(200).json({ content: readLocalContent() });
@@ -117,7 +117,7 @@ module.exports = async function handler(request, response) {
   }
 
   if (!verifySession(request)) {
-    response.status(401).json({ error: "Admin girişi gerekiyor" });
+    response.status(401).json({ error: "Kullanıcı girişi gerekiyor" });
     return;
   }
 
