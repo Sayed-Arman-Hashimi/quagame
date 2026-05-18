@@ -7,12 +7,12 @@ Static website for Quagame Studios and American Ice Cream Simulator.
 Import this repository in Vercel and keep the default static site settings.
 There is no build command and the output is served from the repository root.
 
-## Admin panel
+## Inline admin editing
 
-Admin panel path:
+Open the live site and use the `Admin Girişi` button in the header:
 
 ```text
-https://quagame.vercel.app/admin.html
+https://quagame.vercel.app
 ```
 
 Add these Environment Variables in Vercel before using the admin panel:
@@ -27,5 +27,6 @@ GITHUB_REPO=quagame
 GITHUB_BRANCH=main
 ```
 
-The admin panel edits `content.json` and uploads images under `assets/uploads/` by committing
-changes to GitHub. Vercel redeploys automatically after the commit.
+After login, editable text is changed directly on the page. Image replacement buttons appear on
+the images themselves. Saving commits `content.json` and uploaded images under `assets/uploads/`
+to GitHub. Vercel redeploys automatically after the commit.

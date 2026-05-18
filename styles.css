@@ -443,6 +443,7 @@ h3 {
 }
 
 .lead-story {
+  position: relative;
   min-height: 360px;
   display: flex;
   flex-direction: column;
@@ -793,6 +794,19 @@ h3 {
   justify-content: flex-end;
 }
 
+.edit-status {
+  flex-basis: 100%;
+  min-height: 18px;
+  margin: -4px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.edit-status.is-error {
+  color: #ffb4b4;
+}
+
 .edit-toolbar a,
 .edit-toolbar button {
   min-height: 38px;
@@ -810,6 +824,67 @@ h3 {
 .edit-toolbar button {
   background: transparent;
   color: var(--white);
+}
+
+.edit-toolbar button[data-edit-save] {
+  background: var(--white);
+  color: var(--black);
+}
+
+.inline-file-input {
+  display: none;
+}
+
+.is-inline-editing [data-edit-path] {
+  outline: 1px dashed rgba(247, 247, 242, 0.54);
+  outline-offset: 4px;
+  cursor: text;
+  transition:
+    outline-color 160ms ease,
+    background 160ms ease;
+}
+
+.is-inline-editing [data-edit-path]:hover,
+.is-inline-editing [data-edit-path]:focus {
+  outline-color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.is-inline-editing .ticker [data-edit-path]:hover,
+.is-inline-editing .ticker [data-edit-path]:focus,
+.is-inline-editing .newsletter [data-edit-path]:hover,
+.is-inline-editing .newsletter [data-edit-path]:focus {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.inline-image-edit-button {
+  position: absolute;
+  z-index: 12;
+  top: 18px;
+  right: 18px;
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--white);
+  border-radius: var(--radius);
+  background: rgba(5, 5, 5, 0.82);
+  color: var(--white);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 900;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.38);
+}
+
+.brand + .inline-image-edit-button,
+.site-header > .inline-image-edit-button {
+  position: static;
+  min-height: 34px;
+  margin-left: auto;
+}
+
+.game-info .inline-image-edit-button,
+.story-list .inline-image-edit-button {
+  position: static;
 }
 
 .auth-modal {

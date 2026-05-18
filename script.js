@@ -1,9 +1,32 @@
 let siteContent = null;
 let activeSlide = 0;
 let activeAdmin = null;
+let hasUnsavedChanges = false;
+let pendingImagePath = null;
 
 function getValue(source, path) {
   return path.split(".").reduce((value, key) => value?.[key], source);
+}
+
+function setValue(source, path, nextValue) {
+  const keys = path.split(".");
+  const lastKey = keys.pop();
+  const target = keys.reduce((value, key) => value?.[key], source);
+  if (target && lastKey) {
+    target[lastKey] = nextValue;
+  }
+}
+
+function setInlineStatus(message, isError = false) {
+  const status = document.querySelector("[data-inline-status]");
+  if (!status) return;
+  status.textContent = message;
+  status.classList.toggle("is-error", isError);
+}
+
+function markDirty(message = "Kaydedilmemiş değişiklik var.") {
+  hasUnsavedChanges = true;
+  setInlineStatus(message);
 }
 
 function setTextContent(content) {
@@ -40,9 +63,10 @@ function renderTicker(content) {
   if (!ticker) return;
 
   ticker.replaceChildren(
-    ...content.ticker.map((item) => {
+    ...content.ticker.map((item, index) => {
       const paragraph = document.createElement("p");
       paragraph.textContent = item;
+      paragraph.dataset.editPath = `ticker.${index}`;
       return paragraph;
     }),
   );
@@ -61,9 +85,11 @@ function renderSlides(content) {
       const image = document.createElement("img");
       image.src = slide.image;
       image.alt = slide.alt || "";
+      image.dataset.inlineImagePath = `game.slides.${index}.image`;
 
       const caption = document.createElement("figcaption");
       caption.textContent = slide.caption;
+      caption.dataset.editPath = `game.slides.${index}.caption`;
 
       figure.append(image, caption);
       return figure;
@@ -88,9 +114,10 @@ function renderGameDetails(content) {
   const facts = document.querySelector('[data-render="facts"]');
   if (paragraphs) {
     paragraphs.replaceChildren(
-      ...content.game.paragraphs.map((copy) => {
+      ...content.game.paragraphs.map((copy, index) => {
         const paragraph = document.createElement("p");
         paragraph.textContent = copy;
+        paragraph.dataset.editPath = `game.paragraphs.${index}`;
         return paragraph;
       }),
     );
@@ -98,12 +125,14 @@ function renderGameDetails(content) {
 
   if (facts) {
     facts.replaceChildren(
-      ...content.game.facts.map((fact) => {
+      ...content.game.facts.map((fact, index) => {
         const wrapper = document.createElement("div");
         const label = document.createElement("dt");
         const value = document.createElement("dd");
         label.textContent = fact.label;
         value.textContent = fact.value;
+        label.dataset.editPath = `game.facts.${index}.label`;
+        value.dataset.editPath = `game.facts.${index}.value`;
         wrapper.append(label, value);
         return wrapper;
       }),
@@ -116,17 +145,29 @@ function renderNews(content) {
   if (!list) return;
 
   list.replaceChildren(
-    ...content.news.items.map((item) => {
+    ...content.news.items.map((item, index) => {
       const article = document.createElement("article");
       const time = document.createElement("time");
       const title = document.createElement("h3");
       time.dateTime = item.date;
       time.textContent = item.dateLabel;
+      time.dataset.editPath = `news.items.${index}.dateLabel`;
       title.textContent = item.title;
+      title.dataset.editPath = `news.items.${index}.title`;
       article.append(time, title);
       return article;
     }),
   );
+}
+
+function renderSite(content) {
+  setTextContent(content);
+  renderTicker(content);
+  renderSlides(content);
+  renderGameDetails(content);
+  renderNews(content);
+  showSlide(Math.min(activeSlide, content.game.slides.length - 1));
+  applyInlineEditorState();
 }
 
 function showSlide(index) {
@@ -186,6 +227,162 @@ async function apiRequest(url, options = {}) {
   return body;
 }
 
+function fileToPayload(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = String(reader.result);
+      const [, data = ""] = dataUrl.split(",");
+      resolve({
+        data,
+        filename: file.name,
+        mimeType: file.type || "application/octet-stream",
+      });
+    };
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(file);
+  });
+}
+
+function syncInlineText(element) {
+  const path = element.dataset.editPath;
+  if (!path || !siteContent) return;
+
+  const nextValue = element.innerText.replace(/\n{3,}/g, "\n\n").trim();
+  setValue(siteContent, path, nextValue);
+  markDirty();
+}
+
+function prepareEditableText() {
+  document.querySelectorAll("[data-content]").forEach((element) => {
+    if (element.tagName !== "META") {
+      element.dataset.editPath = element.dataset.content;
+    }
+  });
+
+  document.querySelectorAll("[data-edit-path]").forEach((element) => {
+    const editable = Boolean(activeAdmin);
+    element.contentEditable = String(editable);
+    element.spellcheck = editable;
+    element.classList.toggle("inline-editable", editable);
+
+    if (!element.dataset.inlineBound) {
+      element.dataset.inlineBound = "true";
+      element.addEventListener("input", () => syncInlineText(element));
+      element.addEventListener("click", (event) => {
+        if (activeAdmin && element.tagName === "A") {
+          event.preventDefault();
+        }
+      });
+    }
+  });
+}
+
+function createImageButton(targetElement, path) {
+  if (!activeAdmin || !path) return;
+
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "inline-image-edit-button";
+  button.textContent = "Fotoğrafı Değiştir";
+  button.dataset.targetPath = path;
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+    pendingImagePath = path;
+    document.querySelector("[data-inline-image-input]")?.click();
+  });
+
+  const parentLink = targetElement.closest("a");
+
+  if (targetElement.matches("[data-content-background]")) {
+    targetElement.append(button);
+  } else if (parentLink) {
+    parentLink.insertAdjacentElement("afterend", button);
+  } else {
+    targetElement.insertAdjacentElement("afterend", button);
+  }
+}
+
+function prepareEditableImages() {
+  document.querySelectorAll(".inline-image-edit-button").forEach((button) => button.remove());
+  if (!activeAdmin) return;
+
+  document.querySelectorAll("[data-content-image]").forEach((element) => {
+    createImageButton(element, element.dataset.contentImage);
+  });
+
+  document.querySelectorAll("[data-content-background]").forEach((element) => {
+    createImageButton(element, element.dataset.contentBackground);
+  });
+
+  document.querySelectorAll("[data-inline-image-path]").forEach((element) => {
+    createImageButton(element, element.dataset.inlineImagePath);
+  });
+}
+
+function applyInlineEditorState() {
+  document.body.classList.toggle("is-inline-editing", Boolean(activeAdmin));
+  prepareEditableText();
+  prepareEditableImages();
+}
+
+async function uploadInlineImage(file) {
+  if (!pendingImagePath || !file || !siteContent) return;
+
+  setInlineStatus("Fotoğraf yükleniyor...");
+  const upload = await fileToPayload(file);
+  const body = await apiRequest("/api/content", {
+    method: "POST",
+    body: JSON.stringify({
+      content: siteContent,
+      upload,
+      targetPath: pendingImagePath,
+    }),
+  });
+
+  siteContent = body.content;
+  hasUnsavedChanges = false;
+  renderSite(siteContent);
+  setInlineStatus("Fotoğraf kaydedildi. Vercel yayını birkaç saniye içinde yeniler.");
+}
+
+async function saveInlineContent() {
+  if (!activeAdmin || !siteContent) return;
+
+  setInlineStatus("Kaydediliyor...");
+  const body = await apiRequest("/api/content", {
+    method: "POST",
+    body: JSON.stringify({ content: siteContent }),
+  });
+
+  siteContent = body.content;
+  hasUnsavedChanges = false;
+  renderSite(siteContent);
+  setInlineStatus("Kaydedildi. Vercel yayını birkaç saniye içinde yeniler.");
+}
+
+function setupInlineEditorActions() {
+  document.querySelector("[data-edit-save]")?.addEventListener("click", () => {
+    saveInlineContent().catch((error) => setInlineStatus(error.message, true));
+  });
+
+  document.querySelector("[data-edit-reset]")?.addEventListener("click", () => {
+    if (!hasUnsavedChanges || confirm("Kaydedilmemiş değişiklikler silinsin mi?")) {
+      location.reload();
+    }
+  });
+
+  document.querySelector("[data-inline-image-input]")?.addEventListener("change", (event) => {
+    const [file] = event.target.files || [];
+    uploadInlineImage(file)
+      .catch((error) => setInlineStatus(error.message, true))
+      .finally(() => {
+        event.target.value = "";
+        pendingImagePath = null;
+      });
+  });
+}
+
 function setAuthUi(user) {
   activeAdmin = user || null;
   const toolbar = document.querySelector("[data-edit-toolbar]");
@@ -200,6 +397,10 @@ function setAuthUi(user) {
     emailLabel.textContent = activeAdmin?.email || "";
   }
   document.body.classList.toggle("has-edit-toolbar", Boolean(activeAdmin));
+  applyInlineEditorState();
+  if (activeAdmin) {
+    setInlineStatus("Metinlere tıklayıp düzenle, fotoğrafları kendi üzerinde değiştir.");
+  }
 }
 
 function openAuthModal() {
@@ -218,7 +419,7 @@ function setupAuth() {
   document.querySelectorAll("[data-auth-open]").forEach((button) => {
     button.addEventListener("click", () => {
       if (activeAdmin) {
-        document.querySelector("[data-edit-toolbar]")?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        setInlineStatus("Edit modu açık. Sayfadaki yazıların üstüne tıklayıp düzenle.");
       } else {
         openAuthModal();
       }
@@ -230,6 +431,7 @@ function setupAuth() {
   });
 
   document.querySelector("[data-auth-logout]")?.addEventListener("click", async () => {
+    if (hasUnsavedChanges && !confirm("Kaydedilmemiş değişiklikler var. Çıkış yapılsın mı?")) return;
     await apiRequest("/api/logout", { method: "POST", body: "{}" });
     setAuthUi(null);
   });
@@ -274,17 +476,20 @@ async function loadContent() {
 async function init() {
   try {
     siteContent = await loadContent();
-    setTextContent(siteContent);
-    renderTicker(siteContent);
-    renderSlides(siteContent);
-    renderGameDetails(siteContent);
-    renderNews(siteContent);
+    renderSite(siteContent);
     setupCarousel();
     setupNewsletter(siteContent);
+    setupInlineEditorActions();
     setupAuth();
   } catch (error) {
     console.error(error);
   }
 }
+
+window.addEventListener("beforeunload", (event) => {
+  if (!hasUnsavedChanges) return;
+  event.preventDefault();
+  event.returnValue = "";
+});
 
 init();
