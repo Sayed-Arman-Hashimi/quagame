@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Quagame Studios oyun kataloğu." data-content="metaDescription" />
+    <title>Quagame Studios | Oyunlar</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page-title="Oyunlar">
+    <header class="site-header" aria-label="Ana navigasyon">
+      <a class="brand" href="index.html" aria-label="Quagame Studios ana sayfa">
+        <img src="assets/quagame-logo.png" alt="" data-content-image="logoImage" />
+        <span data-content="brandName">Quagame Studios</span>
+      </a>
+      <nav class="nav-links" aria-label="Site menüsü">
+        <a href="oyunlar.html">Oyunlar</a>
+        <a href="hakkinda.html">Hakkında</a>
+        <a href="haberler.html">Haberler</a>
+        <a href="iletisim.html">İletişim</a>
+      </nav>
+      <button class="header-action" type="button" data-auth-open>Admin Girişi</button>
+    </header>
+
+    <main>
+      <section class="subpage-hero" aria-labelledby="games-title">
+        <p class="eyebrow" data-content="games.eyebrow">Oyunlar</p>
+        <h1 id="games-title" data-content="games.title">Quagame oyunları burada yayınlanır.</h1>
+      </section>
+      <section class="section">
+        <div class="games-list" data-render="gameCards"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p data-content="footer">© 2026 Quagame Studios</p>
+      <div>
+        <a href="index.html">Ana Sayfa</a>
+        <a href="hakkinda.html">Hakkında</a>
+        <a href="iletisim.html">İletişim</a>
+      </div>
+    </footer>
+
+    <div class="edit-toolbar is-hidden" data-edit-toolbar>
+      <div><strong>Quagame Edit Modu</strong><span data-admin-email></span></div>
+      <nav aria-label="Edit kısayolları">
+        <button type="button" data-edit-save>Değişiklikleri Kaydet</button>
+        <button type="button" data-edit-reset>Yenile</button>
+        <button type="button" data-auth-logout>Çıkış</button>
+      </nav>
+      <p class="edit-status" data-inline-status></p>
+    </div>
+    <input class="inline-file-input" type="file" accept="image/*" data-inline-image-input />
+    <div class="auth-modal is-hidden" data-auth-modal>
+      <div class="auth-modal-backdrop" data-auth-close></div>
+      <section class="auth-dialog" aria-labelledby="auth-title" role="dialog" aria-modal="true">
+        <button class="auth-close" type="button" data-auth-close aria-label="Giriş penceresini kapat">×</button>
+        <p class="eyebrow">Yönetici</p>
+        <h2 id="auth-title">Kullanıcı Girişi</h2>
+        <form data-auth-form>
+          <label for="site-login-email">E-posta</label>
+          <input id="site-login-email" name="email" type="email" autocomplete="email" value="sayedarman1352@gmail.com" required />
+          <label for="site-login-password">Şifre</label>
+          <input id="site-login-password" name="password" type="password" autocomplete="current-password" required />
+          <button type="submit">Giriş Yap</button>
+          <p class="auth-message" data-auth-message></p>
+        </form>
+      </section>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

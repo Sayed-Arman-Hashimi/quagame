@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Quagame Studios haberleri." data-content="metaDescription" />
+    <title>Quagame Studios | Haberler</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-page-title="Haberler">
+    <header class="site-header" aria-label="Ana navigasyon">
+      <a class="brand" href="index.html" aria-label="Quagame Studios ana sayfa">
+        <img src="assets/quagame-logo.png" alt="" data-content-image="logoImage" />
+        <span data-content="brandName">Quagame Studios</span>
+      </a>
+      <nav class="nav-links" aria-label="Site menüsü">
+        <a href="oyunlar.html">Oyunlar</a><a href="hakkinda.html">Hakkında</a><a href="haberler.html">Haberler</a><a href="iletisim.html">İletişim</a>
+      </nav>
+      <button class="header-action" type="button" data-auth-open>Admin Girişi</button>
+    </header>
+    <main>
+      <section class="section news-section standalone-page" aria-labelledby="news-title">
+        <div class="section-heading">
+          <p class="eyebrow" data-content="news.eyebrow">Haber Akışı</p>
+          <h1 id="news-title" data-content="news.title">Quagame'den Son Notlar</h1>
+        </div>
+        <div class="news-layout">
+          <article class="lead-story" data-content-background="news.lead.image">
+            <p class="tag" data-content="news.lead.tag">Duyuru</p>
+            <h3 data-content="news.lead.title">American Ice Cream Simulator oyunlar bölümüne eklendi</h3>
+            <p data-content="news.lead.copy">Quagame'in çıkacak oyunu artık Oyunlar bölümünden incelenebilir.</p>
+            <a href="american-icecream-simulator.html" data-content="news.lead.linkLabel">Oyunu İncele</a>
+          </article>
+          <div class="story-list" aria-label="Kısa haberler" data-render="newsItems"></div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer"><p data-content="footer">© 2026 Quagame Studios</p><div><a href="index.html">Ana Sayfa</a><a href="oyunlar.html">Oyunlar</a><a href="iletisim.html">İletişim</a></div></footer>
+    <div class="edit-toolbar is-hidden" data-edit-toolbar><div><strong>Quagame Edit Modu</strong><span data-admin-email></span></div><nav aria-label="Edit kısayolları"><button type="button" data-edit-save>Değişiklikleri Kaydet</button><button type="button" data-edit-reset>Yenile</button><button type="button" data-auth-logout>Çıkış</button></nav><p class="edit-status" data-inline-status></p></div>
+    <input class="inline-file-input" type="file" accept="image/*" data-inline-image-input />
+    <div class="auth-modal is-hidden" data-auth-modal><div class="auth-modal-backdrop" data-auth-close></div><section class="auth-dialog" aria-labelledby="auth-title" role="dialog" aria-modal="true"><button class="auth-close" type="button" data-auth-close aria-label="Giriş penceresini kapat">×</button><p class="eyebrow">Yönetici</p><h2 id="auth-title">Kullanıcı Girişi</h2><form data-auth-form><label for="site-login-email">E-posta</label><input id="site-login-email" name="email" type="email" autocomplete="email" value="sayedarman1352@gmail.com" required /><label for="site-login-password">Şifre</label><input id="site-login-password" name="password" type="password" autocomplete="current-password" required /><button type="submit">Giriş Yap</button><p class="auth-message" data-auth-message></p></form></section></div>
+    <script src="script.js"></script>
+  </body>
+</html>

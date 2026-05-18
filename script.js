@@ -55,7 +55,7 @@ function setTextContent(content) {
     }
   });
 
-  document.title = `${content.brandName} | ${content.hero.title}`;
+  document.title = `${content.brandName} | ${document.body.dataset.pageTitle || content.hero.title}`;
   updateContactLinks();
 }
 
@@ -129,7 +129,7 @@ function renderGameCards(content) {
       copy.dataset.editPath = `games.items.${index}.copy`;
 
       const link = document.createElement("a");
-      link.href = "#american-icecream";
+      link.href = "american-icecream-simulator.html";
       link.className = "button secondary";
       link.textContent = game.linkLabel;
       link.dataset.editPath = `games.items.${index}.linkLabel`;

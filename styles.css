@@ -257,6 +257,34 @@ h3 {
   padding: clamp(56px, 9vw, 112px) clamp(18px, 5vw, 72px);
 }
 
+.subpage-hero,
+.standalone-page {
+  min-height: auto;
+  padding: clamp(76px, 11vw, 136px) clamp(18px, 5vw, 72px) clamp(44px, 7vw, 82px);
+}
+
+.subpage-hero {
+  border-bottom: 1px solid var(--soft-line);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 42%),
+    #090909;
+}
+
+.subpage-hero h1,
+.standalone-page h1 {
+  max-width: 1020px;
+  margin-bottom: 18px;
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+
+.subpage-hero p:not(.eyebrow) {
+  max-width: 720px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
 .section-heading {
   display: flex;
   align-items: end;
