@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quagame Admin</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="admin-page">
+    <main class="admin-shell">
+      <section class="admin-hero">
+        <div>
+          <p class="eyebrow">Yönetim Paneli</p>
+          <h1>Quagame Admin</h1>
+          <p>
+            Site metinleri, haberler, logo, kapak ve slider görselleri buradan değişir. Kayıt
+            sonrası sistem GitHub'a commit atar, Vercel otomatik yayınlar.
+          </p>
+        </div>
+      </section>
+
+      <section class="admin-card" data-view="login">
+        <h2>Admin Girişi</h2>
+        <form class="admin-login-form">
+          <label for="admin-email">E-posta</label>
+          <input id="admin-email" name="email" type="email" value="sayedarman1352@gmail.com" required />
+          <label for="admin-password">Şifre</label>
+          <input id="admin-password" name="password" type="password" required />
+          <button type="submit">Giriş Yap</button>
+          <p class="admin-message" data-message="login"></p>
+        </form>
+      </section>
+
+      <section class="admin-card is-hidden" data-view="editor">
+        <div class="admin-card-heading">
+          <div>
+            <p class="eyebrow">İçerik</p>
+            <h2>Siteyi Düzenle</h2>
+          </div>
+          <a class="button secondary" href="/" target="_blank" rel="noreferrer">Siteyi Aç</a>
+        </div>
+
+        <div class="admin-grid">
+          <form class="admin-upload-form">
+            <h3>Fotoğraf Değiştir / Ekle</h3>
+            <label for="image-target">Nereye eklensin?</label>
+            <select id="image-target" name="target">
+              <option value="logoImage">Logo</option>
+              <option value="hero.image">Ana kapak görseli</option>
+              <option value="news.lead.image">Haber kapak görseli</option>
+              <option value="game.slides.0.image">Slider 1</option>
+              <option value="game.slides.1.image">Slider 2</option>
+              <option value="game.slides.2.image">Slider 3</option>
+              <option value="game.slides.3.image">Slider 4</option>
+            </select>
+            <label for="image-file">Görsel dosyası</label>
+            <input id="image-file" name="image" type="file" accept="image/*" required />
+            <label for="image-caption">Slider açıklaması</label>
+            <input id="image-caption" name="caption" type="text" placeholder="Sadece slider için opsiyonel" />
+            <button type="submit">Fotoğrafı Kaydet</button>
+          </form>
+
+          <form class="admin-json-form">
+            <h3>Tüm İçerik</h3>
+            <label for="content-json">content.json</label>
+            <textarea id="content-json" spellcheck="false"></textarea>
+            <button type="submit">İçeriği Kaydet</button>
+          </form>
+        </div>
+
+        <p class="admin-message" data-message="editor"></p>
+      </section>
+    </main>
+
+    <script src="admin.js"></script>
+  </body>
+</html>

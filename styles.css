@@ -447,7 +447,7 @@ h3 {
   padding: clamp(24px, 4vw, 42px);
   background:
     linear-gradient(180deg, rgba(5, 5, 5, 0.08), rgba(5, 5, 5, 0.92)),
-    url("assets/american-icecream-night.png") center / cover;
+    var(--story-image, url("assets/american-icecream-night.png")) center / cover;
 }
 
 .lead-story h3 {
@@ -618,5 +618,142 @@ h3 {
   .site-footer div {
     width: 100%;
     justify-content: space-between;
+  }
+}
+
+.admin-page {
+  min-height: 100vh;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 34%),
+    var(--black);
+}
+
+.admin-shell {
+  width: min(1180px, calc(100% - 36px));
+  margin: 0 auto;
+  padding: 40px 0 72px;
+}
+
+.admin-hero {
+  padding: clamp(38px, 8vw, 96px) 0 28px;
+}
+
+.admin-hero h1 {
+  max-width: 760px;
+  margin-bottom: 18px;
+  font-size: clamp(3rem, 9vw, 7rem);
+}
+
+.admin-hero p {
+  max-width: 720px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.admin-card {
+  padding: clamp(20px, 4vw, 34px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(21, 21, 21, 0.94);
+}
+
+.admin-card + .admin-card {
+  margin-top: 18px;
+}
+
+.admin-card h2,
+.admin-card h3 {
+  margin-bottom: 18px;
+}
+
+.admin-card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.7fr) minmax(0, 1.3fr);
+  gap: 22px;
+}
+
+.admin-login-form,
+.admin-upload-form,
+.admin-json-form {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-login-form {
+  max-width: 460px;
+}
+
+.admin-page label {
+  color: var(--muted);
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+.admin-page input,
+.admin-page select,
+.admin-page textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #080808;
+  color: var(--white);
+  font: inherit;
+}
+
+.admin-page textarea {
+  min-height: 560px;
+  resize: vertical;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.admin-page button {
+  width: fit-content;
+  min-height: 46px;
+  padding: 0 18px;
+  border: 1px solid var(--white);
+  border-radius: var(--radius);
+  background: var(--white);
+  color: var(--black);
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.admin-message {
+  min-height: 24px;
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.admin-message.is-error {
+  color: #ffb4b4;
+}
+
+.is-hidden {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .admin-card-heading,
+  .admin-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .admin-page textarea {
+    min-height: 420px;
   }
 }

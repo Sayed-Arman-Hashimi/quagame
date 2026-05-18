@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Quagame Studios'un American Ice Cream Simulator oyunu için resmi haber ve duyuru sitesi."
+      content="Quagame Studios'un American Ice Cream Simulator oyunu icin resmi haber ve duyuru sitesi."
+      data-content="metaDescription"
     />
     <title>Quagame Studios | American Ice Cream Simulator</title>
     <link rel="stylesheet" href="styles.css" />
@@ -13,8 +14,8 @@
   <body>
     <header class="site-header" aria-label="Ana navigasyon">
       <a class="brand" href="#top" aria-label="Quagame Studios ana sayfa">
-        <img src="assets/quagame-logo.png" alt="" />
-        <span>Quagame Studios</span>
+        <img src="assets/quagame-logo.png" alt="" data-content-image="logoImage" />
+        <span data-content="brandName">Quagame Studios</span>
       </a>
       <nav class="nav-links" aria-label="Site menüsü">
         <a href="#game">Oyun</a>
@@ -30,64 +31,39 @@
           class="hero-image"
           src="assets/american-icecream-wide.png"
           alt="American Ice Cream Simulator oyun görseli"
+          data-content-image="hero.image"
         />
         <div class="hero-overlay" aria-hidden="true"></div>
         <div class="hero-content">
-          <p class="eyebrow">Quagame Studios sunar</p>
-          <h1 id="hero-title">American Ice Cream Simulator</h1>
-          <p class="hero-copy">
+          <p class="eyebrow" data-content="hero.eyebrow">Quagame Studios sunar</p>
+          <h1 id="hero-title" data-content="hero.title">American Ice Cream Simulator</h1>
+          <p class="hero-copy" data-content="hero.copy">
             Amerika'da dondurmacı olarak hayatına yeniden başla. Gündüzleri müşterilere mutluluk
             sat, geceleri geçmişindeki suç bağlantıları yeniden kapını çalsın.
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="#game">Oyunu İncele</a>
-            <a class="button secondary" href="#news">Gelişmeleri Oku</a>
+            <a class="button primary" href="#game" data-content="hero.primaryLabel">Oyunu İncele</a>
+            <a class="button secondary" href="#news" data-content="hero.secondaryLabel">Gelişmeleri Oku</a>
           </div>
         </div>
       </section>
 
-      <section class="ticker" aria-label="Öne çıkan duyurular">
-        <p>Tek aktif proje: American Ice Cream Simulator</p>
-        <p>Gündüz işletme, gece karanlık kararlar</p>
-        <p>Quagame haberleri burada yayınlanır</p>
-      </section>
+      <section class="ticker" aria-label="Öne çıkan duyurular" data-render="ticker"></section>
 
       <section class="section game-section" id="game" aria-labelledby="game-title">
         <div class="section-heading">
-          <p class="eyebrow">Çıkmakta Olan Oyun</p>
-          <h2 id="game-title">Tatlı bir başlangıç, kirli bir geçmiş.</h2>
+          <p class="eyebrow" data-content="game.eyebrow">Çıkmakta Olan Oyun</p>
+          <h2 id="game-title" data-content="game.title">Tatlı bir başlangıç, kirli bir geçmiş.</h2>
         </div>
 
         <div class="game-showcase">
           <div class="carousel" aria-label="American Ice Cream Simulator görselleri">
-            <div class="carousel-track">
-              <figure class="slide active">
-                <img src="assets/american-icecream-wide.png" alt="Oyunun ana kapak görseli" />
-                <figcaption>Kasabanın parlak yüzü ve şehrin karanlık gecesi.</figcaption>
-              </figure>
-              <figure class="slide">
-                <img src="assets/american-icecream-day.png" alt="Gündüz dondurma servisi görseli" />
-                <figcaption>Gündüzleri mahalleye dondurma servisi yap.</figcaption>
-              </figure>
-              <figure class="slide">
-                <img src="assets/american-icecream-night.png" alt="Gece suç geçmişi atmosferi" />
-                <figcaption>Akşamları eski hayatının izleri yeniden belirir.</figcaption>
-              </figure>
-              <figure class="slide">
-                <img src="assets/american-icecream-truck.png" alt="Dondurma kamyonu yakın plan" />
-                <figcaption>Kamyonunu büyüt, menünü geliştir, riskli işleri yönet.</figcaption>
-              </figure>
-            </div>
+            <div class="carousel-track" data-render="slides"></div>
             <div class="carousel-controls" aria-label="Görsel kontrolleri">
               <button class="carousel-button" type="button" data-carousel="prev" aria-label="Önceki görsel">
                 ‹
               </button>
-              <div class="carousel-dots" aria-label="Görsel seçimi">
-                <button class="active" type="button" data-slide="0" aria-label="1. görsel"></button>
-                <button type="button" data-slide="1" aria-label="2. görsel"></button>
-                <button type="button" data-slide="2" aria-label="3. görsel"></button>
-                <button type="button" data-slide="3" aria-label="4. görsel"></button>
-              </div>
+              <div class="carousel-dots" aria-label="Görsel seçimi" data-render="dots"></div>
               <button class="carousel-button" type="button" data-carousel="next" aria-label="Sonraki görsel">
                 ›
               </button>
@@ -95,41 +71,22 @@
           </div>
 
           <article class="game-info">
-            <p class="tag">Simülasyon / Hikaye / Suç</p>
-            <h3>American Ice Cream Simulator</h3>
-            <p>
-              Yeni bir şehir, yeni bir isim ve eski hayatından kaçmak için küçük bir dondurma
-              kamyonu. Müşteri memnuniyeti, stok yönetimi ve mahalle itibarı gündüz mesainin
-              parçası.
-            </p>
-            <p>
-              Gece olduğunda işler değişir: eski suç çevren tekrar ortaya çıkar, borçlar hatırlatılır
-              ve temiz kalmakla karanlık fırsatlara dönmek arasında seçim yaparsın.
-            </p>
-            <dl class="facts">
-              <div>
-                <dt>Durum</dt>
-                <dd>Geliştirme aşamasında</dd>
-              </div>
-              <div>
-                <dt>Odak</dt>
-                <dd>İşletme + gece hikayesi</dd>
-              </div>
-              <div>
-                <dt>Stüdyo</dt>
-                <dd>Quagame Studios</dd>
-              </div>
-            </dl>
+            <p class="tag" data-content="game.tag">Simülasyon / Hikaye / Suç</p>
+            <h3 data-content="game.name">American Ice Cream Simulator</h3>
+            <div data-render="gameParagraphs"></div>
+            <dl class="facts" data-render="facts"></dl>
           </article>
         </div>
       </section>
 
       <section class="story-band" id="story" aria-labelledby="story-title">
         <div>
-          <p class="eyebrow">Hakkında</p>
-          <h2 id="story-title">Amerika'da ikinci şans herkes için aynı temiz başlamaz.</h2>
+          <p class="eyebrow" data-content="story.eyebrow">Hakkında</p>
+          <h2 id="story-title" data-content="story.title">
+            Amerika'da ikinci şans herkes için aynı temiz başlamaz.
+          </h2>
         </div>
-        <p>
+        <p data-content="story.copy">
           American Ice Cream Simulator, bir dondurmacı simülasyonu gibi başlar; rota planlama,
           satış, müşteri ilişkileri ve kamyon geliştirme etrafında büyür. Ama karakterin eski
           suç geçmişi geceleri geri döndükçe oyun iki hayata ayrılır: gündüz düzgün bir işletme,
@@ -139,39 +96,28 @@
 
       <section class="section news-section" id="news" aria-labelledby="news-title">
         <div class="section-heading">
-          <p class="eyebrow">Haber Akışı</p>
-          <h2 id="news-title">Quagame'den Son Notlar</h2>
+          <p class="eyebrow" data-content="news.eyebrow">Haber Akışı</p>
+          <h2 id="news-title" data-content="news.title">Quagame'den Son Notlar</h2>
         </div>
         <div class="news-layout">
-          <article class="lead-story">
-            <p class="tag">Duyuru</p>
-            <h3>American Ice Cream Simulator geliştirme sayfası yayında</h3>
-            <p>
+          <article class="lead-story" data-content-background="news.lead.image">
+            <p class="tag" data-content="news.lead.tag">Duyuru</p>
+            <h3 data-content="news.lead.title">American Ice Cream Simulator geliştirme sayfası yayında</h3>
+            <p data-content="news.lead.copy">
               İlk görsel seti, oyun teması ve Quagame Studios haber akışı bu sayfada toplandı.
             </p>
-            <a href="#game" aria-label="American Ice Cream Simulator bölümüne git">Oyuna Git</a>
+            <a href="#game" aria-label="American Ice Cream Simulator bölümüne git" data-content="news.lead.linkLabel">
+              Oyuna Git
+            </a>
           </article>
-          <div class="story-list" aria-label="Kısa haberler">
-            <article>
-              <time datetime="2026-05-18">18 Mayıs 2026</time>
-              <h3>Gündüz satış ve gece görev sistemi için konsept çalışmaları başladı</h3>
-            </article>
-            <article>
-              <time datetime="2026-05-18">18 Mayıs 2026</time>
-              <h3>Quagame Studios logosu resmi siteye eklendi</h3>
-            </article>
-            <article>
-              <time datetime="2026-05-18">18 Mayıs 2026</time>
-              <h3>Yaklaşan ekran görüntüleri ve geliştirme notları burada paylaşılacak</h3>
-            </article>
-          </div>
+          <div class="story-list" aria-label="Kısa haberler" data-render="newsItems"></div>
         </div>
       </section>
 
       <section class="newsletter" id="newsletter" aria-labelledby="newsletter-title">
         <div>
-          <p class="eyebrow">Bülten</p>
-          <h2 id="newsletter-title">Yeni Quagame haberlerini kaçırma.</h2>
+          <p class="eyebrow" data-content="newsletter.eyebrow">Bülten</p>
+          <h2 id="newsletter-title" data-content="newsletter.title">Yeni Quagame haberlerini kaçırma.</h2>
         </div>
         <form>
           <label for="email">E-posta</label>
@@ -185,7 +131,7 @@
     </main>
 
     <footer class="site-footer">
-      <p>© 2026 Quagame Studios</p>
+      <p data-content="footer">© 2026 Quagame Studios</p>
       <div>
         <a href="#game">Oyun</a>
         <a href="#story">Hakkında</a>

@@ -1,0 +1,103 @@
+{
+  "brandName": "Quagame Studios",
+  "logoImage": "assets/quagame-logo.png",
+  "metaDescription": "Quagame Studios'un American Ice Cream Simulator oyunu icin resmi haber ve duyuru sitesi.",
+  "hero": {
+    "eyebrow": "Quagame Studios sunar",
+    "title": "American Ice Cream Simulator",
+    "copy": "Amerika'da dondurmacı olarak hayatına yeniden başla. Gündüzleri müşterilere mutluluk sat, geceleri geçmişindeki suç bağlantıları yeniden kapını çalsın.",
+    "image": "assets/american-icecream-wide.png",
+    "primaryLabel": "Oyunu İncele",
+    "secondaryLabel": "Gelişmeleri Oku"
+  },
+  "ticker": [
+    "Tek aktif proje: American Ice Cream Simulator",
+    "Gündüz işletme, gece karanlık kararlar",
+    "Quagame haberleri burada yayınlanır"
+  ],
+  "game": {
+    "eyebrow": "Çıkmakta Olan Oyun",
+    "title": "Tatlı bir başlangıç, kirli bir geçmiş.",
+    "tag": "Simülasyon / Hikaye / Suç",
+    "name": "American Ice Cream Simulator",
+    "paragraphs": [
+      "Yeni bir şehir, yeni bir isim ve eski hayatından kaçmak için küçük bir dondurma kamyonu. Müşteri memnuniyeti, stok yönetimi ve mahalle itibarı gündüz mesainin parçası.",
+      "Gece olduğunda işler değişir: eski suç çevren tekrar ortaya çıkar, borçlar hatırlatılır ve temiz kalmakla karanlık fırsatlara dönmek arasında seçim yaparsın."
+    ],
+    "facts": [
+      {
+        "label": "Durum",
+        "value": "Geliştirme aşamasında"
+      },
+      {
+        "label": "Odak",
+        "value": "İşletme + gece hikayesi"
+      },
+      {
+        "label": "Stüdyo",
+        "value": "Quagame Studios"
+      }
+    ],
+    "slides": [
+      {
+        "image": "assets/american-icecream-wide.png",
+        "alt": "Oyunun ana kapak görseli",
+        "caption": "Kasabanın parlak yüzü ve şehrin karanlık gecesi."
+      },
+      {
+        "image": "assets/american-icecream-day.png",
+        "alt": "Gündüz dondurma servisi görseli",
+        "caption": "Gündüzleri mahalleye dondurma servisi yap."
+      },
+      {
+        "image": "assets/american-icecream-night.png",
+        "alt": "Gece suç geçmişi atmosferi",
+        "caption": "Akşamları eski hayatının izleri yeniden belirir."
+      },
+      {
+        "image": "assets/american-icecream-truck.png",
+        "alt": "Dondurma kamyonu yakın plan",
+        "caption": "Kamyonunu büyüt, menünü geliştir, riskli işleri yönet."
+      }
+    ]
+  },
+  "story": {
+    "eyebrow": "Hakkında",
+    "title": "Amerika'da ikinci şans herkes için aynı temiz başlamaz.",
+    "copy": "American Ice Cream Simulator, bir dondurmacı simülasyonu gibi başlar; rota planlama, satış, müşteri ilişkileri ve kamyon geliştirme etrafında büyür. Ama karakterin eski suç geçmişi geceleri geri döndükçe oyun iki hayata ayrılır: gündüz düzgün bir işletme, akşam ise geçmişten gelen tehlikeli teklifler."
+  },
+  "news": {
+    "eyebrow": "Haber Akışı",
+    "title": "Quagame'den Son Notlar",
+    "lead": {
+      "tag": "Duyuru",
+      "title": "American Ice Cream Simulator geliştirme sayfası yayında",
+      "copy": "İlk görsel seti, oyun teması ve Quagame Studios haber akışı bu sayfada toplandı.",
+      "image": "assets/american-icecream-night.png",
+      "linkLabel": "Oyuna Git"
+    },
+    "items": [
+      {
+        "date": "2026-05-18",
+        "dateLabel": "18 Mayıs 2026",
+        "title": "Gündüz satış ve gece görev sistemi için konsept çalışmaları başladı"
+      },
+      {
+        "date": "2026-05-18",
+        "dateLabel": "18 Mayıs 2026",
+        "title": "Quagame Studios logosu resmi siteye eklendi"
+      },
+      {
+        "date": "2026-05-18",
+        "dateLabel": "18 Mayıs 2026",
+        "title": "Yaklaşan ekran görüntüleri ve geliştirme notları burada paylaşılacak"
+      }
+    ]
+  },
+  "newsletter": {
+    "eyebrow": "Bülten",
+    "title": "Yeni Quagame haberlerini kaçırma.",
+    "successMessage": "Tamamdır, Quagame haberleri için listeye eklendin."
+  },
+  "footer": "© 2026 Quagame Studios"
+}
