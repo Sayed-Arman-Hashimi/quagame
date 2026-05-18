@@ -22,7 +22,7 @@
         <a href="#story">Hakkında</a>
         <a href="#news">Haberler</a>
       </nav>
-      <a class="header-action" href="#newsletter">Takip Et</a>
+      <button class="header-action" type="button" data-auth-open>Admin Girişi</button>
     </header>
 
     <main id="top">
@@ -138,6 +138,49 @@
         <a href="#news">Haberler</a>
       </div>
     </footer>
+
+    <div class="edit-toolbar is-hidden" data-edit-toolbar>
+      <div>
+        <strong>Quagame Edit Modu</strong>
+        <span data-admin-email></span>
+      </div>
+      <nav aria-label="Edit kısayolları">
+        <a href="/admin" data-edit-link>Admin Paneli</a>
+        <a href="/admin" data-edit-link>İçerik Düzenle</a>
+        <a href="/admin" data-edit-link>Fotoğraf Değiştir</a>
+        <button type="button" data-auth-logout>Çıkış</button>
+      </nav>
+    </div>
+
+    <div class="auth-modal is-hidden" data-auth-modal>
+      <div class="auth-modal-backdrop" data-auth-close></div>
+      <section class="auth-dialog" aria-labelledby="auth-title" role="dialog" aria-modal="true">
+        <button class="auth-close" type="button" data-auth-close aria-label="Giriş penceresini kapat">×</button>
+        <p class="eyebrow">Yönetici</p>
+        <h2 id="auth-title">Kullanıcı Girişi</h2>
+        <form data-auth-form>
+          <label for="site-login-email">E-posta</label>
+          <input
+            id="site-login-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            value="sayedarman1352@gmail.com"
+            required
+          />
+          <label for="site-login-password">Şifre</label>
+          <input
+            id="site-login-password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+          />
+          <button type="submit">Giriş Yap</button>
+          <p class="auth-message" data-auth-message></p>
+        </form>
+      </section>
+    </div>
 
     <script src="script.js"></script>
   </body>

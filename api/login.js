@@ -45,5 +45,5 @@ module.exports = async function handler(request, response) {
     "Set-Cookie",
     `quagame_admin=${createSession(adminEmail)}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=28800`,
   );
-  response.status(200).json({ ok: true });
+  response.status(200).json({ ok: true, email: adminEmail });
 };

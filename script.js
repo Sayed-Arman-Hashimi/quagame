@@ -1,5 +1,6 @@
 let siteContent = null;
 let activeSlide = 0;
+let activeAdmin = null;
 
 function getValue(source, path) {
   return path.split(".").reduce((value, key) => value?.[key], source);
@@ -172,6 +173,96 @@ function setupNewsletter(content) {
   });
 }
 
+async function apiRequest(url, options = {}) {
+  const response = await fetch(url, {
+    credentials: "same-origin",
+    headers: { "Content-Type": "application/json", ...(options.headers || {}) },
+    ...options,
+  });
+  const body = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(body.error || "İşlem başarısız oldu");
+  }
+  return body;
+}
+
+function setAuthUi(user) {
+  activeAdmin = user || null;
+  const toolbar = document.querySelector("[data-edit-toolbar]");
+  const loginButton = document.querySelector("[data-auth-open]");
+  const emailLabel = document.querySelector("[data-admin-email]");
+
+  toolbar?.classList.toggle("is-hidden", !activeAdmin);
+  if (loginButton) {
+    loginButton.textContent = activeAdmin ? "Edit Modu Açık" : "Admin Girişi";
+  }
+  if (emailLabel) {
+    emailLabel.textContent = activeAdmin?.email || "";
+  }
+  document.body.classList.toggle("has-edit-toolbar", Boolean(activeAdmin));
+}
+
+function openAuthModal() {
+  document.querySelector("[data-auth-modal]")?.classList.remove("is-hidden");
+  document.querySelector("#site-login-password")?.focus();
+}
+
+function closeAuthModal() {
+  document.querySelector("[data-auth-modal]")?.classList.add("is-hidden");
+}
+
+function setupAuth() {
+  const form = document.querySelector("[data-auth-form]");
+  const message = document.querySelector("[data-auth-message]");
+
+  document.querySelectorAll("[data-auth-open]").forEach((button) => {
+    button.addEventListener("click", () => {
+      if (activeAdmin) {
+        document.querySelector("[data-edit-toolbar]")?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      } else {
+        openAuthModal();
+      }
+    });
+  });
+
+  document.querySelectorAll("[data-auth-close]").forEach((button) => {
+    button.addEventListener("click", closeAuthModal);
+  });
+
+  document.querySelector("[data-auth-logout]")?.addEventListener("click", async () => {
+    await apiRequest("/api/logout", { method: "POST", body: "{}" });
+    setAuthUi(null);
+  });
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    message.textContent = "Giriş kontrol ediliyor...";
+    message.classList.remove("is-error");
+
+    try {
+      const body = await apiRequest("/api/login", {
+        method: "POST",
+        body: JSON.stringify({
+          email: String(data.get("email") || ""),
+          password: String(data.get("password") || ""),
+        }),
+      });
+      setAuthUi({ email: body.email || String(data.get("email") || "") });
+      message.textContent = "";
+      closeAuthModal();
+      form.reset();
+    } catch (error) {
+      message.textContent = error.message;
+      message.classList.add("is-error");
+    }
+  });
+
+  apiRequest("/api/me")
+    .then((body) => setAuthUi(body.user))
+    .catch(() => setAuthUi(null));
+}
+
 async function loadContent() {
   const response = await fetch("content.json", { cache: "no-store" });
   if (!response.ok) {
@@ -190,6 +281,7 @@ async function init() {
     renderNews(siteContent);
     setupCarousel();
     setupNewsletter(siteContent);
+    setupAuth();
   } catch (error) {
     console.error(error);
   }
