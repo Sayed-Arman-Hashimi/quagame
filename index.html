@@ -18,9 +18,10 @@
         <span data-content="brandName">Quagame Studios</span>
       </a>
       <nav class="nav-links" aria-label="Site menüsü">
-        <a href="#game">Oyun</a>
+        <a href="#games">Oyunlar</a>
         <a href="#story">Hakkında</a>
         <a href="#news">Haberler</a>
+        <a href="#contact">İletişim</a>
       </nav>
       <button class="header-action" type="button" data-auth-open>Admin Girişi</button>
     </header>
@@ -42,17 +43,24 @@
             sat, geceleri geçmişindeki suç bağlantıları yeniden kapını çalsın.
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="#game" data-content="hero.primaryLabel">Oyunu İncele</a>
-            <a class="button secondary" href="#news" data-content="hero.secondaryLabel">Gelişmeleri Oku</a>
+            <a class="button primary" href="#games" data-content="hero.primaryLabel">Oyunları İncele</a>
+            <a class="button secondary" href="#news" data-content="hero.secondaryLabel">Stüdyo Haberleri</a>
           </div>
         </div>
       </section>
 
       <section class="ticker" aria-label="Öne çıkan duyurular" data-render="ticker"></section>
 
-      <section class="section game-section" id="game" aria-labelledby="game-title">
+      <section class="section game-section" id="games" aria-labelledby="games-title">
         <div class="section-heading">
-          <p class="eyebrow" data-content="game.eyebrow">Çıkmakta Olan Oyun</p>
+          <p class="eyebrow" data-content="games.eyebrow">Oyunlar</p>
+          <h2 id="games-title" data-content="games.title">Quagame oyunları burada yayınlanır.</h2>
+        </div>
+
+        <div class="games-list" data-render="gameCards"></div>
+
+        <div class="section-heading detail-heading" id="american-icecream">
+          <p class="eyebrow" data-content="game.eyebrow">Öne Çıkan Oyun</p>
           <h2 id="game-title" data-content="game.title">Tatlı bir başlangıç, kirli bir geçmiş.</h2>
         </div>
 
@@ -106,7 +114,7 @@
             <p data-content="news.lead.copy">
               İlk görsel seti, oyun teması ve Quagame Studios haber akışı bu sayfada toplandı.
             </p>
-            <a href="#game" aria-label="American Ice Cream Simulator bölümüne git" data-content="news.lead.linkLabel">
+            <a href="#american-icecream" aria-label="American Ice Cream Simulator bölümüne git" data-content="news.lead.linkLabel">
               Oyuna Git
             </a>
           </article>
@@ -128,14 +136,35 @@
           <p class="form-note" aria-live="polite"></p>
         </form>
       </section>
+
+      <section class="contact-section" id="contact" aria-labelledby="contact-title">
+        <div>
+          <p class="eyebrow" data-content="contact.eyebrow">İletişim</p>
+          <h2 id="contact-title" data-content="contact.title">Quagame ile iletişime geç.</h2>
+          <p data-content="contact.copy">
+            Basın, iş birliği, topluluk ve oyunla ilgili tüm mesajlar için bize ulaşabilirsin.
+          </p>
+        </div>
+        <div class="contact-links">
+          <a href="mailto:quaectum@gmail.com" data-contact-email>
+            <span data-content="contact.emailLabel">E-posta</span>
+            <strong data-content="contact.email">quaectum@gmail.com</strong>
+          </a>
+          <a href="https://www.instagram.com/quagame/" target="_blank" rel="noreferrer" data-contact-instagram>
+            <span data-content="contact.instagramLabel">Instagram</span>
+            <strong data-content="contact.instagram">@quagame</strong>
+          </a>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer">
       <p data-content="footer">© 2026 Quagame Studios</p>
       <div>
-        <a href="#game">Oyun</a>
+        <a href="#games">Oyunlar</a>
         <a href="#story">Hakkında</a>
         <a href="#news">Haberler</a>
+        <a href="#contact">İletişim</a>
       </div>
     </footer>
 

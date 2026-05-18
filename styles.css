@@ -272,6 +272,56 @@ h3 {
   align-items: stretch;
 }
 
+.games-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+  margin-bottom: clamp(42px, 7vw, 82px);
+}
+
+.studio-game-card {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.95fr) minmax(280px, 1fr);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+.studio-game-media {
+  position: relative;
+  min-height: 310px;
+}
+
+.studio-game-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.studio-game-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  padding: clamp(22px, 4vw, 38px);
+}
+
+.studio-game-body p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.studio-game-body .button {
+  width: fit-content;
+  margin-top: 8px;
+}
+
+.detail-heading {
+  padding-top: clamp(16px, 3vw, 34px);
+  border-top: 1px solid var(--soft-line);
+}
+
 .carousel,
 .game-info,
 .lead-story,
@@ -489,6 +539,55 @@ h3 {
   color: var(--black);
 }
 
+.contact-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 560px);
+  gap: clamp(28px, 7vw, 88px);
+  align-items: center;
+  padding: clamp(56px, 9vw, 112px) clamp(18px, 5vw, 72px);
+  border-top: 1px solid #d5d5cf;
+  background: var(--white);
+  color: var(--black);
+}
+
+.contact-section .eyebrow,
+.contact-section p {
+  color: #555;
+}
+
+.contact-section p {
+  max-width: 620px;
+  margin-bottom: 0;
+  line-height: 1.65;
+}
+
+.contact-links {
+  display: grid;
+  gap: 12px;
+}
+
+.contact-links a {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  border: 1px solid var(--black);
+  border-radius: var(--radius);
+  background: transparent;
+}
+
+.contact-links span {
+  color: #555;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.contact-links strong {
+  color: var(--black);
+  font-size: clamp(1.15rem, 3vw, 1.8rem);
+  overflow-wrap: anywhere;
+}
+
 .newsletter .eyebrow,
 .newsletter p {
   color: #555;
@@ -563,10 +662,12 @@ h3 {
   }
 
   .ticker,
+  .studio-game-card,
   .game-showcase,
   .story-band,
   .news-layout,
-  .newsletter {
+  .newsletter,
+  .contact-section {
     grid-template-columns: 1fr;
   }
 
@@ -853,7 +954,9 @@ h3 {
 .is-inline-editing .ticker [data-edit-path]:hover,
 .is-inline-editing .ticker [data-edit-path]:focus,
 .is-inline-editing .newsletter [data-edit-path]:hover,
-.is-inline-editing .newsletter [data-edit-path]:focus {
+.is-inline-editing .newsletter [data-edit-path]:focus,
+.is-inline-editing .contact-section [data-edit-path]:hover,
+.is-inline-editing .contact-section [data-edit-path]:focus {
   background: rgba(0, 0, 0, 0.08);
 }
 

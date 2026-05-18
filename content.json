@@ -1,22 +1,36 @@
 {
   "brandName": "Quagame Studios",
   "logoImage": "assets/quagame-logo.png",
-  "metaDescription": "Quagame Studios'un American Ice Cream Simulator oyunu icin resmi haber ve duyuru sitesi.",
+  "metaDescription": "Quagame Studios oyunları, duyuruları ve stüdyo haberleri.",
   "hero": {
-    "eyebrow": "Quagame Studios sunar",
-    "title": "American Ice Cream Simulator",
-    "copy": "Amerika'da dondurmacı olarak hayatına yeniden başla. Gündüzleri müşterilere mutluluk sat, geceleri geçmişindeki suç bağlantıları yeniden kapını çalsın.",
+    "eyebrow": "Bağımsız oyun stüdyosu",
+    "title": "Quagame Studios",
+    "copy": "Quagame'in çıkan ve çıkacak oyunlarını, geliştirme notlarını ve stüdyo haberlerini tek yerden takip et.",
     "image": "assets/american-icecream-wide.png",
-    "primaryLabel": "Oyunu İncele",
-    "secondaryLabel": "Gelişmeleri Oku"
+    "primaryLabel": "Oyunları İncele",
+    "secondaryLabel": "Stüdyo Haberleri"
   },
   "ticker": [
-    "Tek aktif proje: American Ice Cream Simulator",
-    "Gündüz işletme, gece karanlık kararlar",
+    "Yeni oyun: American Ice Cream Simulator",
+    "Oyunlar bölümünden detayları incele",
     "Quagame haberleri burada yayınlanır"
   ],
+  "games": {
+    "eyebrow": "Oyunlar",
+    "title": "Quagame oyunları burada yayınlanır.",
+    "items": [
+      {
+        "name": "American Ice Cream Simulator",
+        "status": "Yakında",
+        "genre": "Simülasyon / Hikaye / Suç",
+        "copy": "Amerika'da dondurmacı olarak yeni bir hayata başla; geceleri eski suç geçmişinle yüzleş.",
+        "image": "assets/american-icecream-wide.png",
+        "linkLabel": "Oyunu İncele"
+      }
+    ]
+  },
   "game": {
-    "eyebrow": "Çıkmakta Olan Oyun",
+    "eyebrow": "Öne Çıkan Oyun",
     "title": "Tatlı bir başlangıç, kirli bir geçmiş.",
     "tag": "Simülasyon / Hikaye / Suç",
     "name": "American Ice Cream Simulator",
@@ -63,29 +77,29 @@
   },
   "story": {
     "eyebrow": "Hakkında",
-    "title": "Amerika'da ikinci şans herkes için aynı temiz başlamaz.",
-    "copy": "American Ice Cream Simulator, bir dondurmacı simülasyonu gibi başlar; rota planlama, satış, müşteri ilişkileri ve kamyon geliştirme etrafında büyür. Ama karakterin eski suç geçmişi geceleri geri döndükçe oyun iki hayata ayrılır: gündüz düzgün bir işletme, akşam ise geçmişten gelen tehlikeli teklifler."
+    "title": "Quagame, hikaye ve oynanışı aynı masada tutan bir oyun stüdyosu.",
+    "copy": "Quagame Studios; güçlü fikirleri, okunaklı sistemleri ve oyuncunun seçimlerini merkeze alan oyunlar üretir. Stüdyo olarak hedefimiz, küçük ekip çevikliğiyle düzenli geliştirilen ve topluluk geri bildirimiyle büyüyen oyun dünyaları kurmaktır."
   },
   "news": {
     "eyebrow": "Haber Akışı",
     "title": "Quagame'den Son Notlar",
     "lead": {
       "tag": "Duyuru",
-      "title": "American Ice Cream Simulator geliştirme sayfası yayında",
-      "copy": "İlk görsel seti, oyun teması ve Quagame Studios haber akışı bu sayfada toplandı.",
+      "title": "American Ice Cream Simulator oyunlar bölümüne eklendi",
+      "copy": "Quagame'in çıkacak oyunu artık Oyunlar bölümünden incelenebilir. Görseller, hikaye notları ve geliştirme durumu aynı sayfada güncellenecek.",
       "image": "assets/american-icecream-night.png",
-      "linkLabel": "Oyuna Git"
+      "linkLabel": "Oyunu İncele"
     },
     "items": [
       {
-        "date": "2026-05-18",
-        "dateLabel": "18 Mayıs 2026",
-        "title": "Gündüz satış ve gece görev sistemi için konsept çalışmaları başladı"
+        "date": "2026-05-19",
+        "dateLabel": "19 Mayıs 2026",
+        "title": "Oyunlar bölümü Quagame katalog yapısına taşındı"
       },
       {
         "date": "2026-05-18",
         "dateLabel": "18 Mayıs 2026",
-        "title": "Quagame Studios logosu resmi siteye eklendi"
+        "title": "Gündüz satış ve gece görev sistemi için konsept çalışmaları başladı"
       },
       {
         "date": "2026-05-18",
@@ -98,6 +112,16 @@
     "eyebrow": "Bülten",
     "title": "Yeni Quagame haberlerini kaçırma.",
     "successMessage": "Tamamdır, Quagame haberleri için listeye eklendin."
+  },
+  "contact": {
+    "eyebrow": "İletişim",
+    "title": "Quagame ile iletişime geç.",
+    "copy": "Basın, iş birliği, topluluk ve oyunla ilgili tüm mesajlar için bize ulaşabilirsin.",
+    "emailLabel": "E-posta",
+    "email": "quaectum@gmail.com",
+    "instagramLabel": "Instagram",
+    "instagram": "@quagame",
+    "instagramUrl": "https://www.instagram.com/quagame/"
   },
   "footer": "© 2026 Quagame Studios"
 }

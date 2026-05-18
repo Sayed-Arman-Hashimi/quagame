@@ -56,6 +56,24 @@ function setTextContent(content) {
   });
 
   document.title = `${content.brandName} | ${content.hero.title}`;
+  updateContactLinks();
+}
+
+function updateContactLinks() {
+  const emailLink = document.querySelector("[data-contact-email]");
+  const instagramLink = document.querySelector("[data-contact-instagram]");
+  const email = siteContent?.contact?.email;
+  const instagram = siteContent?.contact?.instagram;
+  const instagramUrl =
+    siteContent?.contact?.instagramUrl ||
+    `https://www.instagram.com/${String(instagram || "quagame").replace("@", "")}/`;
+
+  if (emailLink && email) {
+    emailLink.href = `mailto:${email}`;
+  }
+  if (instagramLink) {
+    instagramLink.href = instagramUrl;
+  }
 }
 
 function renderTicker(content) {
@@ -68,6 +86,57 @@ function renderTicker(content) {
       paragraph.textContent = item;
       paragraph.dataset.editPath = `ticker.${index}`;
       return paragraph;
+    }),
+  );
+}
+
+function renderGameCards(content) {
+  const list = document.querySelector('[data-render="gameCards"]');
+  if (!list) return;
+
+  list.replaceChildren(
+    ...content.games.items.map((game, index) => {
+      const article = document.createElement("article");
+      article.className = "studio-game-card";
+
+      const imageWrap = document.createElement("div");
+      imageWrap.className = "studio-game-media";
+      const image = document.createElement("img");
+      image.src = game.image;
+      image.alt = `${game.name} oyun görseli`;
+      image.dataset.inlineImagePath = `games.items.${index}.image`;
+      imageWrap.append(image);
+
+      const body = document.createElement("div");
+      body.className = "studio-game-body";
+
+      const meta = document.createElement("p");
+      meta.className = "tag";
+      const status = document.createElement("span");
+      const genre = document.createElement("span");
+      status.textContent = game.status;
+      genre.textContent = game.genre;
+      status.dataset.editPath = `games.items.${index}.status`;
+      genre.dataset.editPath = `games.items.${index}.genre`;
+      meta.append(status, document.createTextNode(" / "), genre);
+
+      const title = document.createElement("h3");
+      title.textContent = game.name;
+      title.dataset.editPath = `games.items.${index}.name`;
+
+      const copy = document.createElement("p");
+      copy.textContent = game.copy;
+      copy.dataset.editPath = `games.items.${index}.copy`;
+
+      const link = document.createElement("a");
+      link.href = "#american-icecream";
+      link.className = "button secondary";
+      link.textContent = game.linkLabel;
+      link.dataset.editPath = `games.items.${index}.linkLabel`;
+
+      body.append(meta, title, copy, link);
+      article.append(imageWrap, body);
+      return article;
     }),
   );
 }
@@ -163,6 +232,7 @@ function renderNews(content) {
 function renderSite(content) {
   setTextContent(content);
   renderTicker(content);
+  renderGameCards(content);
   renderSlides(content);
   renderGameDetails(content);
   renderNews(content);
@@ -250,6 +320,14 @@ function syncInlineText(element) {
 
   const nextValue = element.innerText.replace(/\n{3,}/g, "\n\n").trim();
   setValue(siteContent, path, nextValue);
+  if (path === "contact.email") {
+    updateContactLinks();
+  }
+  if (path === "contact.instagram") {
+    const handle = nextValue.replace("@", "").trim();
+    siteContent.contact.instagramUrl = `https://www.instagram.com/${handle || "quagame"}/`;
+    updateContactLinks();
+  }
   markDirty();
 }
 
@@ -270,8 +348,9 @@ function prepareEditableText() {
       element.dataset.inlineBound = "true";
       element.addEventListener("input", () => syncInlineText(element));
       element.addEventListener("click", (event) => {
-        if (activeAdmin && element.tagName === "A") {
+        if (activeAdmin && element.closest("a")) {
           event.preventDefault();
+          event.stopPropagation();
         }
       });
     }
