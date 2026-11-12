@@ -1,176 +1,222 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Bu sene böyle olsun kasımpatı. Açılan bir çiçek.">
-    <title>Bu sene böyle olsun kasımpatı</title>
-    <style>
-      * { box-sizing: border-box; }
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kasımpatı</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#f5f3fb; --bg2:#d8d2ea; --ink:#2b2250; --muted:#695f88;
+  --ring:rgba(43,34,80,.32); --btn:rgba(43,34,80,.07); --glow-a:55%;
+  --glow-c:#ffc24d; --spark:#f3b73a;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg1:#1d1540; --bg2:#090716; --ink:#f6ecff; --muted:#b4a8d0;
+    --ring:rgba(246,236,255,.35); --btn:rgba(246,236,255,.08); --glow-a:32%;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg1:#1d1540; --bg2:#090716; --ink:#f6ecff; --muted:#b4a8d0;
+  --ring:rgba(246,236,255,.35); --btn:rgba(246,236,255,.08); --glow-a:32%;
+  color-scheme:dark;
+}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:clamp(8px,2vh,20px);overflow-x:hidden;
+  background-color:var(--bg2);
+  background-image:radial-gradient(ellipse at 50% 42%,var(--bg1),var(--bg2) 78%);
+  color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+header{text-align:center;position:relative;z-index:2;padding:0 16px}
+h1{margin:0;font:italic 500 clamp(36px,6vw,56px)/1 "Cormorant Garamond",Georgia,serif;letter-spacing:.01em}
+header p{margin:8px 0 0;color:var(--muted);font-size:14px}
 
-      body {
-        margin: 0;
-        min-height: 100svh;
-        display: grid;
-        place-items: center;
-        padding: 32px 20px;
-        background: #f4f4f9;
-        color: #42343e;
-        font-family: Georgia, "Times New Roman", serif;
-        letter-spacing: 0;
-      }
+.stage{position:relative;width:min(92vw,60vh,620px);aspect-ratio:1;cursor:pointer;z-index:1;-webkit-tap-highlight-color:transparent}
+.glow{
+  position:absolute;inset:-14%;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,color-mix(in srgb,var(--glow-c) var(--glow-a),transparent),transparent 62%);
+  opacity:0;transform:scale(.4);
+  transition:opacity 2.6s ease .5s,transform 3.2s cubic-bezier(.2,.8,.2,1) .3s;
+}
+.stage.open .glow{opacity:1;transform:scale(1)}
+.stage.closing .glow{transition:opacity .7s ease,transform .9s ease}
+svg{position:relative;display:block;width:100%;height:100%;overflow:visible}
+stop{transition:stop-color .9s ease}
 
-      main {
-        width: min(100%, 620px);
-        display: grid;
-        justify-items: center;
-        gap: 28px;
-        text-align: center;
-      }
+.bloom{transform-origin:0 0;animation:breathe 6s ease-in-out infinite alternate}
+@keyframes breathe{from{transform:scale(1)}to{transform:scale(1.025)}}
+.layer{transform-origin:0 0;animation:sway var(--sp) ease-in-out var(--dl) infinite alternate}
+@keyframes sway{
+  from{transform:rotate(calc(var(--dir) * -1.8deg))}
+  to{transform:rotate(calc(var(--dir) * 1.8deg))}
+}
+.petal{
+  stroke:rgba(40,20,60,.16);stroke-width:.7;stroke-linejoin:round;
+  transform-origin:0 0;opacity:0;
+  transform:rotate(calc(var(--a) - 70deg)) scale(.15,0);
+  transition:transform 1.9s cubic-bezier(.16,.9,.28,1.08) var(--d),opacity .6s ease var(--d);
+}
+.t0{fill:url(#g0)} .t1{fill:url(#g1)} .t2{fill:url(#g2)}
+.stage.open .petal{opacity:1;transform:rotate(var(--a)) scale(1,1)}
+.stage.closing .petal{transition:transform .9s cubic-bezier(.55,0,.85,.35),opacity .7s ease .15s}
+.core{
+  fill:url(#gc);stroke:rgba(120,70,0,.35);stroke-width:.8;transform-origin:0 0;transform:scale(0);
+  transition:transform 1s cubic-bezier(.2,1.4,.4,1) .1s;
+}
+.stage.open .core{transform:scale(1)}
+.stage.closing .core{transition:transform .5s ease}
 
-      h1 {
-        margin: 0;
-        font-size: 38px;
-        line-height: 1.25;
-        font-weight: 400;
-        overflow-wrap: anywhere;
-      }
+.sparks{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0;opacity:0;transition:opacity 3s ease 1.5s}
+body.on .sparks{opacity:1}
+.spark{
+  position:absolute;bottom:-8px;left:var(--x);width:var(--s);height:var(--s);border-radius:50%;
+  background:var(--spark);opacity:0;animation:rise var(--t) linear var(--w) infinite;
+}
+@keyframes rise{
+  0%{transform:translate(0,0);opacity:0}
+  15%{opacity:.85}
+  100%{transform:translate(var(--dx),-105vh);opacity:0}
+}
 
-      h1 em {
-        display: block;
-        color: #b5172c;
-        font-weight: 400;
-      }
+.controls{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px;position:relative;z-index:2;padding:0 16px}
+.chips{display:flex;gap:12px}
+.chip{width:28px;height:28px;border:0;padding:0;border-radius:50%;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(0,0,0,.22);transition:transform .2s}
+.chip:hover{transform:scale(1.12)}
+.chip[aria-pressed="true"]{outline:2px solid var(--ink);outline-offset:3px}
+.chip:focus-visible,.replay:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.replay{font:inherit;font-size:14px;color:var(--ink);background:var(--btn);border:1px solid var(--ring);border-radius:999px;padding:8px 20px;cursor:pointer}
+.replay:hover{background:var(--ring)}
 
-      .flower {
-        display: block;
-        width: min(100%, 390px, 50svh);
-        height: auto;
-        aspect-ratio: 1;
-        overflow: visible;
-      }
+@media (prefers-reduced-motion:reduce){.layer,.bloom,.spark{animation:none}}
+</style>
+</head>
+<body>
+<div class="sparks" id="sparks" aria-hidden="true"></div>
 
-      button {
-        min-height: 44px;
-        padding: 10px 22px;
-        border: 1px solid #b8a3a9;
-        border-radius: 6px;
-        background: transparent;
-        color: #743b49;
-        font: 14px/1.4 system-ui, sans-serif;
-        cursor: pointer;
-        transition: background 160ms ease;
-      }
+<header>
+  <h1>Kasımpatı</h1>
+  <p>Çiçeğe dokun, baştan açsın.</p>
+</header>
 
-      button:hover { background: #eee3e8; }
-      button:focus-visible { outline: 2px solid #b5172c; outline-offset: 5px; }
+<div class="stage" id="stage" role="img" aria-label="Açılan kasımpatı çiçeği">
+  <div class="glow"></div>
+  <svg viewBox="-300 -300 600 600" aria-hidden="true">
+    <defs>
+      <linearGradient id="g0" x1="0" y1="1" x2="0" y2="0"><stop id="g0a" offset="0"/><stop id="g0b" offset="1"/></linearGradient>
+      <linearGradient id="g1" x1="0" y1="1" x2="0" y2="0"><stop id="g1a" offset="0"/><stop id="g1b" offset="1"/></linearGradient>
+      <linearGradient id="g2" x1="0" y1="1" x2="0" y2="0"><stop id="g2a" offset="0"/><stop id="g2b" offset="1"/></linearGradient>
+      <radialGradient id="gc"><stop id="gca" offset="0"/><stop id="gcb" offset="1"/></radialGradient>
+    </defs>
+    <g class="bloom" id="bloom"></g>
+  </svg>
+</div>
 
-      @media (max-width: 480px) {
-        body { padding: 24px 18px; }
-        main { gap: 24px; }
-        h1 { font-size: 30px; }
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <h1>Bu sene böyle olsun <em>kasımpatı</em></h1>
-      <svg class="flower" viewBox="-100 -100 200 200" role="img" aria-labelledby="flower-title flower-description">
-        <title id="flower-title">Kasımpatı</title>
-        <desc id="flower-description">Kırmızı dış yaprakları, şeftali renkli iç yaprakları ve sarı merkezi olan, yavaşça açılan bir çiçek.</desc>
-        <g fill="#e63946" stroke="#b5172c" stroke-width="1" data-ring="outer">
-          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(0)" />
-          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(30)" />
-          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(60)" />
-          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(90)" />
-          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(120)" />
-          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(150)" />
-          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(180)" />
-          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(210)" />
-          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(240)" />
-          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(270)" />
-          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(300)" />
-          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(330)" />
-        </g>
-        <g fill="#f4a261" stroke="#e76f51" stroke-width="1" data-ring="inner">
-          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(15)" />
-          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(45)" />
-          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(75)" />
-          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(105)" />
-          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(135)" />
-          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(165)" />
-          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(195)" />
-          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(225)" />
-          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(255)" />
-          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(285)" />
-          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(315)" />
-          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(345)" />
-        </g>
-        <circle id="flower-center" cx="0" cy="0" r="16" fill="#ffb703" />
-      </svg>
-      <button type="button" id="replay">Yeniden Açtır</button>
-    </main>
-    <script>
-      const svgNamespace = "http://www.w3.org/2000/svg";
-      const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
-      const center = document.querySelector("#flower-center");
-      const flower = document.querySelector(".flower");
-      const petals = [];
-      let animationFrame = 0;
+<div class="controls">
+  <div class="chips" id="chips" role="group" aria-label="Renk seç"></div>
+  <button class="replay" id="replay" type="button">Yeniden aç</button>
+</div>
 
-      // Separate rotation from growth so every petal opens along its own axis.
-      document.querySelectorAll("[data-ring]").forEach((ring, ringIndex) => {
-        ring.querySelectorAll("ellipse").forEach((petal, index) => {
-          const orientation = document.createElementNS(svgNamespace, "g");
-          const growth = document.createElementNS(svgNamespace, "g");
-          orientation.setAttribute("transform", petal.getAttribute("transform"));
-          petal.removeAttribute("transform");
-          ring.append(orientation);
-          orientation.append(growth);
-          growth.append(petal);
-          petals.push({ element: growth, delay: 150 + ringIndex * 700 + index * 65 });
-        });
-      });
+<script>
+(function(){
+  var N = 11;
+  var stage = document.getElementById('stage');
+  var bloom = document.getElementById('bloom');
+  var rnd = function(a, b){ return a + Math.random() * (b - a); };
+  var f = function(n){ return n.toFixed(1); };
 
-      function progressAt(time, delay) {
-        const progress = Math.max(0, Math.min(1, (time - delay) / 1100));
-        return 1 - Math.pow(1 - progress, 3);
-      }
+  // Palettes: three tiers (outer, middle, inner) of [base, tip], plus core and glow.
+  var P = {
+    altin:{name:'Altın', s:[['#c97a06','#ffe27a'],['#e09a12','#ffec95'],['#f0b928','#fff4b8']], core:['#fff6c4','#e8a317'], glow:'#ffc24d', spark:'#f3b73a'},
+    pembe:{name:'Pembe', s:[['#a81f5c','#ffb3d1'],['#c93475','#ffc6df'],['#e0558f','#ffdcec']], core:['#fff0b8','#f0a030'], glow:'#ff7eb0', spark:'#ff8fbc'},
+    beyaz:{name:'Beyaz', s:[['#8d97c0','#ffffff'],['#aab3d6','#ffffff'],['#d7c96c','#fffbe2']], core:['#fff6c4','#d9a520'], glow:'#c9d2ff', spark:'#dfe5ff'},
+    mor:{name:'Mor', s:[['#42267f','#c4a2ff'],['#6139ad','#d7b9ff'],['#8656d3','#ebd8ff']], core:['#fff3b0','#e6a82a'], glow:'#a77bff', spark:'#c5a5ff'},
+    ates:{name:'Ateş', s:[['#86190f','#ff9a4d'],['#b02a12','#ffb347'],['#dd4812','#ffd27a']], core:['#fff0a8','#ff9a1f'], glow:'#ff8a3d', spark:'#ff9d4a'}
+  };
 
-      function draw(time) {
-        petals.forEach(({ element, delay }) => {
-          const progress = progressAt(time, delay);
-          element.setAttribute("transform", `scale(${0.04 + progress * 0.96} ${0.03 + progress * 0.97})`);
-          element.setAttribute("opacity", Math.min(1, progress * 4));
-        });
-        center.setAttribute("transform", `scale(${0.12 + progressAt(time, 1450) * 0.88})`);
-      }
+  // One petal pointing up from the origin; c bends the tip sideways.
+  function petal(L, w, c){
+    return 'M0 0C' + f(-w) + ' ' + f(-L*.3) + ' ' + f(-w*.9 + c*.6) + ' ' + f(-L*.8) + ' ' + f(c - w*.3) + ' ' + f(-L*.97) +
+      'Q' + f(c) + ' ' + f(-L*1.03) + ' ' + f(c + w*.3) + ' ' + f(-L*.97) +
+      'C' + f(w*.9 + c*.6) + ' ' + f(-L*.8) + ' ' + f(w) + ' ' + f(-L*.3) + ' 0 0Z';
+  }
 
-      function play() {
-        cancelAnimationFrame(animationFrame);
-        if (reducedMotion.matches) {
-          draw(3000);
-          flower.dataset.state = "open";
-          return;
-        }
-        flower.dataset.state = "opening";
-        draw(0);
-        const start = performance.now();
-        function frame(now) {
-          const elapsed = now - start;
-          draw(elapsed);
-          if (elapsed < 2800) {
-            animationFrame = requestAnimationFrame(frame);
-          } else {
-            flower.dataset.state = "open";
-          }
-        }
-        animationFrame = requestAnimationFrame(frame);
-      }
+  // Build layers from the outermost (drawn first) to the innermost (drawn last).
+  var html = '';
+  for (var k = 0; k < N; k++){
+    var L = 255 - k*21, w = 15 - k*.6, n = 26 + k*2;
+    var tier = k < 4 ? 0 : k < 8 ? 1 : 2, off = k*13.7, side = k % 2 ? 1 : -1;
+    html += '<g class="layer" style="--dir:' + side + ';--sp:' + (7 + k*.6).toFixed(1) + 's;--dl:-' + (k*.9).toFixed(1) + 's">';
+    for (var i = 0; i < n; i++){
+      var l = L * rnd(.93, 1.05);
+      var a = off + i*360/n + rnd(-3, 3);
+      var c = side * l * rnd(.04, .09);
+      var d = (N - 1 - k)*.2 + rnd(0, .2);
+      html += '<path class="petal t' + tier + '" d="' + petal(l, w*rnd(.9, 1.12), c) + '" style="--a:' + a.toFixed(1) + 'deg;--d:' + d.toFixed(2) + 's"/>';
+    }
+    html += '</g>';
+  }
+  html += '<circle class="core" r="9"/>';
+  bloom.innerHTML = html;
 
-      document.querySelector("#replay").addEventListener("click", play);
-      reducedMotion.addEventListener("change", play);
-      play();
-    </script>
-  </body>
+  // Colour chips
+  var chipsEl = document.getElementById('chips');
+  var chips = [];
+  Object.keys(P).forEach(function(key){
+    var p = P[key], b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.dataset.k = key;
+    b.title = p.name; b.setAttribute('aria-label', p.name);
+    b.style.background = 'linear-gradient(135deg,' + p.s[0][1] + ',' + p.s[0][0] + ')';
+    b.addEventListener('click', function(){ apply(key); });
+    chipsEl.appendChild(b); chips.push(b);
+  });
+
+  function setStop(id, color){ document.getElementById(id).style.stopColor = color; }
+  function apply(key){
+    var p = P[key];
+    p.s.forEach(function(pair, t){ setStop('g' + t + 'a', pair[0]); setStop('g' + t + 'b', pair[1]); });
+    setStop('gca', p.core[0]); setStop('gcb', p.core[1]);
+    document.documentElement.style.setProperty('--glow-c', p.glow);
+    document.documentElement.style.setProperty('--spark', p.spark);
+    chips.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.k === key)); });
+  }
+
+  // Floating sparks
+  var sp = document.getElementById('sparks');
+  for (var s = 0; s < 26; s++){
+    var el = document.createElement('i');
+    el.className = 'spark';
+    el.style.cssText = '--x:' + rnd(2, 98).toFixed(1) + '%;--s:' + rnd(2, 5).toFixed(1) + 'px;--t:' + rnd(9, 18).toFixed(1) +
+      's;--w:-' + rnd(0, 16).toFixed(1) + 's;--dx:' + rnd(-60, 60).toFixed(0) + 'px';
+    sp.appendChild(el);
+  }
+
+  // Bloom control
+  var timer;
+  function replay(){
+    clearTimeout(timer);
+    stage.classList.remove('open');
+    stage.classList.add('closing');
+    timer = setTimeout(function(){
+      stage.classList.remove('closing');
+      stage.classList.add('open');
+    }, 1000);
+  }
+  stage.addEventListener('click', replay);
+  document.getElementById('replay').addEventListener('click', replay);
+
+  apply('altin');
+  setTimeout(function(){ stage.classList.add('open'); document.body.classList.add('on'); }, 400);
+})();
+</script>
+</body>
 </html>
