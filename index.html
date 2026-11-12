@@ -1,100 +1,176 @@
 <!doctype html>
 <html lang="tr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kasımpatı Terminali</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;background:#080909;color:#b4eac5;min-height:100svh;display:grid;place-items:center;padding:14px;font:14px ui-monospace,Consolas,monospace}
-main{width:min(100%,610px);border:1px solid #304538;background:#0b0e0c}
-header,footer{padding:12px 16px;border-bottom:1px solid #304538;display:flex;justify-content:space-between;align-items:center;gap:8px}
-footer{border-bottom:0;border-top:1px solid #304538}
-pre{margin:0;display:grid;place-items:center;padding:18px 0;font:clamp(7px,3.05cqi,17px)/.83 ui-monospace,Consolas,monospace}
-main{container-type:inline-size}
-button{font:inherit;color:inherit;border:1px solid #547660;background:transparent;padding:7px 10px;cursor:pointer}
-button:hover,button:focus-visible{background:#203a29}
-header span:last-child,footer span{color:#92aa9a}
-</style>
-</head>
-<body>
-<main>
-<header><span>~/kasimpati</span><span>TERMINAL</span></header>
-<pre aria-label="Karakterlerle çizilen kasımpatı buketi"><code id="art" aria-hidden="true"></code></pre>
-<footer><span id="status" role="status"></span><button id="replay" type="button">↻ Tekrar</button></footer>
-</main>
-<script>
-const art = document.querySelector("#art");
-const status = document.querySelector("#status");
-const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-const heads = [[11,12,9,0],[39,12,9,1],[25,8,11,2],[15,19,10,1],[35,19,10,0],[25,23,10,2]];
-const colors = ["#e895c8","#ffa6ac","#ffe0a1","#75b88a","#aab8a0"];
-let animation;
-function draw(t) {
-  const cells = Array.from({length:34}, () => Array(51).fill(null));
-  const put = (x,y,char,color) => {
-    if(cells[y] && x>=0 && x<51) cells[y][x] = [char,color];
-  };
-  heads.forEach(([x,y]) => {
-    for(let row=30; row>=y; row--){
-      if((30-row)*24>t) break;
-      const col=Math.round(25+(x-25)*(30-row)/(30-y));
-      put(col,row,x<25?"\\":x>25?"/":"|",3);
-    }
-  });
-  if(t>280){
-    ["\\             /"," \\           /","  \\         /","   \\       /","    \\     /","     \\   /","      >-<","     /   \\"].forEach((line,i)=>{
-      if(t<280+i*45) return;
-      [...line].forEach((ch,j)=>{if(ch!==" ") put(18+j,26+i,ch,4);});
-    });
-  }
-  heads.forEach(([cx,cy,r,color],i) => {
-    const progress=Math.max(0,Math.min(1,(t-680-i*155)/650));
-    if(!progress) return;
-    for(let y=cy-r;y<=cy+r;y++) for(let x=cx-r;x<=cx+r;x++){
-      const dx=x-cx,dy=(y-cy)*1.38;
-      const d=Math.hypot(dx,dy);
-      const a=Math.atan2(dy,dx);
-      const edge=r*(.90+.10*Math.cos(11*a));
-      if(d>edge*progress) continue;
-      const petals=["░","▒","▓","█"];
-      const ridge=(Math.cos(11*a + d*.35)+1)/2;
-      put(x,y,d<2?"●":petals[Math.min(3,Math.floor(ridge*3+(1-d/r)))],color);
-    }
-  });
-  const fragment=document.createDocumentFragment();
-  cells.forEach((row,index)=>{
-    if(index) fragment.append("\n");
-    let group=null;
-    row.forEach(cell=>{
-      const [ch,color]=cell || [" ",null];
-      if(!group || group.color!==color){
-        const span=document.createElement("span");
-        if(color!==null) span.style.color=colors[color];
-        fragment.append(span);
-        group={span,color};
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Bu sene böyle olsun kasımpatı. Açılan bir çiçek.">
+    <title>Bu sene böyle olsun kasımpatı</title>
+    <style>
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100svh;
+        display: grid;
+        place-items: center;
+        padding: 32px 20px;
+        background: #f4f4f9;
+        color: #42343e;
+        font-family: Georgia, "Times New Roman", serif;
+        letter-spacing: 0;
       }
-      group.span.textContent+=ch;
-    });
-  });
-  art.replaceChildren(fragment);
-}
-function play(){
-  cancelAnimationFrame(animation);
-  if(reduced.matches){draw(2200);status.textContent="> buket hazır";return;}
-  status.textContent="> buket çiziliyor...";
-  const start=performance.now();
-  let last=-100;
-  function frame(now){
-    const t=now-start;
-    if(t-last>=32 || t>=2200){draw(t);last=t;}
-    if(t<2200) animation=requestAnimationFrame(frame);
-    else status.textContent="> buket hazır";
-  }
-  animation=requestAnimationFrame(frame);
-}
-document.querySelector("#replay").addEventListener("click",play);
-play();
-</script>
-</body>
+
+      main {
+        width: min(100%, 620px);
+        display: grid;
+        justify-items: center;
+        gap: 28px;
+        text-align: center;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 38px;
+        line-height: 1.25;
+        font-weight: 400;
+        overflow-wrap: anywhere;
+      }
+
+      h1 em {
+        display: block;
+        color: #b5172c;
+        font-weight: 400;
+      }
+
+      .flower {
+        display: block;
+        width: min(100%, 390px, 50svh);
+        height: auto;
+        aspect-ratio: 1;
+        overflow: visible;
+      }
+
+      button {
+        min-height: 44px;
+        padding: 10px 22px;
+        border: 1px solid #b8a3a9;
+        border-radius: 6px;
+        background: transparent;
+        color: #743b49;
+        font: 14px/1.4 system-ui, sans-serif;
+        cursor: pointer;
+        transition: background 160ms ease;
+      }
+
+      button:hover { background: #eee3e8; }
+      button:focus-visible { outline: 2px solid #b5172c; outline-offset: 5px; }
+
+      @media (max-width: 480px) {
+        body { padding: 24px 18px; }
+        main { gap: 24px; }
+        h1 { font-size: 30px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Bu sene böyle olsun <em>kasımpatı</em></h1>
+      <svg class="flower" viewBox="-100 -100 200 200" role="img" aria-labelledby="flower-title flower-description">
+        <title id="flower-title">Kasımpatı</title>
+        <desc id="flower-description">Kırmızı dış yaprakları, şeftali renkli iç yaprakları ve sarı merkezi olan, yavaşça açılan bir çiçek.</desc>
+        <g fill="#e63946" stroke="#b5172c" stroke-width="1" data-ring="outer">
+          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(0)" />
+          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(30)" />
+          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(60)" />
+          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(90)" />
+          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(120)" />
+          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(150)" />
+          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(180)" />
+          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(210)" />
+          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(240)" />
+          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(270)" />
+          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(300)" />
+          <ellipse cx="0" cy="-50" rx="10" ry="40" transform="rotate(330)" />
+        </g>
+        <g fill="#f4a261" stroke="#e76f51" stroke-width="1" data-ring="inner">
+          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(15)" />
+          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(45)" />
+          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(75)" />
+          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(105)" />
+          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(135)" />
+          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(165)" />
+          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(195)" />
+          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(225)" />
+          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(255)" />
+          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(285)" />
+          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(315)" />
+          <ellipse cx="0" cy="-35" rx="8" ry="28" transform="rotate(345)" />
+        </g>
+        <circle id="flower-center" cx="0" cy="0" r="16" fill="#ffb703" />
+      </svg>
+      <button type="button" id="replay">Yeniden Açtır</button>
+    </main>
+    <script>
+      const svgNamespace = "http://www.w3.org/2000/svg";
+      const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+      const center = document.querySelector("#flower-center");
+      const flower = document.querySelector(".flower");
+      const petals = [];
+      let animationFrame = 0;
+
+      // Separate rotation from growth so every petal opens along its own axis.
+      document.querySelectorAll("[data-ring]").forEach((ring, ringIndex) => {
+        ring.querySelectorAll("ellipse").forEach((petal, index) => {
+          const orientation = document.createElementNS(svgNamespace, "g");
+          const growth = document.createElementNS(svgNamespace, "g");
+          orientation.setAttribute("transform", petal.getAttribute("transform"));
+          petal.removeAttribute("transform");
+          ring.append(orientation);
+          orientation.append(growth);
+          growth.append(petal);
+          petals.push({ element: growth, delay: 150 + ringIndex * 700 + index * 65 });
+        });
+      });
+
+      function progressAt(time, delay) {
+        const progress = Math.max(0, Math.min(1, (time - delay) / 1100));
+        return 1 - Math.pow(1 - progress, 3);
+      }
+
+      function draw(time) {
+        petals.forEach(({ element, delay }) => {
+          const progress = progressAt(time, delay);
+          element.setAttribute("transform", `scale(${0.04 + progress * 0.96} ${0.03 + progress * 0.97})`);
+          element.setAttribute("opacity", Math.min(1, progress * 4));
+        });
+        center.setAttribute("transform", `scale(${0.12 + progressAt(time, 1450) * 0.88})`);
+      }
+
+      function play() {
+        cancelAnimationFrame(animationFrame);
+        if (reducedMotion.matches) {
+          draw(3000);
+          flower.dataset.state = "open";
+          return;
+        }
+        flower.dataset.state = "opening";
+        draw(0);
+        const start = performance.now();
+        function frame(now) {
+          const elapsed = now - start;
+          draw(elapsed);
+          if (elapsed < 2800) {
+            animationFrame = requestAnimationFrame(frame);
+          } else {
+            flower.dataset.state = "open";
+          }
+        }
+        animationFrame = requestAnimationFrame(frame);
+      }
+
+      document.querySelector("#replay").addEventListener("click", play);
+      reducedMotion.addEventListener("change", play);
+      play();
+    </script>
+  </body>
 </html>
