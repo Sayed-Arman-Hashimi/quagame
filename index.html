@@ -1,478 +1,100 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>codewtgokce</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle at top, #ffe9ff 0%, #1b1030 55%, #06030e 100%);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      overflow: hidden;
-    }
-
-    .scene {
-      position: relative;
-      width: 480px;
-      height: 480px;
-      border-radius: 32px;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.22), transparent 60%),
-        radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.15), transparent 65%),
-        radial-gradient(circle at 10% 80%, rgba(255, 196, 255, 0.18), transparent 60%),
-        radial-gradient(circle at 90% 85%, rgba(170, 215, 255, 0.15), transparent 60%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
-        linear-gradient(180deg, #12091e 40%, #1b1015 60%, #261819 100%);
-      box-shadow:
-        0 25px 60px rgba(0, 0, 0, 0.6),
-        inset 0 0 40px rgba(255, 255, 255, 0.06);
-      overflow: hidden;
-      position: relative;
-    }
-
-    /* Işıltılı arkaplan (sparkle) */
-    .sparkles {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      filter: blur(0.4px);
-    }
-
-    .sparkle {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #fff8d7 0%, #ffe98c 40%, transparent 70%);
-      box-shadow: 0 0 10px rgba(255, 241, 184, 0.9);
-      opacity: 0.3;
-      animation: twinkle 3s infinite ease-in-out;
-    }
-
-    .sparkle:nth-child(2) { top: 12%; left: 20%; animation-delay: 0.3s; transform: scale(1.1); }
-    .sparkle:nth-child(3) { top: 25%; left: 70%; animation-delay: 0.7s; transform: scale(0.9); }
-    .sparkle:nth-child(4) { top: 40%; left: 10%; animation-delay: 1.2s; transform: scale(1.3); }
-    .sparkle:nth-child(5) { top: 55%; left: 85%; animation-delay: 1.7s; transform: scale(0.8); }
-    .sparkle:nth-child(6) { top: 15%; left: 50%; animation-delay: 2.1s; transform: scale(1.5); }
-    .sparkle:nth-child(7) { top: 70%; left: 25%; animation-delay: 2.6s; transform: scale(1.0); }
-    .sparkle:nth-child(8) { top: 8%; left: 85%; animation-delay: 3.0s; transform: scale(1.4); }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.15; transform: scale(0.8); }
-      50%      { opacity: 0.9;  transform: scale(1.6); }
-    }
-
-    .ground {
-      position: absolute;
-      bottom: -10px;
-      left: -10px;
-      right: -10px;
-      height: 130px;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.15), transparent 60%),
-        radial-gradient(circle at 20% 40%, rgba(180, 140, 95, 0.5), transparent 55%),
-        radial-gradient(circle at 80% 50%, rgba(90, 65, 45, 0.7), transparent 60%),
-        linear-gradient(180deg, #382014 0%, #1f140f 40%, #120b09 100%);
-      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.7);
-    }
-
-    .bouquet {
-      position: absolute;
-      bottom: 90px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 260px;
-      height: 260px;
-      pointer-events: none;
-    }
-
-    /* Gövdeler */
-    .stem {
-      position: absolute;
-      width: 6px;
-      background: linear-gradient(180deg, #6ebc5e 0%, #366a35 100%);
-      border-radius: 999px;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.35);
-      transform-origin: bottom center;
-    }
-
-    /* Saksı */
-    .pot {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 190px;
-      height: 130px;
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 40%),
-        linear-gradient(135deg, #5e3223 0%, #3b1b10 40%, #2b120a 100%);
-      border-radius: 0 0 26px 26px;
-      box-shadow:
-        0 18px 35px rgba(0, 0, 0, 0.7),
-        inset 0 0 16px rgba(0, 0, 0, 0.6);
-      overflow: visible;
-    }
-
-    .pot:before {
-      content: "";
-      position: absolute;
-      top: -24px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 220px;
-      height: 40px;
-      border-radius: 20px;
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 60%),
-        linear-gradient(180deg, #5f3525 0%, #3a1d13 100%);
-      box-shadow:
-        0 8px 14px rgba(0, 0, 0, 0.6),
-        inset 0 0 12px rgba(0, 0, 0, 0.45);
-    }
-
-    /* Kurdele */
-    .ribbon {
-      position: absolute;
-      top: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 210px;
-      height: 34px;
-      background:
-        linear-gradient(90deg, rgba(255, 255, 255, 0.35), transparent 30%, transparent 70%, rgba(255, 255, 255, 0.4)),
-        linear-gradient(90deg, #ff6ea3 0%, #ff3e7d 40%, #e0215c 100%);
-      border-radius: 18px;
-      box-shadow:
-        0 0 12px rgba(255, 120, 170, 0.7),
-        inset 0 0 10px rgba(211, 17, 84, 0.65);
-    }
-
-    .ribbon-knot {
-      position: absolute;
-      top: 37px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 48px;
-      height: 40px;
-      background:
-        radial-gradient(circle at 30% 30%, #ffe6f0, transparent 60%),
-        linear-gradient(180deg, #ff88b4 0%, #ff3c7d 100%);
-      border-radius: 18px;
-      box-shadow:
-        0 0 14px rgba(255, 124, 172, 0.8),
-        inset 0 0 8px rgba(150, 12, 60, 0.7);
-    }
-
-    .ribbon-knot:before,
-    .ribbon-knot:after {
-      content: "";
-      position: absolute;
-      top: 12px;
-      width: 42px;
-      height: 34px;
-      background:
-        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.55), transparent 60%),
-        linear-gradient(145deg, #ffb0cc 0%, #ff5d9a 60%, #cf1e63 100%);
-      border-radius: 40px 4px 40px 4px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
-    }
-
-    .ribbon-knot:before {
-      right: 100%;
-      transform-origin: right center;
-      transform: rotate(-18deg);
-    }
-
-    .ribbon-knot:after {
-      left: 100%;
-      border-radius: 4px 40px 4px 40px;
-      transform-origin: left center;
-      transform: rotate(18deg);
-    }
-
-    /* Çiçek kafası */
-    .flower {
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      transform-origin: bottom center;
-    }
-
-    .flower .head {
-      position: absolute;
-      bottom: 70px;
-      left: 50%;
-      transform: translateX(-50%) scale(1);
-      width: 110px;
-      height: 110px;
-    }
-
-     .title{
-    text-align:center;
-    font-size:23px;
-    font-weight:600;
-    color:#ffd8ff;
-    margin-bottom:28px;
-    text-shadow:0 0 12px #ff66ff;
-  }
-
-    .flower .center {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 30% 30%, #fff3a8 0%, #ffd64a 40%, #f6b300 70%, #a56700 100%);
-      box-shadow:
-        0 0 20px rgba(255, 223, 120, 0.8),
-        inset 0 0 8px rgba(128, 78, 0, 0.75);
-    }
-
-    .petal {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 26px;
-      height: 68px;
-      border-radius: 999px;
-      background:
-        radial-gradient(circle at 20% 10%, #ffeaf8 0%, transparent 45%),
-        linear-gradient(180deg, #ffd7f8 0%, #f47ac6 40%, #d62385 100%);
-      transform-origin: 50% 80%;
-      box-shadow:
-        0 0 12px rgba(248, 153, 210, 0.7),
-        0 4px 8px rgba(0, 0, 0, 0.35);
-    }
-
-    /* Petalleri daireye yay */
-    .petal:nth-child(1)  { transform: translate(-50%, -50%) rotate(0deg); }
-    .petal:nth-child(2)  { transform: translate(-50%, -50%) rotate(30deg); }
-    .petal:nth-child(3)  { transform: translate(-50%, -50%) rotate(60deg); }
-    .petal:nth-child(4)  { transform: translate(-50%, -50%) rotate(90deg); }
-    .petal:nth-child(5)  { transform: translate(-50%, -50%) rotate(120deg); }
-    .petal:nth-child(6)  { transform: translate(-50%, -50%) rotate(150deg); }
-    .petal:nth-child(7)  { transform: translate(-50%, -50%) rotate(180deg); }
-    .petal:nth-child(8)  { transform: translate(-50%, -50%) rotate(210deg); }
-    .petal:nth-child(9)  { transform: translate(-50%, -50%) rotate(240deg); }
-    .petal:nth-child(10) { transform: translate(-50%, -50%) rotate(270deg); }
-    .petal:nth-child(11) { transform: translate(-50%, -50%) rotate(300deg); }
-    .petal:nth-child(12) { transform: translate(-50%, -50%) rotate(330deg); }
-
-    /* Biraz daha kasımpatı hissi için ikinci petal halkası */
-    .flower .head.inner .petal {
-      width: 18px;
-      height: 52px;
-      background:
-        radial-gradient(circle at 10% 0%, #fff5ff 0%, transparent 35%),
-        linear-gradient(180deg, #ffe5ff 0%, #f89fe0 45%, #d03b94 100%);
-      opacity: 0.96;
-    }
-
-    /* Farklı çiçek konumları */
-    .flower.f1 {
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%) scale(1.02);
-    }
-
-    .flower.f1 .stem {
-      height: 120px;
-      left: 50%;
-      bottom: 10px;
-      transform: translateX(-50%);
-    }
-
-    .flower.f2 {
-      bottom: 40px;
-      left: 20%;
-      transform: translateX(-20%) rotate(-6deg) scale(0.95);
-    }
-
-    .flower.f2 .stem {
-      height: 130px;
-      left: 50%;
-      bottom: 5px;
-      transform: translateX(-50%) rotate(5deg);
-    }
-
-    .flower.f3 {
-      bottom: 40px;
-      right: 16%;
-      transform: translateX(16%) rotate(7deg) scale(0.9);
-    }
-
-    .flower.f3 .stem {
-      height: 135px;
-      left: 50%;
-      bottom: 5px;
-      transform: translateX(-50%) rotate(-6deg);
-    }
-
-    /* Hafif sallanma animasyonu */
-    .flower {
-      animation: sway 4s ease-in-out infinite;
-    }
-
-    .flower.f2 { animation-duration: 4.7s; animation-delay: -0.8s; }
-    .flower.f3 { animation-duration: 5.1s; animation-delay: -1.1s; }
-
-    @keyframes sway {
-      0%, 100% { transform: translateX(-50%) rotate(0deg) scale(1); }
-      50%      { transform: translateX(-50%) rotate(2deg) scale(1.02); }
-    }
-
-    /* F2 ve F3 için translate düzeltmesi (farklı anchor) */
-    .flower.f2 {
-      transform: none;
-    }
-
-    .flower.f3 {
-      transform: none;
-    }
-
-    @keyframes sway-left {
-      0%, 100% { transform: translateX(-20%) rotate(-6deg) scale(0.95); }
-      50%      { transform: translateX(-20%) rotate(-1deg) scale(0.97); }
-    }
-
-    @keyframes sway-right {
-      0%, 100% { transform: translateX(16%) rotate(7deg) scale(0.9); }
-      50%      { transform: translateX(16%) rotate(2deg) scale(0.92); }
-    }
-
-    .flower.f2 { animation: sway-left 4.7s ease-in-out infinite; }
-    .flower.f3 { animation: sway-right 5.1s ease-in-out infinite; }
-
-    /* Hafif parlama efekti */
-    .glow-overlay {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.15), transparent 55%);
-      mix-blend-mode: screen;
-      pointer-events: none;
-    }
-
-    .scene { width: min(480px, 100%); }
-    .title { padding: 12px; }
-    .flower > .head {
-      animation: bloom 1.1s ease-out var(--bloom-delay, .2s) both;
-    }
-    .flower.f2 { --bloom-delay: .45s; }
-    .flower.f3 { --bloom-delay: .7s; }
-    @keyframes bloom {
-      from { transform: translateX(-50%) scale(.08); opacity: 0; }
-      to { transform: translateX(-50%) scale(1); opacity: 1; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .flower, .flower > .head, .sparkle { animation: none; }
-      .flower.f2 { transform: translateX(-20%) rotate(-6deg) scale(.95); }
-      .flower.f3 { transform: translateX(16%) rotate(7deg) scale(.9); }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kasımpatı Terminali</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080909;color:#b4eac5;min-height:100svh;display:grid;place-items:center;padding:14px;font:14px ui-monospace,Consolas,monospace}
+main{width:min(100%,610px);border:1px solid #304538;background:#0b0e0c}
+header,footer{padding:12px 16px;border-bottom:1px solid #304538;display:flex;justify-content:space-between;align-items:center;gap:8px}
+footer{border-bottom:0;border-top:1px solid #304538}
+pre{margin:0;min-height:20em;display:grid;place-items:center;padding:14px 0;font:clamp(8px,2.35cqi,15px)/1.1 ui-monospace,Consolas,monospace}
+main{container-type:inline-size}
+button{font:inherit;color:inherit;border:1px solid #547660;background:transparent;padding:7px 10px;cursor:pointer}
+button:hover,button:focus-visible{background:#203a29}
+header span:last-child,footer span{color:#92aa9a}
+</style>
 </head>
 <body>
- 
-  <div class="scene">
-
-    <div class="title">Bu kasımpatı, kasımda çiçek alamayan <br> herkes için kodlandı.</div>
-    <div class="sparkles">
-      <div class="sparkle"></div>
-      <div class="sparkle"></div>
-      <div class="sparkle"></div>
-      <div class="sparkle"></div>
-      <div class="sparkle"></div>
-      <div class="sparkle"></div>
-      <div class="sparkle"></div>
-      <div class="sparkle"></div>
-    </div>
-
-    <div class="ground"></div>
-
-    <div class="bouquet">
-      <!-- Orta çiçek -->
-      <div class="flower f1">
-        <div class="stem"></div>
-        <div class="head">
-          <!-- Dış halka -->
-          <div class="outer">
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-          </div>
-          <!-- İç halka -->
-          <div class="head inner">
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-          </div>
-          <div class="center"></div>
-        </div>
-      </div>
-
-      <!-- Sol çiçek -->
-      <div class="flower f2">
-        <div class="stem"></div>
-        <div class="head">
-          <div class="outer">
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-          </div>
-          <div class="head inner">
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-          </div>
-          <div class="center"></div>
-        </div>
-      </div>
-
-      <!-- Sağ çiçek -->
-      <div class="flower f3">
-        <div class="stem"></div>
-        <div class="head">
-          <div class="outer">
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-          </div>
-          <div class="head inner">
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-            <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-          </div>
-          <div class="center"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="pot">
-      <div class="ribbon"></div>
-      <div class="ribbon-knot"></div>
-    </div>
-
-    <div class="glow-overlay"></div>
-  </div>
+<main>
+<header><span>~/kasimpati</span><span>TERMINAL</span></header>
+<pre aria-label="Karakterlerle çizilen kasımpatı buketi"><code id="art" aria-hidden="true"></code></pre>
+<footer><span id="status" role="status"></span><button id="replay" type="button">↻ Tekrar</button></footer>
+</main>
+<script>
+const art = document.querySelector("#art");
+const status = document.querySelector("#status");
+const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+const heads = [[13,11,6,0],[37,11,6,1],[25,7,8,2],[17,19,7,1],[33,19,7,0],[25,23,6,2]];
+const colors = ["#e895c8","#ffa6ac","#ffe0a1","#75b88a","#aab8a0"];
+let animation;
+function draw(t) {
+  const cells = Array.from({length:34}, () => Array(51).fill(null));
+  const put = (x,y,char,color) => {
+    if(cells[y] && x>=0 && x<51) cells[y][x] = [char,color];
+  };
+  heads.forEach(([x,y]) => {
+    for(let row=30; row>=y; row--){
+      if((30-row)*24>t) break;
+      const col=Math.round(25+(x-25)*(30-row)/(30-y));
+      put(col,row,x<25?"\\":x>25?"/":"|",3);
+    }
+  });
+  if(t>280){
+    ["\\             /"," \\           /","  \\         /","   \\       /","    \\     /","     \\   /","      >-<","     /   \\"].forEach((line,i)=>{
+      if(t<280+i*45) return;
+      [...line].forEach((ch,j)=>{if(ch!==" ") put(18+j,26+i,ch,4);});
+    });
+  }
+  heads.forEach(([cx,cy,r,color],i) => {
+    const progress=Math.max(0,Math.min(1,(t-680-i*155)/650));
+    if(!progress) return;
+    for(let y=cy-r;y<=cy+r;y++) for(let x=cx-r;x<=cx+r;x++){
+      const dx=x-cx,dy=(y-cy)*1.65;
+      const d=Math.hypot(dx,dy);
+      const a=Math.atan2(dy,dx);
+      const edge=r*(.78+.22*Math.cos(9*a));
+      if(d>edge*progress) continue;
+      const petals=[".","+","*","%"];
+      const ring=Math.floor((edge-d)/1.7);
+      put(x,y,d<1.4?"@":petals[Math.max(0,ring)%4],color);
+    }
+  });
+  const fragment=document.createDocumentFragment();
+  cells.forEach((row,index)=>{
+    if(index) fragment.append("\n");
+    let group=null;
+    row.forEach(cell=>{
+      const [ch,color]=cell || [" ",null];
+      if(!group || group.color!==color){
+        const span=document.createElement("span");
+        if(color!==null) span.style.color=colors[color];
+        fragment.append(span);
+        group={span,color};
+      }
+      group.span.textContent+=ch;
+    });
+  });
+  art.replaceChildren(fragment);
+}
+function play(){
+  cancelAnimationFrame(animation);
+  if(reduced.matches){draw(2200);status.textContent="> buket hazır";return;}
+  status.textContent="> buket çiziliyor...";
+  const start=performance.now();
+  let last=-100;
+  function frame(now){
+    const t=now-start;
+    if(t-last>=32 || t>=2200){draw(t);last=t;}
+    if(t<2200) animation=requestAnimationFrame(frame);
+    else status.textContent="> buket hazır";
+  }
+  animation=requestAnimationFrame(frame);
+}
+document.querySelector("#replay").addEventListener("click",play);
+play();
+</script>
 </body>
 </html>
