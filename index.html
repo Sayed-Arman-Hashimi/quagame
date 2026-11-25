@@ -1300,6 +1300,68 @@ html[data-compact-shop=true] .supply :is(.office-bar button,.stock-topline .cate
 html[data-compact-shop=true] .supply .equipment-site .supply-grid:not([data-department=expansion]) { grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr)); }
 html[data-compact-shop=true] .supply .stock-topline .category-back { width:44px; max-width:44px; flex:0 0 44px; padding:0; display:grid; place-items:center; }
 html[data-compact-shop=true] .supply .category-back .category-back-label { display:none; }
+
+/* Restore the original category sidebar, with compact products for landscape phones. */
+.supply .equipment-picker { display:none !important; }
+html[data-compact-shop=true] .supply .equipment-site { grid-template-columns:138px minmax(0,1fr); grid-template-rows:44px minmax(0,1fr); }
+html[data-compact-shop=true] .supply .equipment-site > .supply-nav { display:flex; grid-column:1; grid-row:2; padding:6px; gap:4px; overflow-y:auto; overflow-x:hidden; }
+html[data-compact-shop=true] .supply .equipment-site > .supply-body { grid-column:2; grid-row:2; }
+html[data-compact-shop=true] .supply .equipment-site .supply-nav button { min-height:44px; padding:5px 6px; gap:6px; font-size:12px; }
+html[data-compact-shop=true] .supply .equipment-site .department-icon { width:25px; height:25px; flex-basis:25px; border-radius:7px; }
+html[data-compact-shop=true] .supply .equipment-site .department-icon svg { width:19px; height:19px; }
+html[data-compact-shop=true] .supply .equipment-site .supply-grid:not([data-department=expansion]) { grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr)); }
+
+
+/* Physical device casing: flat top, inset glass, and the classic circular Home key. */
+.supply {
+  border:5px solid var(--tablet-high,#243a31); padding:5px; border-radius:30px;
+  background:linear-gradient(120deg,var(--tablet-ring,#91a394) 0%,var(--tablet-high,#243a31) 2%,var(--tablet-low,#15271f) 32%,var(--tablet-high,#243a31) 72%,var(--tablet-edge,#738977) 100%);
+  box-shadow:0 20px 54px #05140ee0,0 3px 0 2px var(--tablet-low,#15271f),0 0 0 1px var(--tablet-ring,#91a394),inset 0 1px 2px #ffffff88,inset 0 -2px 3px #0009;
+}
+.supply .office,.supply.calendar-open .office { grid-template-rows:44px minmax(0,1fr) 48px; border-radius:21px; box-shadow:0 0 0 1px #07140fc9,inset 0 0 0 1px #ffffff20; }
+.supply .office-bar { position:relative; padding:0 10px; border:0; border-radius:0; background:var(--tablet-low,#15271f); box-shadow:none; }
+.supply .office-title { position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip-path:inset(50%); }
+.supply #office-home { display:none !important; }
+.supply .office-actions { margin-left:auto; }
+.supply .office-bar::before { content:''; position:absolute; left:calc(50% - 31px); top:18px; width:62px; height:6px; border-radius:8px; background:repeating-linear-gradient(90deg,#07110c 0 2px,#34493c 2px 3px); border:1px solid #0007; box-shadow:0 1px #ffffff18,inset 0 1px 2px #0009; pointer-events:none; }
+.supply .office-bar::after { content:''; display:block; position:absolute; left:calc(50% - 52px); top:16px; width:9px; height:9px; border:1px solid #06100c; border-radius:50%; background:radial-gradient(circle at 35% 30%,#72a5b2 0 12%,#294b5a 20%,#06141b 68%); box-shadow:0 0 0 2px #ffffff09,inset 0 1px 1px #ffffff30; pointer-events:none; }
+.supply .office-bar .supply-close { width:44px; min-width:44px; height:44px; min-height:44px; padding:0; border:0; background:transparent; box-shadow:none; font-size:25px; opacity:.85; }
+.supply .tablet-bezel { display:flex; grid-row:3; border:0; background:linear-gradient(180deg,var(--tablet-low,#15271f),var(--tablet-high,#243a31)); box-shadow:inset 0 1px #ffffff0c; }
+.supply .tablet-back,.supply.calendar-open .tablet-back { width:44px; height:44px; min-width:44px; min-height:44px; border:2px solid var(--tablet-ring,#91a394); border-radius:50%; background:radial-gradient(circle at 38% 26%,var(--tablet-button,#344c3c),var(--tablet-low,#15271f) 78%); box-shadow:0 1px 1px #000b,0 0 0 1px #07100c,inset 0 1px 3px #ffffff22,inset 0 -2px 4px #0009; }
+.supply .tablet-back::before { width:12px; height:12px; border:1.5px solid var(--tablet-text,#d8e4da); border-radius:4px; box-shadow:0 1px 1px #0008; }
+.supply .tablet-back:active { transform:scale(.93); box-shadow:inset 0 2px 5px #000b; }
+html[data-compact-shop=true] .supply { padding:4px; border-width:4px; border-radius:24px; }
+html[data-compact-shop=true] .supply .office { grid-template-rows:44px minmax(0,1fr) 46px; border-radius:16px; }
+html[data-compact-shop=true] .supply .office-bar { border:0; }
+html[data-compact-shop=true] .supply .office-bar::after { display:block; }
+html[data-compact-shop=true] .supply .tablet-bezel { display:flex; }
+/* All three shops use the original sidebar; none uses a category dropdown. */
+.supply .equipment-picker { display:none !important; }
+html[data-compact-shop=true] .supply .equipment-site { grid-template-columns:138px minmax(0,1fr); }
+html[data-compact-shop=true] .supply .equipment-site > .supply-nav { display:flex; }
+
+
+/* Reviews first: trust is a small corner badge, not a content panel. */
+.supply .review-site > .supply-header { gap:8px; }
+.supply .review-site > .supply-header h2 { margin-right:auto; }
+.supply .review-site .review-trust { display:flex; flex:none; align-items:center; gap:5px; margin:0; padding:4px 7px; border:1px solid var(--stat-green-edge); border-radius:9px; background:var(--stat-green-bg); color:var(--stat-green-ink); box-shadow:none; }
+.supply .review-site .review-trust-icon { display:grid; place-items:center; width:20px; height:24px; min-width:20px; padding:0; border:0; border-radius:0; background:none; box-shadow:none; }
+.supply .review-site .review-trust-icon svg { width:20px; height:24px; }
+.supply .review-site .review-trust-copy { display:block; }
+.supply .review-site .review-trust-heading { display:block; margin:0; }
+.supply .review-site #review-trust-heading { margin:0; font-size:12px; white-space:nowrap; color:inherit; }
+.supply .review-site :is(#review-trust-label,#review-trust-note,#review-trust-meter) { display:none; }
+.supply .review-site #review-trust-value { font-size:15px; line-height:24px; color:inherit; }
+.supply .review-site .review-trust[data-state=fair] { background:var(--stat-gold-bg); color:var(--stat-gold-ink); border-color:var(--stat-gold-edge); }
+.supply .review-site .review-trust[data-state=low] { background:#fbe9de; color:#983e30; border-color:#c8856a; }
+.supply .review-site .inventory-body { width:100%; max-width:none; }
+.supply .review-site #review-filters { margin:0 0 8px; }
+.supply .review-site .review-card p { font-size:14px; line-height:1.45; margin:6px 0 0; }
+html[data-compact-shop=true] .supply .review-site .supply-header h2 { font-size:15px; }
+html[data-compact-shop=true] .supply .review-site .review-trust { padding:2px 5px; }
+html[data-compact-shop=true] .supply .review-site #review-trust-heading { font-size:11px; }
+html[data-compact-shop=true] .supply .review-site #review-score { font-size:12px; }
+
 </style>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27%23377560%27/%3E%3Ctext x=%2732%27 y=%2747%27 text-anchor=%27middle%27 font-size=%2746%27 fill=%27%23ffcf58%27%3E%24%3C/text%3E%3C/svg%3E">
 <script id="cashier-embedded-assets">/* Standalone Cashier Rush assets. Assets are served from the adjacent assets folder. */
@@ -1553,10 +1615,11 @@ function assetUrl(p){
     <div id="office-reviews" class="supply-site review-site" hidden>
       <header class="supply-header">
         <h2 id="reviews-title">Customer Reviews</h2>
+        <section id="review-trust" class="review-trust" aria-labelledby="review-trust-heading"><div class="review-trust-icon"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="m24 4 17 7v13c0 10-17 20-17 20S7 34 7 24V11z" fill="#d7ead1" stroke="#477652" stroke-width="2.8"/><path d="m15 23 6 6 13-14" stroke="#40754a" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="review-trust-copy"><div class="review-trust-heading"><h3 id="review-trust-heading">Shop trust</h3><span id="review-trust-label"></span></div><p id="review-trust-note"></p><meter id="review-trust-meter" min="0" max="100" value="100" aria-label="Customer trust"></meter></div><strong id="review-trust-value">100%</strong></section>
         <span id="review-score" class="supply-balance review-score"></span>
       </header>
       <section class="supply-body inventory-body" aria-labelledby="reviews-title">
-        <section id="review-trust" class="review-trust" aria-labelledby="review-trust-heading"><div class="review-trust-icon"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="m24 4 17 7v13c0 10-17 20-17 20S7 34 7 24V11z" fill="#d7ead1" stroke="#477652" stroke-width="2.8"/><path d="m15 23 6 6 13-14" stroke="#40754a" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="review-trust-copy"><div class="review-trust-heading"><h3 id="review-trust-heading">Shop trust</h3><span id="review-trust-label"></span></div><p id="review-trust-note"></p><meter id="review-trust-meter" min="0" max="100" value="100" aria-label="Customer trust"></meter></div><strong id="review-trust-value">100%</strong></section>
+
         <div id="review-filters" class="supply-filters inventory-tools" role="group" aria-label="Review filters">
           <button type="button" data-review="all" aria-pressed="true">All reviews</button>
           <button type="button" data-review="complaints" aria-pressed="false">Complaints</button>
@@ -1578,7 +1641,7 @@ function assetUrl(p){
 </div>
     <section id="office-settings" class="office-settings" aria-labelledby="settings-title" hidden><header class="game-settings-heading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 3-1 3-3 1-2 5 2 5 3 1 1 3h6l1-3 3-1 2-5-2-5-3-1-1-3H9z"/><circle cx="12" cy="12" r="3"/></svg><h2 id="settings-title">Settings</h2></header><div class="game-settings-grid"><fieldset class="game-settings-group"><legend>Audio</legend><label class="game-setting-row"><span class="game-setting-name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13M9 8l12-2"/><ellipse cx="6" cy="18" rx="3" ry="3"/><ellipse cx="18" cy="16" rx="3" ry="3"/></svg>Music</span><span class="game-toggle"><input id="setting-music" type="checkbox"><i aria-hidden="true"></i></span></label><label class="game-slider"><span>Music volume<output id="setting-music-volume-value" for="setting-music-volume">24%</output></span><input id="setting-music-volume" type="range" min="0" max="100" step="1" value="24"></label><label class="game-setting-row"><span class="game-setting-name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 5 0 5-4v14l-5-4H3V9zm14-1a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></svg>Sound effects</span><span class="game-toggle"><input id="setting-sound" type="checkbox"><i aria-hidden="true"></i></span></label><label class="game-slider"><span>Effects volume<output id="setting-effects-volume-value" for="setting-effects-volume">65%</output></span><input id="setting-effects-volume" type="range" min="0" max="100" step="1" value="65"></label></fieldset><fieldset class="game-settings-group"><legend>Play your way</legend><label class="game-setting-row"><span class="game-setting-name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14A9 9 0 0 1 10 3.5 9 9 0 1 0 20.5 14Z"/></svg>Dark mode</span><span class="game-toggle"><input id="setting-dark-mode" type="checkbox"><i aria-hidden="true"></i></span></label><label class="game-setting-row"><span class="game-setting-name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="m3 7-2 3 2 4-2 3m20-10 2 3-2 4 2 3"/></svg>Screen shake</span><span class="game-toggle"><input id="setting-shake" type="checkbox"><i aria-hidden="true"></i></span></label><label class="game-setting-row"><span class="game-setting-name"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6m-5 3h4M8 14a6 6 0 1 1 8 0l-1 4H9l-1-4z"/></svg>Task hints</span><span class="game-toggle"><input id="setting-hints" type="checkbox"><i aria-hidden="true"></i></span></label><label class="game-setting-row"><span class="game-setting-name">Visual test · all unlocked</span><span class="game-toggle"><input id="setting-visual-test" type="checkbox"><i aria-hidden="true"></i></span></label><button id="setting-fullscreen" class="game-fullscreen" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg><span>Fullscreen</span></button><p id="settings-feedback" class="settings-feedback" role="status"></p></fieldset></div></section>
     <footer class="tablet-bezel">
-      <button id="tablet-back" class="tablet-back" type="button" aria-label="Go back" title="Back"></button>
+      <button id="tablet-back" class="tablet-back" type="button" aria-label="Home" title="Home"></button>
     </footer>
   </div>
 </dialog>
@@ -3175,10 +3238,11 @@ function advanceRestDay() {
 }
 
 
-// Visual preview uses a separate save; the regular economy stays intact.
-var visualTest = true;
-try { visualTest = localStorage.getItem('cashier-rush-visual-test-enabled') !== 'false'; } catch(e) {}
-var NORMAL_BUSINESS_KEY = 'cashier-rush-business-v1';
+// Fresh playtest starts at Day 1; prior saves remain untouched under their old keys.
+var VISUAL_TEST_KEY = 'cashier-rush-visual-test-enabled-v2';
+var visualTest = false;
+try { visualTest = localStorage.getItem(VISUAL_TEST_KEY) === 'true'; } catch(e) {}
+var NORMAL_BUSINESS_KEY = 'cashier-rush-business-v2-playtest';
 var BUSINESS_KEY = visualTest ? NORMAL_BUSINESS_KEY + '-visual-test' : NORMAL_BUSINESS_KEY;
 var debugPlay = /[?&]play=1/.test(location.search);
 var SHELF_STAGES = ['empty', 'low', 'medium', 'full'];
@@ -3293,6 +3357,93 @@ var CUSTOMER_STYLES = {
   'customer-luna': { base:'customer-teal', filter:'hue-rotate(230deg) saturate(.8)' },
   'customer-owen': { base:'customer-olive', filter:'hue-rotate(270deg) saturate(.75)' }
 };
+var REVIEW_MESSAGES={
+  excellent:[
+    'In and out in no time. Fair prices, too!',
+    'Everything scanned quickly and the prices were right. Five stars.',
+    'A smooth checkout from start to finish. I will be back.',
+    'Quick service without overcharging. My kind of shop.',
+    'No waiting around and no nasty surprises on the receipt.'
+  ],
+  good:[
+    'Found what I needed and paid without any trouble.',
+    'A perfectly fine visit. My groceries are sorted.',
+    'Nothing to complain about. Checkout went smoothly.',
+    'Got my shopping done. I would come here again.',
+    'An easy little shopping trip today.'
+  ],
+  slow:[
+    'I got my groceries, but checkout took longer than I hoped.',
+    'Please speed things up a little. I was waiting a while.',
+    'The shopping was fine. The long checkout was the problem.',
+    'Eventually paid, but I was starting to lose patience.',
+    'I stayed until the end, though the wait was tiring.'
+  ],
+  total:[
+    'My total needed correcting before I could pay.',
+    'There was a mistake on the bill. It got fixed in the end.',
+    'Please double-check the total next time.',
+    'The first amount was wrong, so checkout took an extra step.',
+    'We sorted out the receipt, but I would prefer it right the first time.'
+  ],
+  left:[
+    'I ran out of patience and left without paying.',
+    'The wait was too long. I left my shopping behind.',
+    'I could not stay any longer. No purchase today.',
+    'Still waiting at checkout? I decided to leave.',
+    'I wanted to buy something, but the slow service put me off.'
+  ],
+  helped:[
+    'I could not afford my groceries and the owner helped. Thank you.',
+    'Money was tight today. That helping hand meant a lot.',
+    'I really needed those groceries. Thank you for your kindness.',
+    'I was short of money, and you did not turn me away.',
+    'That kindness made a difficult day a little easier.'
+  ],
+  gift:[
+    'The shop gave me my groceries as a gift.',
+    'I received some complimentary groceries today.',
+    'Left with groceries without having to pay this time.',
+    'My groceries were covered by the shop.',
+    'A complimentary bag of groceries today.'
+  ],
+  unsafe:[
+    'The packaging was damaged or the product was expired. That is not okay.',
+    'Something I bought was unsafe. Please check your stock.',
+    'I cannot trust a shop selling damaged or expired goods.',
+    'Product safety matters more than a cheap price. Very disappointed.',
+    'An unsafe item ruined this visit. The stock needs checking.'
+  ],
+  price:[
+    '{product} cost {price}. I paid, but it felt overpriced.',
+    'I bought {product} for {price}. A little too expensive for me.',
+    '{price} for {product}? I expected a better deal.',
+    'Finished my shopping, but {product} at {price} was disappointing.',
+    'Please reconsider the price of {product}. {price} feels high.'
+  ],
+  steep:[
+    'I paid {price} for {product}, but I am not happy about it.',
+    '{product} at {price} is far too expensive.',
+    'Bought {product} this time. At {price}, I would think twice next time.',
+    'That {price} price tag on {product} really hurt.',
+    'I completed the purchase, but {product} should not cost {price}.'
+  ],
+  skipped:[
+    'I put {product} back. {price} was too much. Bought the rest.',
+    'Kept the other groceries, skipped {product} at {price}.',
+    '{price} for {product} was not worth it. The rest was fine.',
+    'Left {product} behind because of the {price} price tag.',
+    'I still bought other things, but not {product} for {price}.'
+  ],
+  refused:[
+    '{product} was {price}. I left without buying anything.',
+    'No thanks to {product} at {price}. I took my money elsewhere.',
+    'That {price} price on {product} ended my shopping trip.',
+    'I walked away after seeing {product} priced at {price}.',
+    'I could not justify {price} for {product}. No purchase today.'
+  ]
+};
+
 var REVIEW_TYPES = {
   helped: { stars:5, reputation:20, label:'A helping hand', comment:'I could not afford my groceries. The owner helped me when I really needed it.' },
   gift: { stars:3, reputation:0, label:'Complimentary groceries', comment:'Received groceries as a gift from the shop.' },
@@ -3331,6 +3482,7 @@ function loadReviews(saved) {
     return validSalePrice(entry.price) && PRODUCTS.some(function (product) { return product.id === entry.product; });
   }).map(function (entry) {
     return { type: entry.type, customer: entry.customer, day: entry.day,
+             variant: reviewVariant(entry,(REVIEW_MESSAGES[entry.type]||[]).length),
              product: entry.product, price: entry.price,
              marketPrice: validSalePrice(entry.marketPrice) ? entry.marketPrice : undefined };
   });
@@ -3873,6 +4025,8 @@ function refreshTrustSummary() {
   document.getElementById("review-trust-label").textContent = trust >= 80 ? "Trusted shop" : trust >= 50 ? "Room to improve" : "Trust needs care";
   target.dataset.state = trust >= 80 ? "good" : trust >= 50 ? "fair" : "low";
   var unsafe = unsafeStockUnits();
+  target.title='Shop trust: '+trust+'% · '+document.getElementById('review-trust-label').textContent+(unsafe?' · '+unsafe+' unsafe items in My Stock':'');
+  target.setAttribute('aria-label',target.title);
   document.getElementById("review-trust-note").textContent = unsafe ?
     unsafe + " unsafe items on the shelves. Remove them in My Stock." :
     "Safe products and good service build customer confidence.";
@@ -5373,6 +5527,11 @@ function recordReview(type, item, bonusReputation) {
     review.price = item.price;
     review.marketPrice = item.marketPrice;
   }
+  var choices=REVIEW_MESSAGES[type]||[];
+  var previousReview=business.reviews.find(function(entry){return entry.type===type;});
+  var previousVariant=previousReview?reviewVariant(previousReview,choices.length):-1;
+  var variants=choices.map(function(_,index){return index;}).filter(function(index){return index!==previousVariant;});
+  review.variant=variants.length?variants[Math.floor(Math.random()*variants.length)]:0;
   var rating = REVIEW_TYPES[type];
   if (type === 'unsafe') {
     business.trust = Math.max(0, business.trust - 12);
@@ -6613,7 +6772,7 @@ var visualTestSetting = document.getElementById('setting-visual-test');
 visualTestSetting.checked = visualTest;
 visualTestSetting.addEventListener('change',function(){
   saveBusiness();
-  try { localStorage.setItem('cashier-rush-visual-test-enabled',String(visualTestSetting.checked)); } catch(e) {}
+  try { localStorage.setItem(VISUAL_TEST_KEY,String(visualTestSetting.checked)); } catch(e) {}
   location.reload();
 });
 var shakeSetting = document.getElementById('setting-shake');
@@ -6854,7 +7013,7 @@ function buyUpgrade(id) {
   saveBusiness();
   renderUpgrades(upgrade.name+' · '+upgradeValue(id,business.upgrades[id]));
   var refreshed = upgradeItems.querySelector('[data-item="' + id + '"]');
-  (refreshed.disabled ? officeHome : refreshed).focus({ preventScroll: true });
+  (refreshed.disabled ? document.getElementById('tablet-back') : refreshed).focus({ preventScroll: true });
 }
 var equipmentBalance = document.getElementById('equipment-balance');
 var equipmentCategory = document.getElementById('equipment-category');
@@ -7168,14 +7327,20 @@ function inventoryPriceCell(product, count) {
     '>' + note.reference + (note.warning ? ' · ' + note.warning : '') + '</small></td>';
 }
 
-function reviewMessage(review, type) {
-  if (type.comment) return type.comment;
-  var product = PRODUCTS.find(function (item) { return item.id === review.product; });
-  var quoted = product.name + ' was ' + money(review.price) + '.';
-  if (review.type === 'refused') return quoted + (review.marketPrice
-    ? ' I expected around ' + money(review.marketPrice) + ' and left without buying.' : ' I left because the price was too high.');
-  if (review.type === 'skipped') return quoted + ' I put it back and bought the rest.';
-  return quoted + (review.marketPrice ? ' I paid, but I usually see it around ' + money(review.marketPrice) + '.' : ' I paid, but the price felt too high.');
+function reviewVariant(review,count){
+  if(!count)return 0;
+  if(Number.isInteger(review.variant)&&review.variant>=0&&review.variant<count)return review.variant;
+  var seed=[review.type,review.customer,review.day,review.product||'',review.price||0].join('|'),hash=0;
+  for(var i=0;i<seed.length;i++)hash=(Math.imul(hash,31)+seed.charCodeAt(i))>>>0;
+  return hash%count;
+}
+function reviewMessage(review,type){
+  var choices=REVIEW_MESSAGES[review.type];
+  if(!choices||!choices.length)return type.comment||type.label;
+  var product=PRODUCTS.find(function(item){return item.id===review.product;});
+  return choices[reviewVariant(review,choices.length)]
+    .replace(/\{product\}/g,product?product.name:'The item')
+    .replace(/\{price\}/g,money(review.price||0));
 }
 
 function renderReviews() {
@@ -7350,8 +7515,7 @@ function showOffice(page) {
   } else if (equipmentPage) {
     renderEquipment();
     officeEquipment.querySelector('.supply-body').scrollTop=0;
-    if(window.matchMedia('(max-height:600px) and (orientation:landscape)').matches)equipmentPicker.focus({preventScroll:true});
-    else officeEquipment.querySelector('[data-department="' + department + '"]').focus();
+    officeEquipment.querySelector('[data-department="' + department + '"]').focus({preventScroll:true});
   } else if (page === 'settings') {
     soundSetting.checked = business.sound;
     shakeSetting.checked = business.shake;
@@ -7437,10 +7601,6 @@ document.getElementById('tablet-back').addEventListener('click', function () {
   if (!supplyStore.open) return;
   if (S.screen === 'menu' || !officeDesktop.hidden) {
     supplyStore.close();
-  } else if (!officeMarket.hidden && activeGroup !== 'categories') {
-    categoryBack.click();
-  } else if (!officeLocked.hidden && lockedGroup !== 'categories') {
-    lockedBack.click();
   } else {
     showOffice('desktop');
   }
