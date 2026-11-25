@@ -1182,6 +1182,28 @@
   .total-entry-display output { font-size:24px; }
 }
 
+
+/* A definite shared height prevents intrinsic receipt content from stretching only one column. */
+.total-entry-panel { box-sizing:border-box; }
+.total-entry-header { box-sizing:border-box; height:56px; padding:4px 14px; }
+.total-entry-body { box-sizing:border-box; height:min(410px,calc(100dvh - 80px)); min-height:266px; grid-template-columns:repeat(2,minmax(0,1fr)); align-items:stretch; padding:10px; gap:10px; }
+.total-receipt,.total-entry-controls { box-sizing:border-box; height:100%; min-height:0; }
+.total-entry-controls { display:flex; flex-direction:column; gap:8px; }
+.total-entry-keys { flex:1; min-height:194px; grid-template-rows:repeat(4,minmax(44px,1fr)); }
+.total-entry-keys button { min-height:44px; height:100%; }
+.total-entry-confirm { flex:0 0 48px; min-height:48px; }
+.total-entry-error { flex:none; min-height:0; margin:0; line-height:14px; }
+.total-receipt { overflow:hidden; }
+.total-receipt ul { flex:1; min-height:0; max-height:none; overflow:auto; align-content:start; }
+.total-receipt-sum { flex:none; margin-top:0; }
+.total-receipt-title,.total-entry-label,.total-entry-display { flex:none; }
+@media(orientation:landscape) and (max-height:440px) {
+  .total-entry-body { padding:8px; gap:8px; }
+  .total-entry-controls { gap:6px; }
+  .total-entry-confirm { flex-basis:44px; min-height:44px; }
+  .total-receipt { padding:9px; }
+}
+
 </style>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27%23377560%27/%3E%3Ctext x=%2732%27 y=%2747%27 text-anchor=%27middle%27 font-size=%2746%27 fill=%27%23ffcf58%27%3E%24%3C/text%3E%3C/svg%3E">
 <script id="cashier-embedded-assets">/* Standalone Cashier Rush assets. Assets are served from the adjacent assets folder. */
@@ -4493,7 +4515,7 @@ function layout() {
   var beltLeft = W * (portrait ? .61 : .605);
   var beltFrontX = beltLeft - W * .012;
   var deviceGap = Math.max(6, Math.min(W, H) * .017);
-  var phoneLandscape = document.documentElement.dataset.touch === 'true' && !portrait && H <= 500;
+  var phoneLandscape = document.documentElement.dataset.touch === 'true' && !portrait && H <= 600;
   var monitorW = Math.min(W * (portrait ? .45 : .58), H * (phoneLandscape ? .98 : .83));
   if(equippedItem('registers').id==='mint-pop')monitorW*=1.10;
   var monitorH = monitorW * .655;
@@ -4501,12 +4523,12 @@ function layout() {
   var stationX = beltFrontX - monitorEdge - deviceGap;
   UI.pos = { x: stationX - monitorW / 2, y: baseY - monitorH, w: monitorW, h: monitorH };
 
-  var scannerW = Math.min(W * .104, H * .122);
+  var scannerW = Math.min(W * (phoneLandscape ? .125 : .104), H * (phoneLandscape ? .185 : .122));
   var scannerH = scannerW / .748;
   UI.rest = { x: stationX - monitorEdge - deviceGap - scannerW, y: baseY - scannerH,
               w: scannerW, h: scannerH };
 
-  var terminalW = Math.min(W * .101, H * .137);
+  var terminalW = Math.min(W * (phoneLandscape ? .13 : .101), H * (phoneLandscape ? .205 : .137));
   var terminalH = terminalW / .732;
   UI.term = { x: UI.rest.x - terminalW - deviceGap, y: baseY - terminalH - (portrait ? H * .035 : 0),
               w: terminalW, h: terminalH };
@@ -4712,6 +4734,10 @@ function packTarget() {
   var b = UI.pack;
   var margin = Math.min(UI.pad * .7, Math.max(4, b.w * .06));
   return { x: b.x - margin, y: b.y - margin, w: b.w + margin * 2, h: b.h + margin * 2 };
+}
+
+function deviceTouchMargin(box) {
+  return document.documentElement.dataset.touch === 'true' ? Math.max(12,(56-Math.min(box.w,box.h))/2) : 8;
 }
 
 function scannerHeadY() {
@@ -4971,7 +4997,8 @@ function down(p, pointerId) {
   if (S.screen === 'result') return;
 
   if (S.phase === 'card' && S.card) {
-    if (Math.abs(p.x - S.card.x) < itemSize() * .7 && Math.abs(p.y - S.card.y) < itemSize() * .7) {
+    var cardTouchRadius=Math.max(itemSize()*.7,document.documentElement.dataset.touch==='true'?28:0);
+    if (Math.abs(p.x - S.card.x) < cardTouchRadius && Math.abs(p.y - S.card.y) < cardTouchRadius) {
       S.dragCard = true;
       return;
     }
@@ -4991,8 +5018,9 @@ function down(p, pointerId) {
   if (S.phase !== 'carry') return;
 
   var scanner = UI.rest;
-  if (p.x > scanner.x - 8 && p.x < scanner.x + scanner.w + 8 &&
-      p.y > scanner.y - 8 && p.y < scanner.y + scanner.h + 8) {
+  var scannerMargin=deviceTouchMargin(scanner);
+  if (p.x > scanner.x - scannerMargin && p.x < scanner.x + scanner.w + scannerMargin &&
+      p.y > scanner.y - scannerMargin && p.y < scanner.y + scanner.h + scannerMargin) {
     if (S.drag) return;
     S.scannerPointer = pointerId;
     S.dwell = 0;
@@ -5776,7 +5804,7 @@ function drawItem(it, belt) {
 
 function overTerminal(p) {
   var b = UI.term;
-  var margin = 10 * (1 + (equippedItem('terminals').tapBoost || 0) / 100);
+  var margin = Math.max(10,deviceTouchMargin(b)) * (1 + (equippedItem('terminals').tapBoost || 0) / 100);
   return p.x > b.x - margin && p.x < b.x + b.w + margin &&
          p.y > b.y - margin && p.y < b.y + b.h + margin;
 }
