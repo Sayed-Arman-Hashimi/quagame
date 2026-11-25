@@ -1014,6 +1014,47 @@
 .market-stock meter { width:100%; height:8px; accent-color:#5e9663; }
 .market-stock small { color:var(--ui-muted,#667a68); font-size:10px; }
 .market-stock[data-sold-out] b { color:#b85135; }
+
+.total-entry-panel { box-sizing:border-box; width:min(680px,calc(100vw - 24px)); max-height:calc(100dvh - 16px); padding:0; overflow:auto; border:3px solid #805d39; border-radius:24px; background:#fff7df; color:#294b39; font-family:Nunito,system-ui,sans-serif; box-shadow:0 8px 0 #493c2d,0 22px 70px #10261e88; overscroll-behavior:contain; }
+.total-entry-panel::backdrop { background:#12271f99; backdrop-filter:blur(4px); }
+.total-entry-header { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 16px; border-bottom:2px solid #d8c59e; background:#f3dfac; }
+.total-entry-header h2 { margin:0; font-size:21px; font-weight:1000; }
+.total-entry-header button { min-width:44px; min-height:44px; border:2px solid #a58a58; border-radius:13px; background:#fff6dc; color:#664b2c; font:900 28px/1 Nunito,system-ui,sans-serif; cursor:pointer; }
+.total-entry-body { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:14px; padding:14px; }
+.total-receipt { min-width:0; display:flex; flex-direction:column; padding:14px; border:1px solid #d6c49b; border-radius:15px; background:#fffdf1; }
+.total-receipt-title { display:flex; flex-wrap:wrap; justify-content:space-between; gap:4px; font-size:12px; font-weight:1000; color:#86734d; }
+.total-receipt-title small { font-size:12px; }
+.total-receipt ul { list-style:none; padding:0; margin:14px 0; display:grid; gap:9px; font-size:13px; }
+.total-receipt li { display:flex; align-items:center; gap:7px; justify-content:space-between; }
+.total-receipt li span { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.total-receipt li strong { flex:none; font-variant-numeric:tabular-nums; }
+.total-receipt-sum { margin-top:auto; border-top:2px dashed #d6c49b; padding-top:12px; display:grid; gap:3px; }
+.total-receipt-sum span { font-size:12px; letter-spacing:.12em; font-weight:1000; }
+.total-receipt-sum strong { font-size:clamp(18px,3.2vw,28px); font-weight:1000; overflow-wrap:anywhere; font-variant-numeric:tabular-nums; }
+.total-receipt p { margin:8px 0 5px; font-size:12px; color:#82734e; }
+.total-entry-controls { min-width:0; display:grid; gap:7px; align-content:start; }
+.total-entry-display { min-height:48px; display:flex; align-items:center; gap:6px; padding-left:12px; border:2px solid #244e40; border-radius:13px; background:#244e40; color:#edffd5; }
+.total-entry-display output { min-width:0; flex:1; font-size:clamp(19px,3.6vw,30px); font-weight:1000; text-align:right; overflow-wrap:anywhere; font-variant-numeric:tabular-nums; }
+.total-entry-display button { align-self:stretch; min-width:44px; min-height:44px; border:0; background:transparent; color:#f9e7aa; font-size:23px; cursor:pointer; }
+.total-entry-keys { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; }
+.total-entry-keys button,.total-entry-confirm { min-width:44px; min-height:clamp(44px,9dvh,58px); border:2px solid #bba77a; border-radius:12px; background:#fffaf0; color:#334b3d; box-shadow:0 3px 0 #c2af85; font:1000 26px/1 Nunito,system-ui,sans-serif; cursor:pointer; touch-action:manipulation; }
+.total-entry-keys .total-key-clear { background:#f2c8a8; color:#793a2d; }
+.total-entry-confirm { display:flex; align-items:center; justify-content:center; gap:16px; border-color:#3e6946; background:linear-gradient(#7baa68,#54834e); box-shadow:0 3px 0 #315637; color:#fffce4; font-size:19px; }
+.total-entry-panel button:active { transform:translateY(2px); box-shadow:none; }
+.total-entry-panel button:focus-visible { outline:3px solid #d69231; outline-offset:2px; }
+.total-entry-error { min-height:16px; margin:2px 0 0; color:#a53b29; font-size:12px; font-weight:900; }
+@media(max-height:440px) {
+ .total-entry-panel { border-radius:18px; border-width:2px; }
+ .total-entry-header { padding:2px 12px; } .total-entry-header h2 { font-size:18px; }
+ .total-entry-header button { min-height:44px; height:44px; }
+ .total-entry-body { padding:9px; gap:10px; }
+ .total-receipt { padding:10px; } .total-receipt ul { margin:10px 0; gap:7px; } .total-receipt p { font-size:11px; }
+ .total-entry-controls { gap:5px; } .total-entry-display { min-height:44px; }
+ .total-entry-display button { min-height:44px; }
+ .total-entry-keys { gap:5px; } .total-entry-keys button,.total-entry-confirm { min-height:44px; }
+ .total-entry-error { min-height:14px; margin:0; font-size:11px; }
+}
+
 </style>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27%23377560%27/%3E%3Ctext x=%2732%27 y=%2747%27 text-anchor=%27middle%27 font-size=%2746%27 fill=%27%23ffcf58%27%3E%24%3C/text%3E%3C/svg%3E">
 <script id="cashier-embedded-assets">/* Standalone Cashier Rush assets. Assets are served from the adjacent assets folder. */
@@ -1066,6 +1107,20 @@ function assetUrl(p){
 </section>
 <audio id="background-music" src="assets/embedded/7c3fc27efe88f31db32f4d8d3dcc93d02ffd082f37c43877135ea5ee04ee88ef.mp3" preload="none" loop></audio>
 <audio id="payment-chime" src="assets/embedded/d3adec6ce6afd76fdae408b2acbcbf5e422ef5c881bb194ccebcb4bb0c933b65.mp3" preload="auto"></audio>
+
+<dialog id="total-entry-panel" class="total-entry-panel" aria-labelledby="total-entry-heading">
+  <header class="total-entry-header"><h2 id="total-entry-heading">Enter total</h2><button type="button" id="total-entry-close" aria-label="Close price entry">×</button></header>
+  <div class="total-entry-body">
+    <section class="total-receipt" aria-label="Scanned receipt"><div class="total-receipt-title"><span>RECEIPT</span><small id="total-entry-count"></small></div><ul id="total-entry-items"></ul><div class="total-receipt-sum"><span>TOTAL</span><strong id="total-entry-target"></strong></div><p class="total-entry-label">YOUR PRICE</p><div class="total-entry-display"><output id="total-entry-value" aria-label="Entered price" aria-live="polite">$0.00</output><button type="button" data-total-key="backspace" aria-label="Delete last digit">⌫</button></div></section>
+    <section class="total-entry-controls" aria-label="Price keypad">
+
+      <div class="total-entry-keys"><button type="button" data-total-key="1">1</button><button type="button" data-total-key="2">2</button><button type="button" data-total-key="3">3</button><button type="button" data-total-key="4">4</button><button type="button" data-total-key="5">5</button><button type="button" data-total-key="6">6</button><button type="button" data-total-key="7">7</button><button type="button" data-total-key="8">8</button><button type="button" data-total-key="9">9</button><button type="button" data-total-key="C" class="total-key-clear" aria-label="Clear price">C</button><button type="button" data-total-key="0">0</button><button type="button" data-total-key="." aria-label="Decimal point">.</button></div>
+      <button type="button" class="total-entry-confirm" data-total-key="confirm">Confirm <span aria-hidden="true">✓</span></button>
+      <p id="total-entry-error" class="total-entry-error" role="status" aria-live="polite"></p>
+    </section>
+  </div>
+</dialog>
+
 <main id="title-screen" class="title-screen" aria-labelledby="title-brand">
   <div class="title-backdrops" aria-hidden="true"><img class="is-visible" src="assets/embedded/a39c926fdaa07a290c9a3c0a537f0bdff99bb27f8639ea8df21a11e0746703a2.jpg" alt="" decoding="async" fetchpriority="high" style="z-index:1"><img src="assets/embedded/417d1918e0047eb4640f106a82c1ec83aec5fe73d947a595f5850fb5112e4dbc.jpg" alt="" decoding="async"><img src="assets/embedded/e73ee20d624b651242d3fa898307c00415d57f6d565b98e0d714a2366b455795.jpg" alt="" decoding="async"></div>
   <dl class="title-stats">
@@ -4416,6 +4471,7 @@ function startShift() {
 }
 
 function nextCustomer(skipVisitor) {
+  closeTotalEntryPanel();
   if (!skipVisitor && maybeStoreVisitor()) return;
   S.queue = Math.min(S.queue, stockUnits(business.stock, business.storeLevel));
   if (S.queue <= 0) { endShift(); return; }
@@ -4495,6 +4551,7 @@ function nextCustomer(skipVisitor) {
 }
 
 function endShift() {
+  closeTotalEntryPanel();
   S.queue = 0; S.cur = null;
   S.scannerPointer = null;
   S.drag = null; S.dragCard = false; S.bagDrag = null;
@@ -4657,12 +4714,79 @@ function placeOnMachine(it) {
 }
 
 /* butun urunler okundu -> klavyeden TOPLAM girilir */
+
+
+var totalEntryPanel=document.getElementById('total-entry-panel');
+var totalEntryText='';
+var totalEntryError='';
+function totalEntryCents(value) {
+  if(!/^(?:\d{1,11}(?:\.\d{0,2})?|\.\d{0,2})$/.test(value))return null;
+  var parts=value.split('.');
+  var cents=Number(parts[0]||'0')*100+Number(((parts[1]||'')+'00').slice(0,2));
+  return Number.isSafeInteger(cents)?cents:null;
+}
+function syncTotalEntryPanel() {
+  document.getElementById('total-entry-value').textContent=totalEntryText?'$'+totalEntryText:'$0.00';
+  document.getElementById('total-entry-target').textContent=money(S.total);
+  document.getElementById('total-entry-count').textContent=S.scanned.length+' items';
+  var rows=S.scanned.slice(0,3).map(function(product){
+    return '<li><span>'+product.name+'</span><strong>'+money(product.price)+'</strong></li>';
+  });
+  if(S.scanned.length>3)rows.push('<li><span>+'+(S.scanned.length-3)+' more items</span></li>');
+  document.getElementById('total-entry-items').innerHTML=rows.join('');
+  document.getElementById('total-entry-error').textContent=totalEntryError;
+}
+function openTotalEntryPanel() {
+  if(portraitBlocked || S.screen!=='play' || S.phase!=='total' || !S.typing || supplyStore.open || visitorDialog.open || helpDialog.open)return false;
+  totalEntryText=Number(S.typing.val)>0?String(parseInt(S.typing.val,10)/100):'';
+  totalEntryError='';
+  syncTotalEntryPanel();
+  if(!totalEntryPanel.open)totalEntryPanel.showModal();
+  totalEntryPanel.querySelector('[data-total-key="1"]').focus({preventScroll:true});
+  return true;
+}
+function closeTotalEntryPanel() {
+  if(totalEntryPanel && totalEntryPanel.open)totalEntryPanel.close();
+}
+function totalEntryKey(key) {
+  if(!totalEntryPanel.open || S.screen!=='play' || S.phase!=='total' || !S.typing)return;
+  totalEntryError='';
+  if(key==='confirm'){
+    var cents=totalEntryCents(totalEntryText);
+    if(cents===null){totalEntryError='Enter a price first.';syncTotalEntryPanel();return;}
+    S.typing.val=String(cents);
+    submitTotal();
+    if(S.phase==='total'){totalEntryText='';totalEntryError='Check the receipt total and try again.';syncTotalEntryPanel();}
+    return;
+  }
+  if(key==='C')totalEntryText='';
+  else if(key==='backspace')totalEntryText=totalEntryText.slice(0,-1);
+  else if(key==='.' && !totalEntryText.includes('.'))totalEntryText=(totalEntryText||'0')+'.';
+  else if(/^\d$/.test(key)){
+    var candidate=totalEntryText==='0'?key:totalEntryText+key;
+    if(totalEntryCents(candidate)!==null)totalEntryText=candidate;
+  }
+  S.typing.val=totalEntryText?String(totalEntryCents(totalEntryText)||0):'';
+  syncTotalEntryPanel();
+}
+totalEntryPanel.addEventListener('click',function(event){
+  var button=event.target.closest('[data-total-key]');
+  if(button)totalEntryKey(button.dataset.totalKey);
+});
+document.getElementById('total-entry-close').addEventListener('click',closeTotalEntryPanel);
+totalEntryPanel.addEventListener('cancel',function(event){event.preventDefault();closeTotalEntryPanel();});
+totalEntryPanel.addEventListener('keydown',function(event){
+  var key=/^\d$/.test(event.key)?event.key:event.key==='.'||event.key===','?'.':event.key==='Backspace'?'backspace':event.key==='Delete'?'C':event.key==='Enter'?'confirm':null;
+  if(key){event.preventDefault();event.stopPropagation();totalEntryKey(key);}
+});
+
 function submitTotal() {
   if (!S.typing) return;
   var typed = parseInt(S.typing.val || '0', 10);
   if (typed === S.total) {
     S.typing = null;
     S.phase = 'card';
+    closeTotalEntryPanel();
     S.flash = .35;
     S.card = { x: UI.cust.x + UI.cust.w * .5, y: UI.deskY - H * .14, rot: -.1 };
     sfxRegister();
@@ -4711,7 +4835,7 @@ function pos(e) {
 }
 
 function down(p, pointerId) {
-  if (portraitBlocked || visitorDialog.open || helpDialog.open || S.scannerPointer !== null) return;
+  if (portraitBlocked || totalEntryPanel.open || visitorDialog.open || helpDialog.open || S.scannerPointer !== null) return;
   ensureAudio();
   S.pos = p;
   if (S.screen === 'menu') return;
@@ -4724,9 +4848,7 @@ function down(p, pointerId) {
     }
   }
   if (S.phase === 'total') {
-    for (var k2 = 0; k2 < UI.keys.length; k2++) {
-      if (hit(UI.keys[k2], p)) { keyPress(UI.keys[k2].k); return; }
-    }
+    if(hit(UI.pos,p))openTotalEntryPanel();
     return;
   }
   if (S.phase === 'bag') {
@@ -5807,7 +5929,7 @@ function drawBottom() {
     else if (S.scannerPointer === null) msg = 'Press and hold the scanner';
     else msg = 'Keep holding and aim at the product';
   }
-  else if (S.phase === 'total') msg = 'Type the total on the keypad';
+  else if (S.phase === 'total') msg = 'Tap the register to enter the total';
   else if (S.phase === 'card') msg = 'Drag the card onto the reader';
   else if (S.phase === 'bag') msg = 'Drag the bag to the customer';
   else if (S.phase === 'charge') msg = 'Processing payment…';
@@ -7130,6 +7252,7 @@ function update(dt) {
 }
 
 function render() {
+  if(totalEntryPanel.open && (S.screen!=='play' || S.phase!=='total' || portraitBlocked))closeTotalEntryPanel();
   ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
   ctx.clearRect(0, 0, W, H);
   if (business.shake && S.shake > 0) {
