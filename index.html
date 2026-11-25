@@ -1055,6 +1055,133 @@
  .total-entry-error { min-height:14px; margin:0; font-size:11px; }
 }
 
+
+/* Shared, readable tablet layout. Mobile changes use height, since the game is landscape. */
+.equipment-picker { display:none; }
+.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+#open-decor .office-app-icon,#open-themes .office-app-icon { background:transparent; }
+#open-decor .office-app-icon svg,#open-themes .office-app-icon svg { width:100%; height:100%; }
+.total-entry-body { grid-template-columns:repeat(2,minmax(0,1fr)); align-items:stretch; }
+.total-entry-controls { grid-template-rows:minmax(0,1fr) 52px auto; align-content:stretch; }
+.total-entry-keys { grid-template-rows:repeat(4,minmax(44px,1fr)); }
+.total-entry-keys button { height:100%; }
+.total-entry-error:empty { display:none; }
+.total-receipt { min-height:0; }
+.total-receipt ul { max-height:130px; overflow-y:auto; }
+.total-entry-display { flex-shrink:0; }
+.total-entry-display output { font-size:clamp(18px,3.1vw,28px); }
+@media(orientation:landscape) and (max-height:600px) {
+  .supply,html[data-touch=true] .supply {
+    width:calc(100% - max(6px,env(safe-area-inset-left)) - max(6px,env(safe-area-inset-right)));
+    height:calc(100dvh - max(6px,env(safe-area-inset-top)) - max(6px,env(safe-area-inset-bottom)));
+    max-width:none; max-height:none; margin:auto; padding:2px; border-width:4px; border-radius:18px; font-size:14px;
+  }
+  .supply .office,.supply.calendar-open .office { grid-template-rows:48px minmax(0,1fr); border-radius:11px; }
+  .supply .tablet-bezel { display:none; }
+  .supply .office-bar { padding:0 10px; border-bottom:1px solid #ffffff26; }
+  .supply .office-bar::after { display:none; }
+  .supply .office-title { font-size:15px; }
+  .supply .office-bar button { min-width:44px; min-height:44px; font-size:14px; }
+  .supply .office-bar #office-home { padding-inline:14px; }
+  .supply .office-bar .supply-close { width:44px; font-size:26px; }
+  .supply .office-desktop { display:grid; grid-template-columns:repeat(auto-fill,minmax(104px,1fr)); grid-auto-rows:112px; align-content:start; gap:12px; padding:12px; }
+  .supply .office-shortcut { width:100%; min-width:0; min-height:112px; height:112px; padding:7px 4px; gap:5px; border-radius:15px; }
+  .supply .office-shortcut .office-app-icon { width:64px; height:64px; flex-basis:64px; border-radius:17px; }
+  .supply .office-shortcut strong { font-size:14px; line-height:17px; min-height:34px; }
+  .supply .supply-site { min-width:0; min-height:0; grid-template-columns:minmax(0,1fr); grid-template-rows:auto minmax(0,1fr); overflow:hidden; }
+  .supply .supply-site > .supply-nav { display:none; }
+  .supply .supply-header { min-height:52px; padding:4px 12px; gap:8px; flex-wrap:wrap; }
+  .supply .supply-header h2 { font-size:18px; line-height:1.2; letter-spacing:-.02em; }
+  .supply .supply-balance { font-size:14px; padding:6px 8px; }
+  .supply .supply-body { min-width:0; padding:12px; overflow-x:hidden; overflow-y:auto; background:var(--ui-base,#f5f5e9); scroll-padding-block:12px; }
+  .supply .supply-body h3 { font-size:19px; }
+  .supply .supply-body p { font-size:14px; }
+  .supply .equipment-picker { display:block; flex:1; max-width:240px; min-width:140px; }
+  .supply .equipment-picker select { width:100%; min-height:44px; padding:7px 10px; border:2px solid var(--game-edge); border-radius:10px; background:var(--game-paper); color:var(--game-ink); font:850 15px Nunito,system-ui,sans-serif; }
+  .supply .equipment-header h2 { min-width:80px; }
+  .supply .equipment-site .supply-body > h3 { display:none; }
+  .supply .equipment-site .supply-status:not([hidden]) { margin:0 0 10px; }
+  .supply .supply-grid,.supply .equipment-site .supply-grid:not([data-department=expansion]),.supply .unlock-group .supply-grid,.supply .upgrades-site .supply-grid {
+    grid-template-columns:repeat(auto-fill,minmax(min(216px,100%),1fr)); gap:12px; align-items:stretch; margin-top:0;
+  }
+  .supply .supply-card { min-width:0; padding:12px; border-radius:16px; }
+  .supply .supply-card h4 { font-size:17px; line-height:1.25; margin-block:8px; }
+  .supply .supply-card p { font-size:14px; line-height:1.35; }
+  .supply .supply-image,.supply .equipment-preview,.supply .gear-card .equipment-preview { height:120px; margin-bottom:8px; }
+  .supply .supply-buy { min-height:48px; padding:8px 10px; gap:8px; font-size:14px; margin-top:auto; }
+  .supply .equipment-perks { grid-auto-rows:82px; margin:10px 0; }
+  .supply .equipment-perks li { height:82px; padding:6px 2px; }
+  .supply .equipment-perks .gear-stat-icon { height:24px; }
+  .supply .gear-stat-icon svg { width:22px; height:22px; margin:0; }
+  .supply .equipment-perks strong { font-size:17px; line-height:21px; }
+  .supply .gear-stat-label { min-height:22px; font-size:12px; margin-top:2px; }
+  .supply .category-grid,.supply .catalog-overview .category-grid { flex:none; min-height:0; grid-template-columns:repeat(auto-fill,minmax(min(170px,100%),1fr)); grid-template-rows:none; grid-auto-rows:150px; gap:12px; margin:0; }
+  .supply .category-tile { min-width:0; height:150px; }
+  .supply .catalog-overview .category-art,.supply .category-art { height:92px; min-height:92px; flex:none; }
+  .supply .category-copy { padding:6px 10px; }
+  .supply .category-copy strong { font-size:15px; }
+  .supply .category-copy small { font-size:12px; }
+  .supply .category-back,.supply .supply-filters button,.supply #stock-cart-open { min-height:44px; font-size:14px; }
+  .supply .stock-header { gap:5px; }
+  .supply .stock-topline { flex-wrap:wrap; }
+  .supply .stock-pack,.supply .capacity-label { display:none; }
+  .supply .stock-header .stock-capacity { padding:3px 8px; }
+  .supply .capacity-count b,.supply .capacity-free { font-size:16px; }
+  .supply .inventory-body { width:100%; max-width:none; }
+  .supply .inventory-table { table-layout:auto; font-size:14px; }
+  .supply .inventory-table :is(th,td) { padding:8px; }
+  .supply .inventory-price-input { height:44px; }
+  .supply .inventory-price-input input { width:76px; font-size:16px; }
+  .supply .inventory-price-form button { min-width:44px; min-height:44px; }
+  .supply .office-settings { padding:12px; }
+  .supply .game-settings-grid { width:100%; gap:12px; }
+  .supply .settings-list label { min-height:48px; font-size:15px; }
+  .supply .game-fullscreen { min-height:44px; font-size:14px; }
+  .supply .cart-layout { grid-template-columns:minmax(0,1.2fr) minmax(220px,.8fr); gap:12px; }
+  .supply .cart-stepper button { min-width:44px; min-height:44px; }
+  .supply .cart-line [data-cart-remove] { min-height:44px; font-size:13px; }
+  .supply .cart-line small,.supply .cart-shipping small { font-size:12px; }
+  .supply .cart-shipping strong { font-size:14px; }
+  .supply .calendar-site .calendar-body { overflow:auto; }
+  .supply .calendar-site .calendar-layout { grid-template-columns:minmax(0,1fr) 200px; min-height:340px; }
+  .supply .calendar-site .calendar-toolbar button { min-width:44px; min-height:44px; }
+  .supply .calendar-site .calendar-day { min-height:44px; }
+  .supply .calendar-site .calendar-day > strong { font-size:15px; }
+  .supply .calendar-site .calendar-event h4,.supply .calendar-site .calendar-event p { font-size:14px; }
+  .supply .calendar-site .calendar-pay { min-height:44px; font-size:14px; }
+  .total-entry-panel { width:min(720px,calc(100vw - 16px)); }
+  .total-entry-controls { grid-template-rows:minmax(0,1fr) 48px auto; }
+  .total-entry-body { padding:10px; gap:10px; }
+  .total-receipt ul { margin:8px 0; gap:5px; }
+}
+
+
+@media(orientation:landscape) and (max-height:600px) {
+  .supply .auction-site { grid-template-rows:auto auto minmax(0,1fr); }
+  .supply .auction-tabs button,.supply .auction-body button { min-height:44px; font-size:14px; }
+  .supply .auction-body { padding:12px; }
+  .supply .auction-body p { font-size:14px; }
+  .supply .auction-live-layout { grid-template-columns:minmax(0,1fr) 180px; }
+  .supply .auction-grid { grid-template-columns:repeat(auto-fill,minmax(min(216px,100%),1fr)); gap:12px; }
+  .supply .set-preview { height:146px; }
+  .supply .set-preview img,.supply .set-preview canvas { height:58px; }
+  .supply .boost-description { font-size:14px; }
+  .supply .inventory-tools { margin-bottom:10px; }
+}
+@media(orientation:landscape) and (max-height:440px) {
+  .total-entry-header { padding-block:2px; }
+  .total-entry-controls { grid-template-rows:minmax(0,1fr) 44px auto; gap:6px; }
+  .total-entry-body { padding:8px; gap:8px; }
+  .total-receipt { padding:9px; }
+  .total-receipt ul { max-height:78px; margin:7px 0; gap:4px; font-size:12px; }
+  .total-receipt-sum { padding-top:6px; gap:1px; }
+  .total-receipt-sum strong { font-size:24px; }
+  .total-receipt p { margin:5px 0 3px; font-size:11px; }
+  .total-entry-display { min-height:44px; }
+  .total-entry-display button { min-height:44px; }
+  .total-entry-display output { font-size:24px; }
+}
+
 </style>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27%23377560%27/%3E%3Ctext x=%2732%27 y=%2747%27 text-anchor=%27middle%27 font-size=%2746%27 fill=%27%23ffcf58%27%3E%24%3C/text%3E%3C/svg%3E">
 <script id="cashier-embedded-assets">/* Standalone Cashier Rush assets. Assets are served from the adjacent assets folder. */
@@ -1209,6 +1336,8 @@ function assetUrl(p){
         <strong>My Stock</strong>
       </button>
       <button id="open-equipment" class="office-shortcut" type="button"><span class="office-app-icon" aria-hidden="true"><img src="assets/embedded/3bcbc3acd383337d2eb2712face6d74c9505cdd6a421e14f2fcda77a817b4d0b.svg" alt="" width="82" height="82" decoding="async" draggable="false"></span><strong>Gamazon</strong></button>
+      <button id="open-decor" class="office-shortcut" type="button"><span class="office-app-icon" aria-hidden="true"><svg viewBox="0 0 82 82" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="76" height="76" rx="21" fill="#e9a878" stroke="#fff4d0" stroke-width="2"/><rect x="8" y="8" width="66" height="66" rx="17" stroke="#ffffff66" stroke-width="2"/><path d="M19 39 41 19l22 20v25H19z" fill="#fff3c9" stroke="#745733" stroke-width="3"/><path d="M30 64V43h22v21" fill="#77b898" stroke="#745733" stroke-width="3"/><path d="m56 23 9 7-4 6-9-7z" fill="#ffce76" stroke="#745733" stroke-width="2"/></svg></span><strong>Decor</strong></button>
+      <button id="open-themes" class="office-shortcut" type="button"><span class="office-app-icon" aria-hidden="true"><svg viewBox="0 0 82 82" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="76" height="76" rx="21" fill="#aa99db" stroke="#fff4d0" stroke-width="2"/><rect x="8" y="8" width="66" height="66" rx="17" stroke="#ffffff66" stroke-width="2"/><rect x="18" y="22" width="46" height="37" rx="6" fill="#fff2cc" stroke="#5e4b7a" stroke-width="3"/><path d="M19 32h44M33 65h16M41 59v6" stroke="#5e4b7a" stroke-width="3"/><circle cx="28" cy="27" r="2" fill="#ee9c7d"/><path d="m42 37 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" fill="#ffc85e" stroke="#99713e" stroke-width="2"/></svg></span><strong>Themes</strong></button>
       <button id="open-reviews" class="office-shortcut" type="button">
         <span class="office-app-icon" aria-hidden="true"><img src="assets/embedded/344f05fa96a3ce826972a107ef6bfef5d959ee4d8d573c9047964c27459f1b32.svg" alt="" width="82" height="82" decoding="async" draggable="false"></span>
         <strong>Reviews</strong>
@@ -1280,8 +1409,8 @@ function assetUrl(p){
     </div>
     <div id="office-equipment" class="supply-site equipment-site" hidden>
       <header class="supply-header equipment-header">
-        <h2>Gamazon</h2>
-        <span id="equipment-balance" class="supply-balance"></span>
+        <h2 id="equipment-app-title">Gamazon</h2>
+        <label class="equipment-picker"><span class="sr-only">Category</span><select id="equipment-department-select" aria-label="Category"></select></label><span id="equipment-balance" class="supply-balance"></span>
       </header>
       <nav class="supply-nav" aria-label="Gamazon departments"><button type="button" data-department="sets" aria-pressed="false"><span class="department-icon" style="--department-ink:#6d658a;--department-bg:#ece8f7" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 9 5-9 5-9-5zM3 12l9 5 9-5M3 17l9 5 9-5"/></svg></span><span class="department-label">Collections</span></button><button type="button" data-department="os" aria-pressed="false"><span class="department-icon" style="--department-ink:#6d658a;--department-bg:#ece8f7" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4M6 8h4m-4 4h10"/></svg></span><span class="department-label">Register OS</span></button>
         <button type="button" data-department="registers" aria-pressed="false"><span class="department-icon" style="--department-ink:#346383;--department-bg:#e6eff9" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="13" rx="2"/><path d="M9 16v4m6-4v4M6 21h12M6 7h6m-6 3h3m7 0h2"/></svg></span><span class="department-label">Registers</span></button>
@@ -6562,6 +6691,33 @@ var equipmentStatus = document.getElementById('equipment-status');
 var equipmentItems = document.getElementById('equipment-items');
 var departments = officeEquipment.querySelectorAll('[data-department]');
 var department = 'registers';
+var equipmentApp = 'equipment';
+var EQUIPMENT_APPS = {
+  equipment: { name:'Gamazon', departments:['registers','scanners','terminals','belts','bags','trays'] },
+  decor: { name:'Decor', departments:['backgrounds','counters','expansion'] },
+  themes: { name:'Themes', departments:['sets','os','wallpapers','tabletColors'] }
+};
+var equipmentPicker = document.getElementById('equipment-department-select');
+function syncEquipmentApp() {
+  var app=EQUIPMENT_APPS[equipmentApp];
+  document.getElementById('equipment-app-title').textContent=app.name;
+  officeEquipment.dataset.app=equipmentApp;
+  departments.forEach(function(button){button.hidden=!app.departments.includes(button.dataset.department);});
+  equipmentPicker.innerHTML=app.departments.map(function(key){return '<option value="'+key+'">'+departmentNames[key]+'</option>';}).join('');
+  equipmentPicker.value=department;
+}
+function openEquipmentApp(app,category) {
+  if(!EQUIPMENT_APPS[app])return;
+  equipmentApp=app;
+  var choices=EQUIPMENT_APPS[app].departments;
+  department=choices.includes(category)?category:choices[0];
+  showOffice(app);
+}
+equipmentPicker.addEventListener('change',function(){
+  if(!EQUIPMENT_APPS[equipmentApp].departments.includes(equipmentPicker.value))return;
+  department=equipmentPicker.value;renderEquipment();
+  officeEquipment.querySelector('.supply-body').scrollTop=0;
+});
 var departmentNames = { registers: 'Registers', backgrounds: 'Interiors', counters: 'Counters',
                         sets: 'Collections', os: 'Register OS', belts: 'Conveyors', scanners: 'Scanners', terminals: 'Card Readers',
                         bags: 'Bags', trays: 'Scan Trays', wallpapers: 'Wallpapers', tabletColors: 'Tablet colors', expansion: 'Expansion' };
@@ -6716,6 +6872,7 @@ function renderExpansion() {
 
 
 function renderEquipment(message) {
+  syncEquipmentApp();
   departments.forEach(function(button){button.setAttribute('aria-pressed',String(button.dataset.department===department));});
   if (department === 'os') { equipmentBalance.textContent=money(business.cash); renderOperatingSystems(); return; }
   if (department === 'sets') { equipmentBalance.textContent=money(business.cash); renderCosmeticSets(); return; }
@@ -6771,6 +6928,7 @@ equipmentItems.addEventListener('click', function (event) {
   if(setButton && !setButton.disabled){buyCosmeticSet(setButton.dataset.setId);return;}
   var interiorLink = event.target.closest('[data-expansion-interior]');
   if (interiorLink && !officeEquipment.hidden && supplyStore.open) {
+    equipmentApp = 'decor';
     department = 'backgrounds';
     renderEquipment();
     var choice = equipmentItems.querySelector('[data-item="' + interiorLink.dataset.expansionInterior + '"]');
@@ -6979,7 +7137,12 @@ function showOffice(page) {
   officeInventory.hidden = page !== 'inventory';
   officeReviews.hidden = page !== 'reviews';
   officeSettings.hidden = page !== 'settings';
-  officeEquipment.hidden = page !== 'equipment';
+  var equipmentPage=Object.prototype.hasOwnProperty.call(EQUIPMENT_APPS,page);
+  if(equipmentPage) {
+    equipmentApp=page;
+    if(!EQUIPMENT_APPS[page].departments.includes(department))department=EQUIPMENT_APPS[page].departments[0];
+  }
+  officeEquipment.hidden = !equipmentPage;
   officeHome.hidden = S.screen === 'menu' || page === 'desktop';
   officeTitle.textContent = S.screen === 'menu' ? 'Settings' : 'Shop computer';
   if (page === 'auction') {
@@ -7008,9 +7171,11 @@ function showOffice(page) {
     renderReviews();
     officeReviews.querySelector('.supply-body').scrollTop = 0;
     officeReviews.querySelector('[aria-pressed=true]').focus();
-  } else if (page === 'equipment') {
+  } else if (equipmentPage) {
     renderEquipment();
-    officeEquipment.querySelector('[data-department="' + department + '"]').focus();
+    officeEquipment.querySelector('.supply-body').scrollTop=0;
+    if(window.matchMedia('(max-height:600px) and (orientation:landscape)').matches)equipmentPicker.focus({preventScroll:true});
+    else officeEquipment.querySelector('[data-department="' + department + '"]').focus();
   } else if (page === 'settings') {
     soundSetting.checked = business.sound;
     shakeSetting.checked = business.shake;
@@ -7086,7 +7251,9 @@ reviewFilters.forEach(function (button) {
   });
 });
 
-equipmentShortcut.addEventListener('click', function () { showOffice('equipment'); });
+equipmentShortcut.addEventListener('click', function () { openEquipmentApp('equipment'); });
+document.getElementById('open-decor').addEventListener('click',function(){openEquipmentApp('decor');});
+document.getElementById('open-themes').addEventListener('click',function(){openEquipmentApp('themes');});
 settingsShortcut.addEventListener('click', function () { showOffice('settings'); });
 officeHome.addEventListener('click', function () { showOffice('desktop'); });
 document.getElementById('tablet-back').addEventListener('click', function () {
