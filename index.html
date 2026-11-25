@@ -1003,11 +1003,52 @@
 .auction-deal{position:absolute;top:12px;right:12px;padding:6px 8px;border:1px solid #93ac75;border-radius:10px;background:#e2efce;color:#466338;font-size:10px;font-weight:1000}
 @media(max-height:550px){.upgrades-site .boost-card{grid-template-rows:36px auto minmax(35px,1fr) 8px auto 34px;min-height:210px}.upgrades-site .boost-description{min-height:0;margin:0;font-size:9px}.auction-deal{top:7px;right:7px;font-size:8px;padding:4px 6px}.upgrades-site .boost-values b{font-size:20px}}
 
+.retail-risk { display:flex; flex-wrap:wrap; gap:5px; margin:0 0 8px; color:#674e1f; }
+.retail-risk span { background:#fff0c4; border:1px solid #c6a455; border-radius:8px; padding:4px 7px; font-size:11px; font-weight:900; }
+.retail-risk small { flex-basis:100%; font-size:11px; color:inherit; }
+.supply-card:has(.retail-risk) { border-color:#c6a455; }
+[data-ui-theme=dark] .retail-risk { color:#ffe0a0; }
+[data-ui-theme=dark] .retail-risk span { background:#463c29; color:#ffe0a0; }
+.market-stock { display:grid; gap:4px; padding:8px; margin:0 0 8px; border-radius:10px; background:var(--ui-raised,#eef4ef); color:var(--ui-ink,#254c3e); font-size:11px; }
+.market-stock span { display:flex; flex-wrap:wrap; justify-content:space-between; gap:4px; }
+.market-stock meter { width:100%; height:8px; accent-color:#5e9663; }
+.market-stock small { color:var(--ui-muted,#667a68); font-size:10px; }
+.market-stock[data-sold-out] b { color:#b85135; }
 </style>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27%23377560%27/%3E%3Ctext x=%2732%27 y=%2747%27 text-anchor=%27middle%27 font-size=%2746%27 fill=%27%23ffcf58%27%3E%24%3C/text%3E%3C/svg%3E">
 <script id="cashier-embedded-assets">/* Standalone Cashier Rush assets. Assets are served from the adjacent assets folder. */
 var CASHIER_ASSETS={"assets/prop-pos.png":"assets/embedded/6582433fab3234e95287eae1ef5bac6e440f9c3544d375b0ff154abd0e6c2106.png","assets/register-mint-pop.webp":"assets/embedded/673ff3b7178f9e3a23741ffd09eb4b52bf7c190860abda455d98bd5084027f9a.webp","assets/register-lavender-touch.webp":"assets/embedded/65583edb40327b97e48857e026ccabbe1906e0255952e8a9e69a7da4fe4cb7a5.webp","assets/register-cherry-arcade.webp":"assets/embedded/d63f8a3b2f6e660050c5b19e115c3b791a47b4a82cb4f93d5c31073443490a79.webp","assets/orbit-register.png":"assets/embedded/d415e16cdd821ee50cd8eee260bacf1b5848ad13041a96af05a4b8e4207a5368.png","assets/bazaar-register.png":"assets/embedded/7aebaa5c4fced5cc4a96b15d051412a434372f8599d87e9790a8174d07354d91.png","assets/honey-register.png":"assets/embedded/aea33166b8f703032d553997d068fd42b592952cef1eb01e1178987a0056c245.png","assets/bg-anime.jpg":"assets/embedded/607ab5e27045b5c4679fb9591ebb4821ef17f86270d67a9f686d2c7d0eac36db.jpg","assets/bg-boutique.jpg":"assets/embedded/417d1918e0047eb4640f106a82c1ec83aec5fe73d947a595f5850fb5112e4dbc.jpg","assets/bg-night.jpg":"assets/embedded/e73ee20d624b651242d3fa898307c00415d57f6d565b98e0d714a2366b455795.jpg","assets/prop-counter.png":"assets/embedded/68e8cbec32993da9423f031ee5ea345bb40a98d35b3d3264e77766bd7fa113d7.png","assets/counter-walnut.png":"assets/embedded/8c52d36f15bee6264d3f9cc3b19a4743adb97b629f5b02fefa185480161ee340.png","assets/counter-jade.png":"assets/embedded/3ef4281c86cb7e338381fe96d41eacc261731ba63551b95b433c6adb5155ed2b.png","assets/counter-slate.png":"assets/embedded/d3234ce967801aff8b080c3f8cb32ebc6ebcb015d1d7009bae99805bb0065398.png","assets/counter-honey-cabinet.png":"assets/embedded/74724091f810636f5ee7418cfcd307d8457de64fbff5b2c5272f0cf8a548d036.png","assets/prop-barcode-reader.png":"assets/embedded/910360a7fa3fb01e40b2bbce942991b8d179cc6b47704afe3956f02a236bd679.png","assets/orbit-scanner.png":"assets/embedded/163f5aef2507cd838911182c40cfdf2bebe467cc0ffd7629b026e1ea76f394a5.png","assets/bazaar-scanner.png":"assets/embedded/33eac7586165838ca912e00d453777260e31f20d1145ac10aeb8631c650e0ae5.png","assets/honey-scanner.png":"assets/embedded/2ea526082c3bbdf8c3c248382ae006e1e34e82ba2d1670833b90ca879ba8a89b.png","assets/prop-card-terminal.png":"assets/embedded/6bdf4c482d4548372077ae1c566fbeb92c4c6c9bc3c06e2250b34024f6de4931.png","assets/orbit-terminal.png":"assets/embedded/aa96b68d8980e3f7f9b61fabf795bfe63477616542b0dad247005e9f5aec3844.png","assets/bazaar-terminal.png":"assets/embedded/f816f28e1e07a0f0b0451e6035abb1248aed060986ce63daf998641a154acd91.png","assets/honey-terminal.png":"assets/embedded/a49171f075a8aaabd0ecee8daaef5b572419ad6ea55159ffc624071a0c8d48be.png","assets/prop-bag.png":"assets/embedded/5b0d910d2d99b53cfe824d8cbab827d8983c5e47af8e2e0cc6e03e3c7b9d28c3.png","assets/prop-eco-bag.png":"assets/embedded/fb658a786f403da51c3079ab2f9a0aa49f315c1ff8937ca518e9cdfeb63dad97.png","assets/honey-bag.png":"assets/embedded/a7b79913802ae0705817b0a8e8580f6d11a343a1099bc322bb0c45c1483e4030.png","assets/customers/customer-deniz-expressions.png":"assets/embedded/35f14489ea34dce0c46b77a93e9c6633db3d1650ddd8308334bc2c54b8c6c647.png","assets/customers/customer-zeynep-expressions.png":"assets/embedded/74ac0a248bbd09b85707634f562b6871b40cc2470f9a1b26190d72ad7ea753d9.png","assets/customers/customer-cem-expressions.png":"assets/embedded/8ddc46fa3ea6a53e92b160f7ba8d6e57573f9e113086a984fc23adb48df20e33.png","assets/customers/customer-selin-expressions.png":"assets/embedded/873784eb23b36b696253c8f126ca80e5247fabafc8db6a7a97e335e2a19238b7.png","assets/customers/customer-bora-expressions.png":"assets/embedded/f64c3bc9b20783051588395d0ebbea8f4f33fdce8f161f1d78eabecfa4d05db3.png","assets/customers/customer-elif-expressions.png":"assets/embedded/5537e966ca9280125aa999d7869c874d17d6f9f0490dda41488861dee265748b.png","assets/customers/customer-kemal-expressions.png":"assets/embedded/26ad6029b7765a47ced483f60e3026170ace8a976b9d9b892320ddfcecce7b69.png","assets/customers/customer-aysel-expressions.png":"assets/embedded/f833230b01d1ad45ddff197d99c7676e7ca16db1ae112ebe4be33525d6f49fac.png","assets/customers/customer-mert-expressions.png":"assets/embedded/98cad4e83faa931483e3d29fde5e0e2eb705db114e6700b28f6904449adb4def.png","assets/customers/customer-duru-expressions.png":"assets/embedded/78e6739fc51966aae202339ae7266f1ee313ba13b6f5bbd1ce785e9018d8a7b6.png","assets/customers/customer-tuna-expressions.png":"assets/embedded/6cde9b21018a5b7578ff4858ad630ac81fb470191b9d67141667c821f54b9bfe.png","assets/customers/customer-ada-expressions.png":"assets/embedded/ac93e10f55502e7ab86eb07d8f3e18f667bf023affb3d4d57a795c45ae3a90b1.png","assets/customers/customer-harun-expressions.png":"assets/embedded/4f1c2e1caf6468bf2276e1eefe5ae6084d89491419c47486902cf0fb08df8e31.png","assets/customers/customer-ozan-expressions.png":"assets/embedded/66edb69e4c53d8c03b42b24300496da179f4d35908746f5df1328c48ecd37948.png","assets/customers/customer-fikret-expressions.png":"assets/embedded/ed953de0f58cfbe84ab7f375264cfdcd513a7f26680e6c6c6642caa82a5844a4.png","assets/customers/customer-sadik-expressions.png":"assets/embedded/2e0286afdce5472516f37e7ca534fcc4f32f7ff2ad0775ee2edadf2912cc9dff.png","assets/customers/customer-rasim-expressions.png":"assets/embedded/27b12dabf875f6f78fbb9a42ccd0db205d731204d30ee8e68d9958967a74ecc2.png","assets/customers/customer-victor-expressions.png":"assets/embedded/5d07c19ca43a75b39f0175f1a1dfe98187011e6f0ee4c321d490e080c83ea25f.png","assets/customers/customer-aurelia-expressions.png":"assets/embedded/a5e39efc6c4fee9533b40d7857c47baccf2e5d578611ec4cf015bf55f3937c59.png","assets/customers/customer-felix-expressions.png":"assets/embedded/32658fdd517f9bbec1d1388dde269e3d7919dc79a23f49eaf43b077e17f730e9.png","assets/app-icons/auctions.svg":"assets/embedded/618fc0927f6dee11ed12034f109a9d91567ec2304f977e0ff3e6a912eee7be78.svg","assets/app-icons/calendar.svg":"assets/embedded/78a52b5e9eb491f8f4400e48959dcbad204420c35afdb579e0b23bef9b1d5120.svg","assets/app-icons/locked-products.svg":"assets/embedded/a7ac5e34fdbcc13385c47cf8b96d622384273b5a6d762f3eded8736e607fe400.svg","assets/app-icons/my-stock.svg":"assets/embedded/74a25bd6f5d179537e072f0c8fe268971f0e16c07388410596cd6602f0cb866c.svg","assets/app-icons/reviews.svg":"assets/embedded/344f05fa96a3ce826972a107ef6bfef5d959ee4d8d573c9047964c27459f1b32.svg","assets/app-icons/settings.svg":"assets/embedded/31479c60bfdeff2d17cf42a78e05ad78d0574e68cc8181570c25a6579bd95ea4.svg","assets/app-icons/stock.svg":"assets/embedded/6acc59762d5c1ed05e0907df294d7bc66b8ff8d02955c56973cf10e1c362b12d.svg","assets/app-icons/storeworks.svg":"assets/embedded/3bcbc3acd383337d2eb2712face6d74c9505cdd6a421e14f2fcda77a817b4d0b.svg","assets/app-icons/upgrades.svg":"assets/embedded/8c90c37719f04f5e0ae28e000e4ae96bf12527b4eaae4412189ad35e92e21966.svg","assets/auction/crown.png":"assets/embedded/a8c99a45dd9bb16dbfefb3e70be5413aafa22df9c10e50d0817cf5344ab166aa.png","assets/auction/jet.png":"assets/embedded/38a5da6550f7a14b6c962dbfd96fa4ce8cec44f245a40cf8938f4121fdeee0f5.png","assets/auction/mystery.png":"assets/embedded/4c33133f3998cd0fb2b2a452d00c9453bcbeb986bc4b02e81c90b4acd35dc1e9.png","assets/auction/painting.png":"assets/embedded/0ca6e32f1ce7f9be78466d5dd1053f9d86f004ee96d5cb14ac6c93e268172b01.png","assets/auction/roadster.png":"assets/embedded/d7a9147c87b325408a2b67c06b70c159c71fe153eb11d646be59adad5909c2e6.png","assets/auction/vase.png":"assets/embedded/6f1f4463cc5b62b4bce3c842e6747cc79dafff9c1cd39fd86c52c0f9d4a8533a.png","assets/auction/watch.png":"assets/embedded/4842bf0501348c0d6bd7fef294ed11924cc7baf1d36809bd5b2797ce370861ce.png","assets/auction/yacht.png":"assets/embedded/715774fda8b3331e0ae73226cd2335e54ae06bbf0f89fa95a06b1d217b88f8c1.png","assets/bag-src.png":"assets/embedded/8c7a1acf783191e5ff5c7d4ef04b15a077972c9879ea8519632e897491742962.png","assets/bg.jpg":"assets/embedded/dfa3b772cbdbd2e2daf15360812d5ca723e6e8df0aeda24f8c6627209691ffaa.jpg","assets/counter.jpg":"assets/embedded/5a519ea89078a08fe2a76730e95cde2608f1f7924fe1d8c2db564305bde2684c.jpg","assets/customer-berry-expressions.webp":"assets/embedded/0912a80a55991db4729c756c2065b3d88c329e0d40739d9f6c33e3ec70ae7c2c.webp","assets/customer-berry.png":"assets/embedded/0931f6f48a26418698f10646a6439f4b55fde49e79720fcc5e1788be26c5ad1c.png","assets/customer-indigo-expressions.webp":"assets/embedded/b667ae2bd2e74cc8fefc20b061c383001a331d206246771ac99d5f2840570ca9.webp","assets/customer-indigo.png":"assets/embedded/d4379410654c5df09d1b1e7b2ce18464037b63665e496f5ec5d7866bbec73f8e.png","assets/customer-olive-expressions.webp":"assets/embedded/247d7b2b2288013f720730db7930f4f7fd409f68512130bd261a56e30be5be86.webp","assets/customer-olive.png":"assets/embedded/54c2a48c77ee990daf12e8991dbdb4e449bfbcefa24f1a122546f0f6f61aeb04.png","assets/customer-teal-expressions.webp":"assets/embedded/e7976aba026edafddb044bfdba0e8bd73191727d6bf531a5d3011a9ae77c5274.webp","assets/customer-teal.png":"assets/embedded/462afde9deaa257ba5fedc57af667f7d3c055fa50e408f450aebb955bd9ccdbf.png","assets/npc-brooks.png":"assets/embedded/70a1fa5a76b022cfcaf20d766e38879dbb0d207340dc3b7400afe60837a399bd.png","assets/npc-jax.png":"assets/embedded/f7c35400d3d799535d0bfcf984f9bfbee1b8f17ef9eafffd46660bdfa7b7ff42.png","assets/npc-milo.png":"assets/embedded/cd2abdd28178365c1ab0f5fa753b16e7b07ae09f6e646e4facb0ee7d4931fc75.png","assets/npc-vera.png":"assets/embedded/c19755a3d4fbeebdc6c6d6def7813ec3a914b7f74bc4c565312911c1a8c0eb03.png","assets/products/almond-granola.png":"assets/embedded/dfa0da80f890faa059bc5fc6f58f232e201c01e7dd792c055775a4a81803e4b5.png","assets/products/apple-juice.png":"assets/embedded/8c309e262ca61e21016e8348f1c6a22617cfbce9cf914202cc23fce184c871be.png","assets/products/artisan-jam.png":"assets/embedded/aeca769c209060dc33bf83e1a970adc53d04a1910408d2baeb595ad0f77a8a41.png","assets/products/avocado.png":"assets/embedded/faa4d4dcb7c103e73fa92fd29eae9db665046c9a9bf08bc929a4826daa69e053.png","assets/products/bagel.png":"assets/embedded/d4282258755538ede2b498654dba940714b531f57e213c4581e4402c64a06fb7.png","assets/products/baguette.png":"assets/embedded/17ca6e08b90ba24dc8df574aa4f564564d7869a536be418ca76deae63f347503.png","assets/products/banana.png":"assets/embedded/7af86eab3f0f9dc4a0b57006a2c89cf8ba0674e51efebdd6c8ed72652dbd81b7.png","assets/products/beans.png":"assets/embedded/718758ec44ad34bb5b93b01bc039969cbdd76d3141658d917344a4ed18750e0c.png","assets/products/bell-pepper.png":"assets/embedded/1ddaa55d5a1d0b89f71c3e6eff800799e40e0ddfcc3782838e7174624dd02e3b.png","assets/products/black-truffle.png":"assets/embedded/7b50957a0e73af0aa21fe7b04fa9d64295d2a8868d25d1f3135060c79602fc0a.png","assets/products/blueberries.png":"assets/embedded/2440e795e328159cfd3a254eea5b4217f013209bbf3e3c5c05f1e7cbfb88999b.png","assets/products/bread.png":"assets/embedded/66dfa2aad3f3f6efca3f7680c2a043ef76abc60f13ad0a90d7d3a6acade7eaa5.png","assets/products/broccoli.png":"assets/embedded/464eee61495224038db22aac3d82b903f4881cdb3b93503fdd31270934883f2b.png","assets/products/butter.png":"assets/embedded/8e36eece8d1357dbca38004629488578224fd668aaee7868fc48002ffc8e2226.png","assets/products/canned.png":"assets/embedded/57db18e524b2e9f3e6354495e5a70dff84d7b5ab7a49d12aa508e1e90ba65c5c.png","assets/products/carrots.png":"assets/embedded/5831978ea914a8fb66154d433d44bab5ad550512477270202d3401d448cb28a6.png","assets/products/cheddar.png":"assets/embedded/38252a19ac3973a61d4be237f934ddfb275664047c25f7013eb4eb5d6f409c2f.png","assets/products/cheese.png":"assets/embedded/9169a58df0965d4c76ab4e02c48afe74fd7bfb4cb75770e671550b18a9b9f71b.png","assets/products/cherries.png":"assets/embedded/f42f98d76c1bdc843289913ac1f6a6a6912bc2ec0a9bbdaab78931a0d1ecc155.png","assets/products/chips.png":"assets/embedded/f6338f49b3c251136e41ac69eab0bec4dbb9c4a99dc826a70d947a3ea14088c8.png","assets/products/choco.png":"assets/embedded/4faa146771d63f428cdc0be2e54a4c085deec681f0d4dd993dbd549a4a189f5f.png","assets/products/chocolate-cake.png":"assets/embedded/39b90741718785ab4a1469bbfd2d701c4d5da85cf179dd375660b7ee61775c76.png","assets/products/cinnamon-roll.png":"assets/embedded/53b36073af2b47625eee7ba700e232ea1571a622c1a4cff80486596c94746159.png","assets/products/coconut-water.png":"assets/embedded/635697dbc44cb513e1f6fa3b542209de1bfb1d7e754aa3822d4149bfea256a7f.png","assets/products/cookies.png":"assets/embedded/25de5cebad77ad22c9f93144ee5d171306f361f13e5cdd0b20715c4a8053c84f.png","assets/products/corn-cob.png":"assets/embedded/3c42d4f670de3bbee124cd6f3e708e7e87db4aab3a4eb07de9742af000ea837d.png","assets/products/cornflakes.png":"assets/embedded/b79e55c00e6b7cf5b1866ab1124a75c4c244d89d0366f25ed589cb40f70fea34.png","assets/products/crackers.png":"assets/embedded/54d10df03900b096a60d897f972b54a43dd9f51a80caa4ae28cb4581096cb4a3.png","assets/products/cream-cheese.png":"assets/embedded/74e0ded020b0f2c277a4e2254c937dabc104ca99251aa04f466afd786d56caf7.png","assets/products/cream.png":"assets/embedded/1d5525da1802ceca9b6bcd14c434fd5ac8ccd8597cd1d8efa29f5f9745952523.png","assets/products/croissant.png":"assets/embedded/7369be630e9cc1a084108a7ed05d1d4054ae0ab16350219229f1396d32ad85f3.png","assets/products/cucumber.png":"assets/embedded/43ba985d6a86d97d8d23ce890c60a4647227890cc9f1baa654253ba516eabafc.png","assets/products/dish-soap.png":"assets/embedded/5a30c8ca19ad7a455e83c9e4b3d2a18580ba3a688ab9ff97a4d28ebf84edd783.png","assets/products/donut.png":"assets/embedded/5761eab2f03d02f006cb9b553f5148a74c8559852476e31e58462ca55b8936ae.png","assets/products/dumplings.png":"assets/embedded/1bc116fb6832c06b3a04e43ad9416aa68171f5ec3d9a241450bd30ff13ed6cd4.png","assets/products/eggs.png":"assets/embedded/0ad46ef0e657da005706d6c62a46c55a5296bbf165edaec8622df69a5965324d.png","assets/products/energy-drink.png":"assets/embedded/7086169b8022a8d0124c5489f7b8fe5f28fee28aea93eb5bb068d83e814f82a5.png","assets/products/flour.png":"assets/embedded/d0527a73c2b5eca756803d62aa0144e9b717186cd71b49993d5ede9cae083389.png","assets/products/fresh-figs.png":"assets/embedded/5d8523ee680f51f8959dcc84fe4282611cde09d116fb48d36b5af28df3109513.png","assets/products/frozen-corn.png":"assets/embedded/fe708b0d65b29297d4462e82b20f849d5f1705cfc5b4020fdf0392e956e1ba0b.png","assets/products/frozen-fries.png":"assets/embedded/65f4557186399f4ec02c2cfd513d3adfe3340c8189acab43a61cbb5590645b14.png","assets/products/frozen-peas.png":"assets/embedded/7928ec9270409089161fcb64f0d961143abf2b2a3890b99c4cee411417c8cd9a.png","assets/products/frozen-pizza.png":"assets/embedded/364b771c76af6431b4cb11532eb825e069bd985bd6a3576f42b06be6fcb379d7.png","assets/products/fruit-tart.png":"assets/embedded/43639bce75d6f62d49abdfb9ca6dbd77f6e571c520d459dd49f3871a8d0800ee.png","assets/products/gelato.png":"assets/embedded/a37b16d1dad8167d39ad831d22c06040c1d5d2f3d5b07eaf4bb8fc8f8b72fc52.png","assets/products/ginger-ale.png":"assets/embedded/1a94e00bdf6c914d599ede30d6629d6e16bfdfdc5ede64a584d729063a701121.png","assets/products/granola-bar.png":"assets/embedded/d1ebcd89ace0859be470231726584ea864bb49747ce302a2d6722e19bf887a5c.png","assets/products/grape-soda.png":"assets/embedded/2d50512e7f5ec30271945b33f49ba0429acb1a95833b3a4a27da1a2f2c06bf11.png","assets/products/gummy-bears.png":"assets/embedded/b89c99b04cc932c5f96ce66ab9a566c83902950b95afcb38e3e9c80cb76aedf6.png","assets/products/hand-soap.png":"assets/embedded/11cd1d6ea9938a193c021ff23a355ce88d2e22c76df9d809d29c25b6fe2c1073.png","assets/products/honey-waffles.png":"assets/embedded/79712fa3fd9c565b1984da589e361ebd404857e2798c78b24655d0664918b16d.png","assets/products/honey.png":"assets/embedded/764c6de0082fee245457c38134c904ae4618b859a0b58f8d7b155a319096cb28.png","assets/products/hot-chocolate.png":"assets/embedded/8d50edba5269280548a9d56738deb22767bb92878decf44370c38c3e62c4c8bd.png","assets/products/ice-cream-sandwich.png":"assets/embedded/7d45248a0fcd2ce4d1d152cf7d6eb0d113aa5611fb4db87737244713bd5dae89.png","assets/products/ice-cream.png":"assets/embedded/63f1eed964f44f1854dee06457311d81217bbd79e8d8a27b6882227eed4fdf70.png","assets/products/ice-pop.png":"assets/embedded/cbab3437925356eb46c2a7c9f1d37e6007d5d576058959f46ebeb7ccd8533633.png","assets/products/iced-coffee.png":"assets/embedded/039d67b3a0387ac952e154ef3e0c3ed78b27115964074d498d6286bcedd3f284.png","assets/products/iced-tea.png":"assets/embedded/5e3458d8f4e3a42174e4f0e70a7abc21184e7045f7a85ec1a2bb417891d715bb.png","assets/products/instant-camera.png":"assets/embedded/915e57ed2cddd9b5d5a0acc3a839978f96af159a8d81a1b7de02afab8fcd8657.png","assets/products/kefir.png":"assets/embedded/818022d31b5c5239a1d4f5c8843fe277828f64a4c5725e520a1271adee943adb.png","assets/products/laundry-detergent.png":"assets/embedded/45a21d4d3bf4566adb0ed5b0a5a0bf8393b97ee4784246eff144b2f6b328e756.png","assets/products/lemon-tart.png":"assets/embedded/1c5028c76e82fd36ec2842558dfbd80dfb9dfcba05fc491e53090e586d866289.png","assets/products/lemon.png":"assets/embedded/1a9d06b486b9a8052dfd036669daa51930d62aaee1b9935a3d7c265584a96db1.png","assets/products/lemonade.png":"assets/embedded/fe79a423059047b5bbcc3577e4c5184966b999be29526c821fba762092289ad3.png","assets/products/lentils.png":"assets/embedded/09de59d1579213994165e2a427cef87ff148f24a52076c11bb08e0ea79836060.png","assets/products/luxury-watch.png":"assets/embedded/95e5e84d482e5bc6465fbb0cce267ad347d9880900b68bd38a99b6c709577dc4.png","assets/products/macarons.png":"assets/embedded/b67b16e7c48c10df9fa71c95bb809a29b0d327697cdabaccc747eceb0d2377eb.png","assets/products/mango-sorbet.png":"assets/embedded/5b7ec56448e04e8a720767aa6534299163dee7ff384574e880b9c181c8121588.png","assets/products/maple-syrup.png":"assets/embedded/4a806b7c4b514234ebf4b5bcbfe772c53e41d8aafa288fc670a06aad6a7f385c.png","assets/products/marshmallows.png":"assets/embedded/7e477e744f294c19594537fd4ce34a8c3b1fd46d6fd6c8eb32ea37c0fff962c1.png","assets/products/matcha-latte.png":"assets/embedded/c9103d707b9c3ec2d6fec69a5af06374411949ef0df1164d16974e467f9dc32f.png","assets/products/milk.png":"assets/embedded/5e121bacb4146485152e0ab311f55c422db02745e6112de838ad43302fffbd3e.png","assets/products/mozzarella.png":"assets/embedded/c89caf05f78dd8926e12b92b490e87ea47e3dc25f58a09595d6dbf414b9f2484.png","assets/products/muffin.png":"assets/embedded/2d53e99642e7dc2c684ec9a2ea98efb9a48f6cb6894d682d838d887fa53a6dea.png","assets/products/mushrooms.png":"assets/embedded/54fe24064ab5a5987657212cf5d442a73a36cab1c8942a1867f0dcecc449f6c3.png","assets/products/oats.png":"assets/embedded/f08fe4fd094304c2584a93e418c467d2eacdd1fc7609297169b2b8ef7a85409f.png","assets/products/olive-oil.png":"assets/embedded/b37c513d19d5de11f17bffb5c2c6c71a447d0c74650284bbbb142f7b423766ed.png","assets/products/orange-juice.png":"assets/embedded/e0f3e1210e292ef1aa4e0ddf6e6ae803ccf48dfd007f7c632b4ea2f916e8e3a4.png","assets/products/paper-towels.png":"assets/embedded/711b8ebb8c8bab620691af8b2bad216a2b5224a459ed19c134543c92a3131e0a.png","assets/products/paprika.png":"assets/embedded/1cf83ccee255e2ff06225f1234dd44986710e79c82c534814512144632d4cc48.png","assets/products/pasta-sauce.png":"assets/embedded/b316f71f711841d81d30a94f740a4318b121c719e667e88228592e85539e8948.png","assets/products/pasta.png":"assets/embedded/939de5dffbb6f16546408e224994041306360f97d38b37b6800a9a1e45af321a.png","assets/products/peach.png":"assets/embedded/c3771c6d5b8a928c87154a8d5ff0f23ace71c064ed3f8de3219ba9c0991bb29e.png","assets/products/peanut-butter.png":"assets/embedded/759d3d4f8cd2fa910f5d6e5ce60d934e062496e3b71962f455e7eafcf7dc5c9a.png","assets/products/pear.png":"assets/embedded/d84a827fea517cd4c415232a3941c660e97cfb45764ea8eb53058387731ba2a2.png","assets/products/pesto.png":"assets/embedded/468ec6abc54a89945a3d109910e43ff7a3ff57b03cbbf3238976f5390a438d10.png","assets/products/pineapple.png":"assets/embedded/0b3a81bf86f29bccbec578df209664e050f4dd61723020c249b7a57b6d7ed482.png","assets/products/pomegranate-soda.png":"assets/embedded/6511eaef84cdd40ecc75b4352f74a1a1471ba817ffc9264be10edf90b49b4f7a.png","assets/products/popcorn.png":"assets/embedded/59dce4581c971424a9117acfc017eecf075974272e437cfc054029e0bb868446.png","assets/products/potatoes.png":"assets/embedded/053103d860860a94d147c5a961ac8a5ce3561f061fa9bb6f6faaee7aec8dee75.png","assets/products/premium-cake.png":"assets/embedded/cfcd091846ab32b1b740eb9319077820d5d1b36a31288637eb0151bca94f7721.png","assets/products/premium-juice.png":"assets/embedded/8941f6330e43021602610565a8768868c3c1b0ffb177f117b8f325814d91487f.png","assets/products/pretzels.png":"assets/embedded/6938b45bc104afe08ca9155a6858150014e8712a7c473924cecb45e7da417a0f.png","assets/products/ramen.png":"assets/embedded/d148d699663e51cfced9361ca72628aef488c5ed761cdb5525febfeeb31eb683.png","assets/products/raspberry-yogurt.png":"assets/embedded/062ba2264a080ae20c1c5ba0844afa9bb3b6c778ce7b8e8987a821c2e59331d0.png","assets/products/red-apple.png":"assets/embedded/aa286959cae2661962080b31fc94a4648c7e76d942d4becdce70eb38f6ca9ec0.png","assets/products/red-onion.png":"assets/embedded/17f77b8827c6b5ffedc1e9d7cd7715f6cada9e5269a74f0eb0eb41c17ee4fcc5.png","assets/products/rice.png":"assets/embedded/53ff75188dcd00f12873267c4268333703b2ee94567c2a4449418bc5ff918a00.png","assets/products/royal-caviar.png":"assets/embedded/08d29eebdab9f53d5d2388e73f35c0c39e5b725cd17fb94e3a0051e6f6e8c99f.png","assets/products/rye-bread.png":"assets/embedded/b197f645ec778fdb9cf6cbcebde0c7266efb9e02e50900a0dfd61028efb4b484.png","assets/products/saffron-tin.png":"assets/embedded/b3e39e9a14f6ee4cae95261f06ed156b7c8ea9391d0324534f7057ab5809d2df.png","assets/products/sea-salt.png":"assets/embedded/6c5460d8f24c7a2d68b54a5c42ef53449f6fff3ced0d8107a448a01d37d440bb.png","assets/products/signature-perfume.png":"assets/embedded/2ba33132811da854790294ebe1465d92b463afc413bc6db226efad2384cd0075.png","assets/products/smoothie.png":"assets/embedded/0fe31ee2ed7c8c7343dd6983aba86ae7b9c905b70debd092147254a0c1d2388f.png","assets/products/soda.png":"assets/embedded/52d84da818705a9c200bc231d2bdea84369ea0cbf40d9f3dfe71782cafd3e9b3.png","assets/products/sorbet.png":"assets/embedded/5737826f7fb555c9001335915926be090f7ec1c2d51bc01e1eaeb822759553d7.png","assets/products/soy-sauce.png":"assets/embedded/2c017e9a7cac25c1190af46a07b95b2b49288be3da7c03334d7bb02012aa0af2.png","assets/products/sparkling-water.png":"assets/embedded/b7dd99251db32c794ddc82eab6d32b5d8aaf4fd51216f6f1f26e6b2903822771.png","assets/products/strawberries.png":"assets/embedded/7c8073510f89e71015b34da56cc70d2fd775f99bf2ad989c2cb0448ef1df71fc.png","assets/products/sugar.png":"assets/embedded/5bbec7d39aeef0ffbc32023b84ba5cac1d7bf221651ea718a7d309aa2e744dd0.png","assets/products/sweetcorn.png":"assets/embedded/2336afde402152f74c842700c02ffc50745a3077c537645780aa2715b1f4de70.png","assets/products/tissues.png":"assets/embedded/c4f11b580112addcf62a1ff9b8ef8ebea32385caa8dfda70fe4d7577015a0d25.png","assets/products/tomato.png":"assets/embedded/b46ac782ce0f4066ffce5339fbd7a4d92663e1cb2450649de1331898eb7c1c0a.png","assets/products/toothpaste.png":"assets/embedded/b01684194da8b7e17b9eb205e71b5bac6cb9994bc542bfe91cd663ed46b7c903.png","assets/products/trail-mix.png":"assets/embedded/d1e59f43dea68becc34e04d06a5817ad03fd3019312cd1310d55e5f714c0b949.png","assets/products/truffle-butter.png":"assets/embedded/45036766e8aa9fbf167a8d82d69f997bc343f755162b8642e2435aaf97aec24a.png","assets/products/tuna.png":"assets/embedded/4dd578d8a13cdc57e92c7c0f40d12836d8a50eff24f64574d31eeafde8f4671d.png","assets/products/vanilla-pudding.png":"assets/embedded/378c47b025826b4e6172a88238b0481808866be4278210e0315d7bbe9ae66cbd.png","assets/products/wafer-rolls.png":"assets/embedded/f643e3d3633ef2f6c5aa60abb2f359560493739130fe9057d9478cad40b57d59.png","assets/products/water.png":"assets/embedded/99d83aae4669f7096b11ea968a202d872115d665cb9445df20c49f900797f2a0.png","assets/products/watermelon.png":"assets/embedded/7eaec91e19eb0d408a813f1a2bc2ae7fa5f80735ecc4392a3fe73190152d3167.png","assets/products/wireless-headphones.png":"assets/embedded/0c34e68b39f9967f553be01be16aacef24eecdfcd680bf739ebde02782f90c1f.png","assets/products/yogurt.png":"assets/embedded/c33dce35bba414308928c3528b02e2bfddc8616f1aa94d2214c8fc9dddb5d803.png","assets/prop-register.png":"assets/embedded/e556b714fa078b2d8d3ed295f683a847492e969a8ba115cba0b5b62d43079e1c.png","assets/prop-scanner.png":"assets/embedded/6e3d00da6b15e6eb7d52f0cebb0003d8244ea0ec36a548282245d5de6d129dee.png","assets/props/bag.png":"assets/embedded/0909d7f8ed50c81af6b5a4ea58ea86808b6c2f6ee1c730e38bfc78b1fa93c8b5.png","assets/props/counter-src.png":"assets/embedded/8fe3198c6458085d4ba23679d86fbb8cc5f524d0e5d87fe9b419d8106d87be14.png","assets/props/counter.png":"assets/embedded/68e8cbec32993da9423f031ee5ea345bb40a98d35b3d3264e77766bd7fa113d7.png","assets/props/pos-src.png":"assets/embedded/d6877fa36f3c7e7c95e6ab1eb06a1b70ca1196b94cfa010fb365134a82f48642.png","assets/props/scanner.png":"assets/embedded/6e3d00da6b15e6eb7d52f0cebb0003d8244ea0ec36a548282245d5de6d129dee.png","assets/shelves-boutique-low.jpg":"assets/embedded/c40851f205c093df8c6cf75ef7493ed747dc68415c358a07eba76f372fd41803.jpg","assets/shelves-boutique-medium.jpg":"assets/embedded/9c4794aff3e1a93e17dc4647027b03611cfb3ea1b305606a5b1af275df980627.jpg","assets/shelves-boutique.jpg":"assets/embedded/166b30fb24005ee998345e6e1935956a8867c1f081dcdee92863c1098b1ab258.jpg","assets/shelves-neighborhood-low.jpg":"assets/embedded/ad0e2341d57892ca6f41c6f2303ffe8e93fc18586a3e2c51505b69efcabac829.jpg","assets/shelves-neighborhood-medium.jpg":"assets/embedded/bae1284f412adc99549278696ff57d4f9d414a9ff340a0b00b158cade06b521b.jpg","assets/shelves-neighborhood.jpg":"assets/embedded/3db00aa81a67f31185ec9a5d1c9ba458ea2ae647823d5dd004b723783522a31e.jpg","assets/shelves-night-low.jpg":"assets/embedded/6b87711e7eb61f6afdd44efc4ee4b96cb05d509ba6bb29da8ac41c4619985c52.jpg","assets/shelves-night-medium.jpg":"assets/embedded/d63246d362e0415e01f3bc79d1580649ad752184d2818f63228acf44a9e0b162.jpg","assets/shelves-night.jpg":"assets/embedded/43728dc89421b95bd639fd5a08a5519ff13545ebea9bb4403cfbfe457b42a4f2.jpg","assets/title-cashier.jpg":"assets/embedded/a39c926fdaa07a290c9a3c0a537f0bdff99bb27f8639ea8df21a11e0746703a2.jpg","assets/wallpaper-cosmos.jpg":"assets/embedded/f8e52f170cdac816407ea1f76af2e7e5d41afd9a990c7a7867be5c4a2ae0664f.jpg","assets/wallpaper-lantern-garden.jpg":"assets/embedded/4d3e1676e8b2728dafa6efea6af18c4dfd76a395a5195a99265c93839074a01f.jpg","assets/wallpaper-meadow.jpg":"assets/embedded/0b32d642f4e7ac581ff6db2030de17a9b9f75883613a125b12772d543aeef57d.jpg"};
-function assetUrl(p){if(Object.prototype.hasOwnProperty.call(CASHIER_ASSETS,p))return CASHIER_ASSETS[p];if(typeof p==="string"&&p.indexOf("assets/")===0)throw new Error("Missing asset mapping: "+p);return p;}
+CASHIER_ASSETS["assets/products/game-console.png"]="assets/products/game-console.png";
+CASHIER_ASSETS["assets/products/pro-camera.png"]="assets/products/pro-camera.png";
+CASHIER_ASSETS["assets/products/gaming-laptop.png"]="assets/products/gaming-laptop.png";
+CASHIER_ASSETS["assets/products/designer-handbag.png"]="assets/products/designer-handbag.png";
+CASHIER_ASSETS["assets/products/gold-bracelet.png"]="assets/products/gold-bracelet.png";
+CASHIER_ASSETS["assets/products/diamond-ring.png"]="assets/products/diamond-ring.png";
+CASHIER_ASSETS["assets/products/premium-smartphone.png"]="assets/products/premium-smartphone.png";
+CASHIER_ASSETS["assets/products/drawing-tablet.png"]="assets/products/drawing-tablet.png";
+CASHIER_ASSETS["assets/products/vr-headset.png"]="assets/products/vr-headset.png";
+CASHIER_ASSETS["assets/products/camera-drone.png"]="assets/products/camera-drone.png";
+CASHIER_ASSETS["assets/products/espresso-machine.png"]="assets/products/espresso-machine.png";
+CASHIER_ASSETS["assets/products/robot-vacuum.png"]="assets/products/robot-vacuum.png";
+CASHIER_ASSETS["assets/products/electric-guitar.png"]="assets/products/electric-guitar.png";
+CASHIER_ASSETS["assets/products/silk-scarf.png"]="assets/products/silk-scarf.png";
+CASHIER_ASSETS["assets/products/gold-fountain-pen.png"]="assets/products/gold-fountain-pen.png";
+CASHIER_ASSETS["assets/products/sapphire-necklace.png"]="assets/products/sapphire-necklace.png";
+CASHIER_ASSETS["assets/products/diamond-earrings.png"]="assets/products/diamond-earrings.png";
+CASHIER_ASSETS["assets/products/gold-bullion.png"]="assets/products/gold-bullion.png";
+CASHIER_ASSETS["assets/products/studio-synthesizer.png"]="assets/products/studio-synthesizer.png";
+CASHIER_ASSETS["assets/products/concert-grand-piano.png"]="assets/products/concert-grand-piano.png";
+CASHIER_ASSETS["assets/products/ruby-necklace.png"]="assets/products/ruby-necklace.png";
+CASHIER_ASSETS["assets/products/diamond-tiara.png"]="assets/products/diamond-tiara.png";
+CASHIER_ASSETS["assets/products/crystal-sculpture.png"]="assets/products/crystal-sculpture.png";
+var CASHIER_RESOLVED_URLS = new Set(Object.values(CASHIER_ASSETS));
+function assetUrl(p){
+  if(Object.prototype.hasOwnProperty.call(CASHIER_ASSETS,p))return CASHIER_ASSETS[p];
+  // Resolved local URLs can pass through the loader again (as data URLs did).
+  if(CASHIER_RESOLVED_URLS.has(p))return p;
+  if(typeof p==="string"&&p.indexOf("assets/")===0)throw new Error("Missing asset mapping: "+p);
+  return p;
+}
 </script>
 </head>
 <body>
@@ -1019,7 +1060,7 @@ function assetUrl(p){if(Object.prototype.hasOwnProperty.call(CASHIER_ASSETS,p))r
       <div id="result-stars" class="result-stars" role="img"><svg class="result-star" viewBox="0 0 80 80" aria-hidden="true"><path class="star-base" d="m40 5 11 23 25 4-18 18 4 25-22-12-22 12 4-25L4 32l25-4z"/><path class="star-highlight" d="m40 15 8 17 18 3-13 13 3 18-16-9-16 9 3-18-13-13 18-3z"/></svg><svg class="result-star" viewBox="0 0 80 80" aria-hidden="true"><path class="star-base" d="m40 5 11 23 25 4-18 18 4 25-22-12-22 12 4-25L4 32l25-4z"/><path class="star-highlight" d="m40 15 8 17 18 3-13 13 3 18-16-9-16 9 3-18-13-13 18-3z"/></svg><svg class="result-star" viewBox="0 0 80 80" aria-hidden="true"><path class="star-base" d="m40 5 11 23 25 4-18 18 4 25-22-12-22 12 4-25L4 32l25-4z"/><path class="star-highlight" d="m40 15 8 17 18 3-13 13 3 18-16-9-16 9 3-18-13-13 18-3z"/></svg></div>
       <div class="result-earn"><span>Total earned</span><div><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="26" r="21" fill="#bc8131" stroke="#825529" stroke-width="2.5"/><circle cx="24" cy="22" r="20" fill="#ffdc7c" stroke="#9f722f" stroke-width="2.5"/><circle cx="24" cy="22" r="15" stroke="#ffefb5" stroke-width="3"/><path d="M29 15c-2-4-12-3-12 2 0 6 13 3 13 9 0 5-10 7-14 2m7-17v23" stroke="#a36e28" stroke-width="3.5" stroke-linecap="round"/></svg><strong id="result-earned"></strong></div></div>
     </div>
-    <div class="result-details"><div class="receipt-sales"><span>Sales subtotal</span><strong id="result-sales"></strong></div><div class="result-stat-grid"><div class="result-stat"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="9" r="6" fill="#f6bd83" stroke="#93704b" stroke-width="2"/><path d="M5 29v-4a11 11 0 0 1 22 0v4z" fill="#8fbcb0" stroke="#426d61" stroke-width="2"/></svg><strong id="result-served"></strong><span>Customers served</span></div><div class="result-stat"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m16 2 4.1 8.5 9.4 1.3-6.8 6.6 1.6 9.4-8.3-4.4-8.3 4.4 1.6-9.4-6.8-6.6 9.4-1.3z" fill="#e6bc62" stroke="#a37733" stroke-width="1.8" stroke-linejoin="round"/></svg><strong id="result-reputation"></strong><span>Reputation</span></div></div><div id="result-bonus-row" class="result-bonus"><span>Sales bonuses <small>included</small></span><strong id="result-bonus"></strong></div><div class="receipt-stamp" aria-hidden="true"><span class="receipt-barcode"></span><small id="result-receipt-number"></small></div></div>
+    <div class="result-details"><div class="receipt-sales"><span>Sales subtotal</span><strong id="result-sales"></strong></div><div class="result-stat-grid"><div class="result-stat"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="9" r="6" fill="#f6bd83" stroke="#93704b" stroke-width="2"/><path d="M5 29v-4a11 11 0 0 1 22 0v4z" fill="#8fbcb0" stroke="#426d61" stroke-width="2"/></svg><strong id="result-served"></strong><span>Customers served</span></div><div class="result-stat"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m16 2 4.1 8.5 9.4 1.3-6.8 6.6 1.6 9.4-8.3-4.4-8.3 4.4 1.6-9.4-6.8-6.6 9.4-1.3z" fill="#e6bc62" stroke="#a37733" stroke-width="1.8" stroke-linejoin="round"/></svg><strong id="result-reputation"></strong><span>Reputation</span></div></div><div id="result-bonus-row" class="result-bonus"><span>Sales bonuses <small>included</small></span><strong id="result-bonus"></strong></div><div class="receipt-stamp" aria-hidden="true"><span class="receipt-barcode"></span><small id="result-receipt-number"></small><small id="result-no-buyers" hidden></small></div></div>
     <footer class="result-actions"><button id="result-next" class="result-next" type="button"><span>Next shift</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></button><div class="result-secondary"><button id="result-shop" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7h14l2 14H3zM8 8V6a4 4 0 0 1 8 0v2"/></svg>Shop</button><button id="result-home" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-8h6v8"/></svg>Home</button></div></footer>
   </article>
 </section>
@@ -1491,7 +1532,30 @@ var PRODUCTS = [
   {"id":"almond-granola","name":"Almond granola","price":1425,"caseCost":2480,"group":"pantry","level":5},
   {"id":"mango-sorbet","name":"Mango sorbet","price":3650,"caseCost":6350,"group":"frozen","level":7},
   {"id":"truffle-butter","name":"Truffle butter","price":2850,"caseCost":4960,"group":"dairy","level":6},
-  {"id":"saffron-tin","name":"Saffron tin","price":7200,"caseCost":12530,"group":"gourmet","level":8}
+  {"id":"saffron-tin","name":"Saffron tin","price":7200,"caseCost":12530,"group":"gourmet","level":8},
+  {"id":"game-console","name":"Game console","price":45000,"caseCost":83700,"group":"electronics","level":9},
+  {"id":"pro-camera","name":"Pro camera","price":150000,"caseCost":288000,"group":"electronics","level":9},
+  {"id":"gaming-laptop","name":"Gaming laptop","price":280000,"caseCost":554400,"group":"electronics","level":9},
+  {"id":"designer-handbag","name":"Designer handbag","price":600000,"caseCost":1224000,"group":"luxury","level":10},
+  {"id":"gold-bracelet","name":"Gold bracelet","price":1250000,"caseCost":2625000,"group":"luxury","level":10},
+  {"id":"diamond-ring","name":"Diamond ring","price":2500000,"caseCost":5400000,"group":"luxury","level":10},
+  {"id":"premium-smartphone","name":"Premium smartphone","price":95000,"caseCost":188100,"group":"electronics","level":9},
+  {"id":"drawing-tablet","name":"Drawing tablet","price":135000,"caseCost":267300,"group":"electronics","level":9},
+  {"id":"vr-headset","name":"VR headset","price":180000,"caseCost":356400,"group":"electronics","level":9},
+  {"id":"camera-drone","name":"Camera drone","price":350000,"caseCost":693000,"group":"electronics","level":9},
+  {"id":"espresso-machine","name":"Espresso machine","price":220000,"caseCost":435600,"group":"household","level":8},
+  {"id":"robot-vacuum","name":"Robot vacuum","price":78000,"caseCost":154440,"group":"household","level":8},
+  {"id":"electric-guitar","name":"Electric guitar","price":420000,"caseCost":919800,"group":"luxury","level":10},
+  {"id":"silk-scarf","name":"Silk scarf","price":42000,"caseCost":91980,"group":"luxury","level":10},
+  {"id":"gold-fountain-pen","name":"Gold fountain pen","price":280000,"caseCost":613200,"group":"luxury","level":10},
+  {"id":"sapphire-necklace","name":"Sapphire necklace","price":1850000,"caseCost":4051500,"group":"luxury","level":10},
+  {"id":"diamond-earrings","name":"Diamond earrings","price":3200000,"caseCost":7008000,"group":"luxury","level":10},
+  {"id":"gold-bullion","name":"Gold bullion","price":6000000,"caseCost":14400000,"group":"luxury","level":10},
+  {"id":"studio-synthesizer","name":"Studio synthesizer","price":8500000,"caseCost":20400000,"group":"electronics","level":10,"vipOnly":true,"vipInterest":"tech","purchaseChance":0.32},
+  {"id":"concert-grand-piano","name":"Concert grand piano","price":18000000,"caseCost":43200000,"group":"luxury","level":10,"vipOnly":true,"vipInterest":"music","purchaseChance":0.24},
+  {"id":"ruby-necklace","name":"Royal ruby necklace","price":45000000,"caseCost":108000000,"group":"luxury","level":10,"vipOnly":true,"vipInterest":"jewelry","purchaseChance":0.18},
+  {"id":"diamond-tiara","name":"Diamond tiara","price":180000000,"caseCost":432000000,"group":"luxury","level":10,"vipOnly":true,"vipInterest":"jewelry","purchaseChance":0.12},
+  {"id":"crystal-sculpture","name":"Crystal phoenix sculpture","price":350000000,"caseCost":840000000,"group":"luxury","level":10,"vipOnly":true,"vipInterest":"art","purchaseChance":0.08}
 ];
 var CASE_SIZE = 3;
 var UPGRADE_LIMIT = 10;
@@ -1563,9 +1627,9 @@ var STORE_LEVELS = [
   {"name":"Family supermarket","price":70000,"reputation":450,"visits":[6,7],"budget":[4500,8000],"premiumChance":0.4,"interiorTier":2},
   {"name":"City supermarket","price":140000,"reputation":750,"visits":[7,8],"budget":[7500,13000],"premiumChance":0.45,"interiorTier":3},
   {"name":"Department market","price":250000,"reputation":1150,"visits":[8,9],"budget":[12000,20000],"premiumChance":0.5,"interiorTier":3},
-  {"name":"Gourmet market","price":400000,"reputation":1650,"visits":[9,10],"budget":[18000,30000],"premiumChance":0.6,"interiorTier":4},
-  {"name":"Lifestyle superstore","price":650000,"reputation":2250,"visits":[10,11],"budget":[25000,42000],"premiumChance":0.7,"interiorTier":4},
-  {"name":"Luxury flagship","price":1000000,"reputation":3000,"visits":[11,12],"budget":[35000,65000],"premiumChance":0.8,"interiorTier":5}
+  {"name":"Gourmet market","price":400000,"reputation":1650,"visits":[9,10],"budget":[18000,30000],"premiumBudget":[60000,240000],"premiumChance":0.6,"interiorTier":4},
+  {"name":"Lifestyle superstore","price":650000,"reputation":2250,"visits":[10,11],"budget":[25000,42000],"premiumBudget":[100000,450000],"premiumChance":0.7,"interiorTier":4},
+  {"name":"Luxury flagship","price":1000000,"reputation":3000,"visits":[11,12],"budget":[35000,65000],"premiumBudget":[400000,9000000],"premiumChance":0.8,"interiorTier":5}
 ];
 var EQUIPMENT = {
   "registers": [
@@ -2643,6 +2707,7 @@ function payCalendarBill(id, automatic, day) {
 }
 
 function processWorldDay(day) {
+  refreshMarketSupply();
   var summary = {deliveries:0, expenses:0};
   expireAuctions(day);
   for (var current = business.processedDay + 1; current <= day; current++) {
@@ -2671,6 +2736,62 @@ function processWorldDay(day) {
 }
 
 
+
+function marketWeekForDay(day) {
+  return Math.floor((Math.max(1,day)-1)/7);
+}
+function marketCaseLimit(product) {
+  if (retailRule(product)) return 1;
+  if (product.level>=9) return 2;
+  if (product.level>=7) return 4;
+  if (product.level>=4) return 6;
+  return 12;
+}
+function readMarketSupply(saved,orders) {
+  var day=Number.isSafeInteger(saved.day)&&saved.day>0?saved.day:1;
+  var week=marketWeekForDay(day), previous=saved.marketSupply, bought={};
+  if (previous && previous.week===week && previous.bought && typeof previous.bought==='object') {
+    PRODUCTS.forEach(function(product){
+      var count=previous.bought[product.id];
+      if(Number.isSafeInteger(count)&&count>0)bought[product.id]=Math.min(count,marketCaseLimit(product));
+    });
+  } else if (!previous || !Number.isSafeInteger(previous.week)) {
+    // Migrate old saves once; delivered orders count too.
+    (orders||[]).forEach(function(order){
+      var product=PRODUCTS.find(function(p){return p.id===order.product;});
+      if(product && Number.isSafeInteger(order.orderedDay) && marketWeekForDay(order.orderedDay)===week &&
+         Number.isSafeInteger(order.quantity)&&order.quantity>0) {
+        bought[product.id]=Math.min(marketCaseLimit(product),(bought[product.id]||0)+Math.ceil(order.quantity/CASE_SIZE));
+      }
+    });
+  }
+  return {week:week,bought:bought};
+}
+function refreshMarketSupply() {
+  var week=marketWeekForDay(business.day);
+  if(!business.marketSupply)business.marketSupply=readMarketSupply(business,business.orders);
+  if(business.marketSupply.week!==week)business.marketSupply={week:week,bought:{}};
+}
+function marketCasesRemaining(product,includeCart) {
+  refreshMarketSupply();
+  return Math.max(0,marketCaseLimit(product)-(business.marketSupply.bought[product.id]||0)-
+    (includeCart?(business.cart[product.id]||0):0));
+}
+function recordMarketPurchase(product,cases) {
+  refreshMarketSupply();
+  business.marketSupply.bought[product.id]=(business.marketSupply.bought[product.id]||0)+cases;
+}
+function marketRestockDay() {
+  return (marketWeekForDay(business.day)+1)*7+1;
+}
+function marketStockBadge(product) {
+  var left=marketCasesRemaining(product,true), limit=marketCaseLimit(product);
+  var soldOut=marketCasesRemaining(product,false)===0;
+  return '<div class="market-stock"'+(soldOut?' data-sold-out':'')+'><span>Supplier <b>'+left+' / '+limit+' cases</b></span>'+
+    '<meter min="0" max="'+limit+'" value="'+left+'" aria-label="Supplier cases available for '+product.name+'"></meter>'+
+    '<small>Restocks '+calendarDate(marketRestockDay())+'</small></div>';
+}
+
 function cartUnits() {
   return Object.keys(business.cart).reduce(function (sum,id) { return sum + business.cart[id] * CASE_SIZE; },0);
 }
@@ -2680,22 +2801,24 @@ function cartQuote(speed) {
   }).filter(function (entry) {return entry.product && entry.cases > 0;});
   var subtotal=entries.reduce(function (sum,entry) {return sum+entry.product.caseCost*entry.cases;},0);
   var fee=speed==='express' && entries.length ? Math.max(100,Math.round(subtotal*.15/5)*5) : 0;
-  return {entries:entries,subtotal:subtotal,fee:fee,total:subtotal+fee,units:cartUnits()};
+  var stockValid=entries.every(function(entry){return Number.isInteger(entry.cases)&&entry.cases>0&&entry.cases<=marketCasesRemaining(entry.product,false);});
+  return {entries:entries,subtotal:subtotal,fee:fee,total:subtotal+fee,units:cartUnits(),stockValid:stockValid};
 }
 function addCartCase(id) {
   if(!canManageShop())return false;
   var product=PRODUCTS.find(function(product){return product.id===id;});
-  if(!product||product.level>business.storeLevel||committedStockUnits()+cartUnits()+CASE_SIZE>equippedItem('backgrounds').capacity)return false;
+  if(!product||product.level>business.storeLevel||marketCasesRemaining(product,true)<1||committedStockUnits()+cartUnits()+CASE_SIZE>equippedItem('backgrounds').capacity)return false;
   business.cart[id]=(business.cart[id]||0)+1;saveBusiness();return true;
 }
 function checkoutStockCart(speed) {
   if(!canManageShop()||!['standard','express'].includes(speed))return null;
   var quote=cartQuote(speed);
-  if(!quote.entries.length||business.cash<quote.total||committedStockUnits()+quote.units>equippedItem('backgrounds').capacity||
+  if(!quote.entries.length||!quote.stockValid||business.cash<quote.total||committedStockUnits()+quote.units>equippedItem('backgrounds').capacity||
      quote.entries.some(function(entry){return entry.product.level>business.storeLevel;}))return null;
   var due=business.day+(speed==='express'?1:2+Math.floor(Math.random()*2));
   var ids=[];
   quote.entries.forEach(function(entry,index){
+    recordMarketPurchase(entry.product,entry.cases);
     var order={id:'PO-'+business.nextOrderNo++,product:entry.product.id,quantity:entry.cases*CASE_SIZE,
       price:entry.product.caseCost*entry.cases,shippingFee:index===0?quote.fee:0,delivery:speed,orderedDay:business.day,dueDay:due,
       status:'pending',deliveredDay:0,delayed:false,credit:false};
@@ -2707,9 +2830,10 @@ function checkoutStockCart(speed) {
 
 
 function placeStockOrder(product, onCredit) {
-  if (!canManageShop() || !product || !PRODUCTS.includes(product) || product.level > business.storeLevel ||
+  if (!canManageShop() || !product || !PRODUCTS.includes(product) || product.level > business.storeLevel || marketCasesRemaining(product,true)<1 ||
       committedStockUnits() + CASE_SIZE > equippedItem('backgrounds').capacity ||
       (!onCredit && business.cash < product.caseCost)) return null;
+  recordMarketPurchase(product,1);
   var contribution = onCredit ? Math.min(business.cash,product.caseCost) : product.caseCost;
   business.cash -= contribution;
   if (onCredit) business.supplierCredit += product.caseCost - contribution;
@@ -2723,7 +2847,7 @@ function placeStockOrder(product, onCredit) {
 
 function emergencyRestock() {
   if (!canManageShop() || stockAvailable() || pendingStockUnits()) return false;
-  var cheapest = PRODUCTS.filter(function (product) { return product.level <= business.storeLevel; })
+  var cheapest = PRODUCTS.filter(function (product) { return product.level <= business.storeLevel && marketCasesRemaining(product,true)>0; })
     .slice().sort(function (a,b) { return a.caseCost - b.caseCost; })[0];
   if (!cheapest || business.cash >= cheapest.caseCost) return false;
   return Boolean(placeStockOrder(cheapest,true));
@@ -2756,7 +2880,7 @@ var BUSINESS_KEY = visualTest ? NORMAL_BUSINESS_KEY + '-visual-test' : NORMAL_BU
 var debugPlay = /[?&]play=1/.test(location.search);
 var SHELF_STAGES = ['empty', 'low', 'medium', 'full'];
 var MIN_SALE_PRICE = 25;
-var MAX_SALE_PRICE = 99999;
+var MAX_SALE_PRICE = 100000000000; // Up to $1B per retail item, stored as integer cents.
 var REVIEW_HISTORY_LIMIT = 60;
 var CUSTOMER_NAMES = {
   'customer-teal': 'Maya', 'customer-olive': 'Leo', 'customer-berry': 'Nora', 'customer-indigo': 'Riley',
@@ -2815,6 +2939,40 @@ var CUSTOMER_PROFILES = {
   "customer-aurelia": {"wealthy":true,"budgetMultiplier":3.5,"patienceBonus":8},
   "customer-felix": {"wealthy":true,"budgetMultiplier":3.5,"patienceBonus":8}
 };
+
+var VIP_RETAIL_PREFERENCES = {
+  'customer-victor': { interests:['art','music','collectibles'], spending:[{chance:.10,min:360000000,max:500000000},{chance:.20,min:20000000,max:80000000}] },
+  'customer-aurelia': { interests:['jewelry','fashion','collectibles'], spending:[{chance:.12,min:200000000,max:300000000},{chance:.25,min:30000000,max:65000000}] },
+  'customer-felix': { interests:['tech','music','collectibles'], spending:[{chance:.08,min:12000000,max:25000000},{chance:.22,min:6000000,max:11000000}] }
+};
+function retailRule(product) {
+  if (!product.vipOnly && product.price < 500000) return null;
+  var interest=product.vipInterest || (product.id==='designer-handbag'?'fashion':product.id==='gold-bullion'?'collectibles':product.group==='electronics'?'tech':'jewelry');
+  return {interest:interest,chance:product.purchaseChance || (product.price>=1000000?.30:.45)};
+}
+function retailBuyerAllowed(product,customerId) {
+  var rule=retailRule(product);
+  if (!rule) return true;
+  var profile=CUSTOMER_PROFILES[customerId], preference=VIP_RETAIL_PREFERENCES[customerId];
+  return Boolean(profile && profile.wealthy && preference && preference.interests.includes(rule.interest));
+}
+function vipSpendingBudget(customerId) {
+  var preference=VIP_RETAIL_PREFERENCES[customerId];
+  if (!preference || business.storeLevel<10) return 0;
+  var roll=Math.random(), cumulative=0;
+  for(var i=0;i<preference.spending.length;i++){
+    var bracket=preference.spending[i]; cumulative+=bracket.chance;
+    if(roll<cumulative)return Math.round(rnd(bracket.min,bracket.max));
+  }
+  return 0;
+}
+function retailRiskBadges(product) {
+  var rule=retailRule(product); if(!rule)return '';
+  var buyerNames=Object.keys(VIP_RETAIL_PREFERENCES).filter(function(id){return retailBuyerAllowed(product,id);}).map(function(id){return CUSTOMER_NAMES[id];}).join(', ');
+  var rarity=rule.chance<=.18?'Very rare buyer':rule.chance<=.32?'Rare buyer':'Selective buyer';
+  return '<div class="retail-risk" title="Interested VIPs: '+buyerNames+'. Budget and interest are checked each visit; a sale is never guaranteed."><span>VIP only</span><span>'+rarity+'</span><small>May stay in stock for many days</small></div>';
+}
+
 function isBasicGrocery(product){
   return product.price<=800 && ['drinks','snacks','dairy','pantry','produce','bakery','frozen'].includes(product.group);
 }
@@ -3068,6 +3226,7 @@ function loadBusiness() {
            shiftRoll: Number.isFinite(saved.shiftRoll) && saved.shiftRoll >= 0 && saved.shiftRoll < 1 ? saved.shiftRoll : Math.random(),
            stock: stock, unsafeStock: unsafeStock,
            orders:calendar.orders,cart:calendar.cart,bills:calendar.bills,nextOrderNo:calendar.nextOrderNo,
+           marketSupply:readMarketSupply(saved,calendar.orders),
            auctions:readAuctionState(saved),
            financeStartDay:calendar.financeStartDay,processedDay:calendar.processedDay,supplierCredit:calendar.supplierCredit,
            trust: Number.isInteger(saved.trust) ? Math.max(0, Math.min(100, saved.trust)) : 100,
@@ -3105,34 +3264,44 @@ function stockAvailable() {
 function buildOrder(customerId) {
   var profile=CUSTOMER_PROFILES[customerId];
   var stocked = PRODUCTS.filter(function (product) {
-    return business.stock[product.id] > 0 && (!profile || profile.wealthy || isBasicGrocery(product));
+    if (!(business.stock[product.id]>0) || product.level>business.storeLevel || !retailBuyerAllowed(product,customerId)) return false;
+    if (profile && !profile.wealthy && !isBasicGrocery(product)) return false;
+    var rule=retailRule(product);
+    return !rule || Math.random()<rule.chance;
   }).map(function (product) {
     return { id: product.id, name: product.name, level: product.level,
-             price: sellingPrice(product), marketPrice: product.price };
+             price: sellingPrice(product), marketPrice: product.price, restricted: Boolean(retailRule(product)) };
   }).sort(function (a, b) { return a.price - b.price; });
   var tier = currentStore();
   var premium = Boolean(profile && profile.wealthy) || (!profile && Math.random() < tier.premiumChance);
   var budgetRange=profile && !profile.wealthy?profile.budget:tier.budget;
   var budget = Math.round(rnd(budgetRange[0], budgetRange[1]) * (profile && profile.wealthy?profile.budgetMultiplier:1));
+  // Occasional high-budget visitors make late-game retail stock worth carrying.
+  if (profile && profile.wealthy && tier.premiumBudget && Math.random() < .40) {
+    budget = Math.max(budget, Math.round(rnd(tier.premiumBudget[0], tier.premiumBudget[1])));
+  }
   if (premium) budget = Math.round(budget * 1.30);
+  budget=Math.max(budget,vipSpendingBudget(customerId));
   if (!stocked.length) return { products: [], budget: budget, premium: premium };
 
   var acceptable = stocked.filter(function (product) {
     return priceConcern(product.price, product.marketPrice) !== 'refused';
   });
   var normalPrice = acceptable.find(function (product) {
-    return !priceConcern(product.price, product.marketPrice);
+    return !product.restricted && !priceConcern(product.price, product.marketPrice);
   });
   if (normalPrice && !acceptable.some(function (product) { return product.price <= budget; })) {
     budget = Math.max(budget, normalPrice.price);
   }
   if (!acceptable.some(function (product) { return product.price <= budget; })) {
-    return { products: [], budget: budget, premium: premium, refused: stocked[0] };
+    return { products: [], budget: budget, premium: premium, refused: stocked.some(function(p){return priceConcern(p.price,p.marketPrice)==='refused';}) ? stocked[0] : null };
   }
 
+  var remaining = {};
+  acceptable.forEach(function(product){remaining[product.id]=product.restricted?Math.min(1,business.stock[product.id]):business.stock[product.id];});
   var affordableUnits = 0, unspent = budget;
   acceptable.forEach(function (product) {
-    var units = Math.min(business.stock[product.id], Math.floor(unspent / product.price));
+    var units = Math.min(remaining[product.id], Math.floor(unspent / product.price));
     unspent -= units * product.price;
     affordableUnits += units;
   });
@@ -3140,7 +3309,6 @@ function buildOrder(customerId) {
   var count = Math.min(affordableUnits, 1 + Math.floor(-Math.log(1 - roll) * (2 + business.storeLevel * .45)));
   if(profile && profile.wealthy)count=Math.min(affordableUnits,14,Math.max(count,8+Math.floor(Math.random()*7)));
   else if(profile)count=Math.min(3,count);
-  var remaining = Object.assign({}, business.stock);
   var order = [];
   var left = budget;
 
@@ -3912,7 +4080,7 @@ function renderStockCart() {
   }
   var lines=quote.entries.map(function(entry){
     var src='assets/products/'+entry.product.id+'.png';if(typeof assetUrl==='function')src=assetUrl(src);
-    return '<article class="cart-line"><img src="'+src+'" alt=""><div><h4>'+entry.product.name+'</h4><small>'+entry.cases*CASE_SIZE+' units · '+money(entry.product.caseCost)+' / case</small><button type="button" data-cart-remove="'+entry.product.id+'">Remove</button></div><div class="cart-stepper"><button type="button" data-cart-step="'+entry.product.id+'" data-step="-1" aria-label="Remove one case of '+entry.product.name+'">−</button><b>'+entry.cases+'</b><button type="button" data-cart-step="'+entry.product.id+'" data-step="1" aria-label="Add one case of '+entry.product.name+'">+</button></div><strong>'+money(entry.product.caseCost*entry.cases)+'</strong></article>';
+    return '<article class="cart-line"><img src="'+src+'" alt=""><div><h4>'+entry.product.name+'</h4><small>'+entry.cases*CASE_SIZE+' units · '+money(entry.product.caseCost)+' / case</small><button type="button" data-cart-remove="'+entry.product.id+'">Remove</button></div><div class="cart-stepper"><button type="button" data-cart-step="'+entry.product.id+'" data-step="-1" aria-label="Remove one case of '+entry.product.name+'">−</button><b>'+entry.cases+'</b><button type="button" data-cart-step="'+entry.product.id+'" data-step="1"'+(marketCasesRemaining(entry.product,true)<1?' disabled':'')+' aria-label="Add one case of '+entry.product.name+'">+</button></div><strong>'+money(entry.product.caseCost*entry.cases)+'</strong></article>';
   }).join('');
   var express=cartQuote('express');
   supplyItems.innerHTML='<div class="cart-layout"><div class="cart-lines">'+lines+'</div><aside class="cart-checkout"><h3>Delivery</h3>'+
@@ -3920,7 +4088,7 @@ function renderStockCart() {
     '<label class="cart-shipping"><input type="radio" name="cart-delivery" value="express"'+(cartDelivery==='express'?' checked':'')+'><span><strong>Express · '+money(express.fee)+'</strong><small>Next game day · '+calendarDate(business.day+1)+'</small></span></label>'+
     '<div class="cart-totals"><span>Products<strong>'+money(quote.subtotal)+'</strong></span><span>Delivery<strong>'+money(quote.fee)+'</strong></span><span class="cart-total">Total<strong>'+money(quote.total)+'</strong></span></div>'+
     '<p class="cart-arrival">'+(cartDelivery==='express'?'Arrives '+calendarDate(business.day+1):'Arrives in 2–3 game days')+'</p>'+
-    '<button type="button" class="cart-confirm" data-checkout-cart'+(business.cash<quote.total||committedStockUnits()+quote.units>equippedItem('backgrounds').capacity?' disabled':'')+'>'+(business.cash<quote.total?'Not enough money':'Confirm order')+'</button>'+
+    '<button type="button" class="cart-confirm" data-checkout-cart'+(!quote.stockValid||business.cash<quote.total||committedStockUnits()+quote.units>equippedItem('backgrounds').capacity?' disabled':'')+'>'+(!quote.stockValid?'Supplier limit reached':business.cash<quote.total?'Not enough money':'Confirm order')+'</button>'+
     '<small>Payment and shelf reservations happen only after confirmation.</small></aside></div>';
 }
 document.getElementById('stock-cart-open').addEventListener('click',function(){activeGroup='cart';renderSupply();});
@@ -3942,7 +4110,7 @@ document.getElementById('supply-items').addEventListener('click',function(event)
   var pay=event.target.closest('[data-checkout-cart]');
   if(pay&&!pay.disabled){
     var placed=checkoutStockCart(cartDelivery);
-    renderSupply(placed?'Order confirmed: '+placed.units+' units arriving '+calendarDate(placed.dueDay)+'.':'Check your balance and available shelf space.');
+    renderSupply(placed?'Order confirmed: '+placed.units+' units arriving '+calendarDate(placed.dueDay)+'.':'Check supplier stock, balance and shelf space.');
   }
 });
 
@@ -4213,7 +4381,7 @@ function startShift() {
   S.screen = 'play';
   S.shiftSize = shiftCustomers();
   saveBusiness();
-  S.earned = 0; S.served = 0; S.queue = S.shiftSize;
+  S.earned = 0; S.served = 0; S.queue = S.shiftSize; S.noBuyerVisits = 0;
   S.shiftReputation = 0;
   S.registerBonus = 0;
   S.charityApproved = false; S.paymentApproved = false; S.financialRequest = null;
@@ -4257,7 +4425,10 @@ function nextCustomer(skipVisitor) {
   var order = buildOrder(S.cur);
   var list = order.products;
   if (!list.length && !order.refused) {
-    endShift();
+    // An unsuitable visitor leaves. Do not summon a guaranteed buyer or discard stock.
+    S.noBuyerVisits=(S.noBuyerVisits||0)+1;
+    S.queue--;
+    nextCustomer(true);
     return;
   }
   S.queue--;
@@ -4329,7 +4500,7 @@ function endShift() {
   S.drag = null; S.dragCard = false; S.bagDrag = null;
   Portal.stop();
   var stars = S.earned >= 2600 ? 3 : S.earned >= 1500 ? 2 : 1;
-  S.lastResult = { earn: S.earned, bonus: S.registerBonus, stars: stars, served: S.served, reputation: S.shiftReputation };
+  S.lastResult = { earn: S.earned, bonus: S.registerBonus, stars: stars, served: S.served, reputation: S.shiftReputation, noBuyers:S.noBuyerVisits||0 };
   if (S.earned > S.best) S.best = S.earned;
   business.day = S.day + 1;
   processWorldDay(business.day);
@@ -5686,6 +5857,9 @@ function syncResultScreen() {
   document.getElementById("result-sales").textContent = money(Math.max(0, result.earn - (result.bonus || 0)));
   document.getElementById("result-receipt-number").textContent = "CR-" + String(S.day).padStart(4, "0");
   document.getElementById("result-served").textContent = String(result.served);
+  var noBuyerNote=document.getElementById("result-no-buyers");
+  noBuyerNote.hidden=!result.noBuyers;
+  noBuyerNote.textContent=(result.noBuyers||0)+" left without buying";
   document.getElementById("result-reputation").textContent = (result.reputation > 0 ? "+" : "") + result.reputation;
   document.getElementById("result-reputation").toggleAttribute("data-negative", result.reputation < 0);
   var stars = document.getElementById("result-stars");
@@ -6136,9 +6310,9 @@ function productCard(product, locked, hasRoom) {
   if(!locked && business.cart[product.id]) detail += ' · '+business.cart[product.id]+' in cart';
   if (!locked && pendingStockUnits(product.id)) detail += ' · ' + pendingStockUnits(product.id) + ' incoming';
   var action = locked ? '<p class="unlock-cost">Case price ' + money(product.caseCost) + '</p>'
-    : buyButton(product.id, hasRoom ? 'Add case' : 'No shelf space', product.caseCost,
-                hasRoom && committedStockUnits()+cartUnits()+CASE_SIZE<=equippedItem('backgrounds').capacity);
-  return '<article class="supply-card"><div class="supply-image"><img alt="" src="' + assetUrl('assets/products/' + product.id + '.png') + '"></div><h4>' + product.name + '</h4><p>' + detail + '</p>' + action + '</article>';
+    : buyButton(product.id, marketCasesRemaining(product,true)<1 ? (marketCasesRemaining(product,false)<1?'Sold out':'All in cart') : hasRoom ? 'Add case' : 'No shelf space', product.caseCost,
+                hasRoom && marketCasesRemaining(product,true)>0 && committedStockUnits()+cartUnits()+CASE_SIZE<=equippedItem('backgrounds').capacity);
+  return '<article class="supply-card"><div class="supply-image"><img alt="" src="' + assetUrl('assets/products/' + product.id + '.png') + '"></div><h4>' + product.name + '</h4>' + retailRiskBadges(product) + (!locked?marketStockBadge(product):'') + '<p>' + detail + '</p>' + action + '</article>';
 }
 
 function lockedProducts(products) {
@@ -6184,7 +6358,7 @@ function renderSupply(message) {
   var units = stockUnits(business.stock, business.storeLevel);
   var hasRoom = interior.capacity - units - pendingStockUnits() >= CASE_SIZE;
   renderStockCapacity(supplyCapacity, units, interior);
-  supplyStatus.textContent = message || 'Deliveries take 2–3 game days. Incoming cases reserve shelf space.';
+  supplyStatus.textContent = message || 'Weekly supply · Restocks '+calendarDate(marketRestockDay())+' · Delivery 2–3 days';
   supplyItems.dataset.kind = 'products';
   supplyItems.innerHTML = PRODUCTS.filter(function (product) {
     return (activeGroup === 'all' || product.group === activeGroup) && (product.level || 1) <= business.storeLevel;
@@ -6194,7 +6368,7 @@ function renderSupply(message) {
 function buySupply(id) {
   if (!canManageShop() || !supplyStore.open || officeMarket.hidden) return;
   var product = PRODUCTS.find(function (entry) { return entry.id === id; });
-  if(!product||!addCartCase(id)){renderSupply('There is not enough shelf space for another case.');return;}
+  if(!product||!addCartCase(id)){renderSupply(product&&marketCasesRemaining(product,true)<1?'Supplier limit reached. Restocks '+calendarDate(marketRestockDay())+'.':'There is not enough shelf space for another case.');return;}
   renderSupply('Added a case of '+product.name+' to your cart. Checkout to place the order.');
   var refreshed = supplyItems.querySelector('[data-item="' + id + '"]');
   (refreshed && !refreshed.disabled ? refreshed : officeHome).focus({preventScroll:true});
