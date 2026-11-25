@@ -1362,6 +1362,20 @@ html[data-compact-shop=true] .supply .review-site .review-trust { padding:2px 5p
 html[data-compact-shop=true] .supply .review-site #review-trust-heading { font-size:11px; }
 html[data-compact-shop=true] .supply .review-site #review-score { font-size:12px; }
 
+
+/* One catalog for unlocked and future products. Only the future items are monochrome. */
+#open-locked { display:none !important; }
+.supply .catalog-locked { filter:grayscale(1); }
+.supply .catalog-product .supply-image,.supply .category-art { position:relative; overflow:hidden; }
+.supply .catalog-lock-ribbon { position:absolute; z-index:2; left:50%; top:50%; width:150%; min-width:90px; min-height:28px; padding:4px 10px; display:flex; justify-content:center; align-items:center; gap:5px; transform:translate(-50%,-50%) rotate(-23deg); border-block:1px solid #ffffff85; background:#27302be8; color:#fffdf4; box-shadow:0 3px 6px #0004; pointer-events:none; font:900 13px/1.2 Nunito,system-ui,sans-serif; }
+.supply .catalog-lock-ribbon svg { width:18px; height:18px; flex:none; }
+.supply .catalog-lock-ribbon strong { font-size:13px; white-space:nowrap; }
+.supply .catalog-locked .supply-buy { background:var(--ui-raised,#e4e8e4); color:var(--ui-muted,#536057); }
+.supply .catalog-locked .supply-image img { opacity:.7; }
+html[data-compact-shop=true] .supply .catalog-lock-ribbon { min-height:26px; padding:3px 6px; gap:3px; }
+html[data-compact-shop=true] .supply .catalog-lock-ribbon strong { font-size:12px; }
+html[data-compact-shop=true] .supply .catalog-lock-ribbon svg { width:16px; height:16px; }
+
 </style>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27%23377560%27/%3E%3Ctext x=%2732%27 y=%2747%27 text-anchor=%27middle%27 font-size=%2746%27 fill=%27%23ffcf58%27%3E%24%3C/text%3E%3C/svg%3E">
 <script id="cashier-embedded-assets">/* Standalone Cashier Rush assets. Assets are served from the adjacent assets folder. */
@@ -1503,7 +1517,7 @@ function assetUrl(p){
     </header>
     <div id="office-desktop" class="office-desktop">
       <button id="open-market" class="office-shortcut" type="button"><span class="office-app-icon" aria-hidden="true"><img src="assets/embedded/6acc59762d5c1ed05e0907df294d7bc66b8ff8d02955c56973cf10e1c362b12d.svg" alt="" width="82" height="82" decoding="async" draggable="false"></span><strong>Stock</strong></button>
-      <button id="open-locked" class="office-shortcut" type="button">
+      <button id="open-locked" class="office-shortcut" type="button" hidden>
         <span class="office-app-icon" aria-hidden="true"><img src="assets/embedded/a7ac5e34fdbcc13385c47cf8b96d622384273b5a6d762f3eded8736e607fe400.svg" alt="" width="82" height="82" decoding="async" draggable="false"></span>
         <strong>Locked Products</strong>
       </button>
@@ -1771,8 +1785,8 @@ var PRODUCT_GROUPS = [
   {"id":"frozen","name":"Frozen","level":6},
   {"id":"household","name":"Household","level":7},
   {"id":"gourmet","name":"Gourmet","level":8},
-  {"id":"electronics","name":"Electronics","level":9},
-  {"id":"luxury","name":"Luxury gifts","level":10}
+  {"id":"electronics","name":"Electronics","level":8},
+  {"id":"luxury","name":"Luxury gifts","level":9}
 ];
 var PRODUCTS = [
   {"id":"milk","name":"Milk","price":175,"caseCost":305,"group":"dairy","level":2},
@@ -1886,10 +1900,10 @@ var PRODUCTS = [
   {"id":"tissues","name":"Tissues","price":1600,"caseCost":2785,"group":"household","level":7},
   {"id":"royal-caviar","name":"Royal caviar","price":5000,"caseCost":8700,"group":"gourmet","level":8},
   {"id":"black-truffle","name":"Black truffle","price":6500,"caseCost":11310,"group":"gourmet","level":8},
-  {"id":"wireless-headphones","name":"Wireless headphones","price":7500,"caseCost":13050,"group":"electronics","level":9},
+  {"id":"wireless-headphones","name":"Wireless headphones","price":7500,"caseCost":13050,"group":"electronics","level":8},
   {"id":"instant-camera","name":"Instant camera","price":10000,"caseCost":17400,"group":"electronics","level":9},
-  {"id":"signature-perfume","name":"Signature perfume","price":12000,"caseCost":20880,"group":"luxury","level":10},
-  {"id":"luxury-watch","name":"Luxury watch","price":15000,"caseCost":26100,"group":"luxury","level":10},
+  {"id":"signature-perfume","name":"Signature perfume","price":12000,"caseCost":20880,"group":"luxury","level":9},
+  {"id":"luxury-watch","name":"Luxury watch","price":15000,"caseCost":26100,"group":"luxury","level":9},
   {"id":"pomegranate-soda","name":"Pomegranate soda","price":650,"caseCost":1130,"group":"drinks","level":3},
   {"id":"honey-waffles","name":"Honey waffles","price":480,"caseCost":835,"group":"snacks","level":2},
   {"id":"lemon-tart","name":"Lemon tart","price":1875,"caseCost":3260,"group":"bakery","level":5},
@@ -1898,29 +1912,29 @@ var PRODUCTS = [
   {"id":"mango-sorbet","name":"Mango sorbet","price":3650,"caseCost":6350,"group":"frozen","level":7},
   {"id":"truffle-butter","name":"Truffle butter","price":2850,"caseCost":4960,"group":"dairy","level":6},
   {"id":"saffron-tin","name":"Saffron tin","price":7200,"caseCost":12530,"group":"gourmet","level":8},
-  {"id":"game-console","name":"Game console","price":45000,"caseCost":83700,"group":"electronics","level":9},
-  {"id":"pro-camera","name":"Pro camera","price":150000,"caseCost":288000,"group":"electronics","level":9},
-  {"id":"gaming-laptop","name":"Gaming laptop","price":280000,"caseCost":554400,"group":"electronics","level":9},
-  {"id":"designer-handbag","name":"Designer handbag","price":600000,"caseCost":1224000,"group":"luxury","level":10},
-  {"id":"gold-bracelet","name":"Gold bracelet","price":1250000,"caseCost":2625000,"group":"luxury","level":10},
-  {"id":"diamond-ring","name":"Diamond ring","price":2500000,"caseCost":5400000,"group":"luxury","level":10},
-  {"id":"premium-smartphone","name":"Premium smartphone","price":95000,"caseCost":188100,"group":"electronics","level":9},
-  {"id":"drawing-tablet","name":"Drawing tablet","price":135000,"caseCost":267300,"group":"electronics","level":9},
-  {"id":"vr-headset","name":"VR headset","price":180000,"caseCost":356400,"group":"electronics","level":9},
-  {"id":"camera-drone","name":"Camera drone","price":350000,"caseCost":693000,"group":"electronics","level":9},
-  {"id":"espresso-machine","name":"Espresso machine","price":220000,"caseCost":435600,"group":"household","level":8},
-  {"id":"robot-vacuum","name":"Robot vacuum","price":78000,"caseCost":154440,"group":"household","level":8},
-  {"id":"electric-guitar","name":"Electric guitar","price":420000,"caseCost":919800,"group":"luxury","level":10},
+  {"id":"game-console","name":"Game console","price":45000,"caseCost":83700,"group":"electronics","level":10},
+  {"id":"pro-camera","name":"Pro camera","price":150000,"caseCost":288000,"group":"electronics","level":11},
+  {"id":"gaming-laptop","name":"Gaming laptop","price":280000,"caseCost":554400,"group":"electronics","level":12},
+  {"id":"designer-handbag","name":"Designer handbag","price":600000,"caseCost":1224000,"group":"luxury","level":13},
+  {"id":"gold-bracelet","name":"Gold bracelet","price":1250000,"caseCost":2625000,"group":"luxury","level":14},
+  {"id":"diamond-ring","name":"Diamond ring","price":2500000,"caseCost":5400000,"group":"luxury","level":15},
+  {"id":"premium-smartphone","name":"Premium smartphone","price":95000,"caseCost":188100,"group":"electronics","level":10},
+  {"id":"drawing-tablet","name":"Drawing tablet","price":135000,"caseCost":267300,"group":"electronics","level":11},
+  {"id":"vr-headset","name":"VR headset","price":180000,"caseCost":356400,"group":"electronics","level":11},
+  {"id":"camera-drone","name":"Camera drone","price":350000,"caseCost":693000,"group":"electronics","level":12},
+  {"id":"espresso-machine","name":"Espresso machine","price":220000,"caseCost":435600,"group":"household","level":12},
+  {"id":"robot-vacuum","name":"Robot vacuum","price":78000,"caseCost":154440,"group":"household","level":10},
+  {"id":"electric-guitar","name":"Electric guitar","price":420000,"caseCost":919800,"group":"luxury","level":13},
   {"id":"silk-scarf","name":"Silk scarf","price":42000,"caseCost":91980,"group":"luxury","level":10},
-  {"id":"gold-fountain-pen","name":"Gold fountain pen","price":280000,"caseCost":613200,"group":"luxury","level":10},
-  {"id":"sapphire-necklace","name":"Sapphire necklace","price":1850000,"caseCost":4051500,"group":"luxury","level":10},
-  {"id":"diamond-earrings","name":"Diamond earrings","price":3200000,"caseCost":7008000,"group":"luxury","level":10},
-  {"id":"gold-bullion","name":"Gold bullion","price":6000000,"caseCost":14400000,"group":"luxury","level":10},
-  {"id":"studio-synthesizer","name":"Studio synthesizer","price":8500000,"caseCost":20400000,"group":"electronics","level":10,"vipOnly":true,"vipInterest":"tech","purchaseChance":0.32},
-  {"id":"concert-grand-piano","name":"Concert grand piano","price":18000000,"caseCost":43200000,"group":"luxury","level":10,"vipOnly":true,"vipInterest":"music","purchaseChance":0.24},
-  {"id":"ruby-necklace","name":"Royal ruby necklace","price":45000000,"caseCost":108000000,"group":"luxury","level":10,"vipOnly":true,"vipInterest":"jewelry","purchaseChance":0.18},
-  {"id":"diamond-tiara","name":"Diamond tiara","price":180000000,"caseCost":432000000,"group":"luxury","level":10,"vipOnly":true,"vipInterest":"jewelry","purchaseChance":0.12},
-  {"id":"crystal-sculpture","name":"Crystal phoenix sculpture","price":350000000,"caseCost":840000000,"group":"luxury","level":10,"vipOnly":true,"vipInterest":"art","purchaseChance":0.08}
+  {"id":"gold-fountain-pen","name":"Gold fountain pen","price":280000,"caseCost":613200,"group":"luxury","level":12},
+  {"id":"sapphire-necklace","name":"Sapphire necklace","price":1850000,"caseCost":4051500,"group":"luxury","level":14},
+  {"id":"diamond-earrings","name":"Diamond earrings","price":3200000,"caseCost":7008000,"group":"luxury","level":15},
+  {"id":"gold-bullion","name":"Gold bullion","price":6000000,"caseCost":14400000,"group":"luxury","level":16},
+  {"id":"studio-synthesizer","name":"Studio synthesizer","price":8500000,"caseCost":20400000,"group":"electronics","level":16,"vipOnly":true,"vipInterest":"tech","purchaseChance":0.32},
+  {"id":"concert-grand-piano","name":"Concert grand piano","price":18000000,"caseCost":43200000,"group":"luxury","level":17,"vipOnly":true,"vipInterest":"music","purchaseChance":0.24},
+  {"id":"ruby-necklace","name":"Royal ruby necklace","price":45000000,"caseCost":108000000,"group":"luxury","level":18,"vipOnly":true,"vipInterest":"jewelry","purchaseChance":0.18},
+  {"id":"diamond-tiara","name":"Diamond tiara","price":180000000,"caseCost":432000000,"group":"luxury","level":19,"vipOnly":true,"vipInterest":"jewelry","purchaseChance":0.12},
+  {"id":"crystal-sculpture","name":"Crystal phoenix sculpture","price":350000000,"caseCost":840000000,"group":"luxury","level":20,"vipOnly":true,"vipInterest":"art","purchaseChance":0.08}
 ];
 var CASE_SIZE = 3;
 var UPGRADE_LIMIT = 10;
@@ -1992,9 +2006,19 @@ var STORE_LEVELS = [
   {"name":"Family supermarket","price":70000,"reputation":450,"visits":[6,7],"budget":[4500,8000],"premiumChance":0.4,"interiorTier":2},
   {"name":"City supermarket","price":140000,"reputation":750,"visits":[7,8],"budget":[7500,13000],"premiumChance":0.45,"interiorTier":3},
   {"name":"Department market","price":250000,"reputation":1150,"visits":[8,9],"budget":[12000,20000],"premiumChance":0.5,"interiorTier":3},
-  {"name":"Gourmet market","price":400000,"reputation":1650,"visits":[9,10],"budget":[18000,30000],"premiumBudget":[60000,240000],"premiumChance":0.6,"interiorTier":4},
-  {"name":"Lifestyle superstore","price":650000,"reputation":2250,"visits":[10,11],"budget":[25000,42000],"premiumBudget":[100000,450000],"premiumChance":0.7,"interiorTier":4},
-  {"name":"Luxury flagship","price":1000000,"reputation":3000,"visits":[11,12],"budget":[35000,65000],"premiumBudget":[400000,9000000],"premiumChance":0.8,"interiorTier":5}
+  {"name":"Gourmet market","price":400000,"reputation":1650,"visits":[10,12],"budget":[18000,30000],"premiumBudget":[20000,45000],"premiumChance":0.6,"interiorTier":4},
+  {"name":"Premium boutique","price":650000,"reputation":2250,"visits":[10,12],"budget":[25000,42000],"premiumBudget":[35000,80000],"premiumChance":0.62,"interiorTier":4},
+  {"name":"Electronics market","price":1000000,"reputation":3000,"visits":[10,12],"budget":[35000,65000],"premiumBudget":[120000,250000],"premiumChance":0.64,"interiorTier":5},
+  {"name":"Digital showroom","price":1800000,"reputation":3900,"visits":[10,12],"budget":[45000,80000],"premiumBudget":[220000,450000],"premiumChance":0.6599999999999999,"interiorTier":5},
+  {"name":"Professional studio","price":3200000,"reputation":5000,"visits":[10,12],"budget":[55000,95000],"premiumBudget":[450000,900000],"premiumChance":0.6799999999999999,"interiorTier":5},
+  {"name":"Designer gallery","price":6000000,"reputation":6300,"visits":[10,12],"budget":[65000,110000],"premiumBudget":[1100000,2200000],"premiumChance":0.7,"interiorTier":5},
+  {"name":"Fine jewelry gallery","price":12500000,"reputation":7800,"visits":[10,12],"budget":[75000,130000],"premiumBudget":[2800000,5500000],"premiumChance":0.72,"interiorTier":5},
+  {"name":"Diamond salon","price":25000000,"reputation":9500,"visits":[10,12],"budget":[85000,150000],"premiumBudget":[5500000,10000000],"premiumChance":0.74,"interiorTier":5},
+  {"name":"Investment boutique","price":50000000,"reputation":11500,"visits":[10,12],"budget":[95000,170000],"premiumBudget":[11000000,22000000],"premiumChance":0.76,"interiorTier":5},
+  {"name":"Grand music gallery","price":100000000,"reputation":13800,"visits":[10,12],"budget":[105000,190000],"premiumBudget":[22000000,45000000],"premiumChance":0.78,"interiorTier":5},
+  {"name":"Royal collection","price":200000000,"reputation":16400,"visits":[10,12],"budget":[115000,210000],"premiumBudget":[55000000,110000000],"premiumChance":0.8,"interiorTier":5},
+  {"name":"Crown treasury","price":400000000,"reputation":19300,"visits":[10,12],"budget":[125000,230000],"premiumBudget":[200000000,350000000],"premiumChance":0.8,"interiorTier":5},
+  {"name":"Legendary collectors club","price":800000000,"reputation":22500,"visits":[10,12],"budget":[135000,250000],"premiumBudget":[400000000,700000000],"premiumChance":0.8,"interiorTier":5}
 ];
 var EQUIPMENT = {
   "registers": [
@@ -2228,7 +2252,7 @@ var EQUIPMENT = {
       "image": assetUrl("assets/bg-night.jpg"),
       "scene": "night",
       "filter": "saturate(1.25) brightness(1.12)",
-      "detail": "Unlocks the final expansion to store level 10."
+      "detail": "Supports expansion through all 20 store levels."
     }
   ],
   "counters": [
@@ -3329,7 +3353,10 @@ function vipSpendingBudget(customerId) {
   var roll=Math.random(), cumulative=0;
   for(var i=0;i<preference.spending.length;i++){
     var bracket=preference.spending[i]; cumulative+=bracket.chance;
-    if(roll<cumulative)return Math.round(rnd(bracket.min,bracket.max));
+    if(roll<cumulative){
+      var cap=currentStore().premiumBudget[1];
+      return Math.round(rnd(Math.min(bracket.min,cap*.6),Math.min(bracket.max,cap)));
+    }
   }
   return 0;
 }
@@ -6809,43 +6836,24 @@ var CATEGORY_ART = {
   luxury: { name: 'Luxury gifts', images: ['signature-perfume', 'luxury-watch'], background: '#f6e9f1', edge: '#e8c5d8' }
 };
 
-function renderCategories(target, locked) {
-  var groups = PRODUCT_GROUPS.map(function (group) { return group.id; });
-  if (!locked) groups.unshift('all');
-  var visibleCount = 0;
-  target.innerHTML = groups.map(function (id) {
-    var art = CATEGORY_ART[id];
-    var products = PRODUCTS.filter(function (product) { return id === 'all' || product.group === id; });
-    var available = products.filter(function (product) {
-      return locked ? (product.level || 1) > business.storeLevel : (product.level || 1) <= business.storeLevel;
-    });
-    if (!available.length && (locked || id !== 'all')) return '';
-    visibleCount++;
-    var count = available.length;
-    var detail = count + (locked ? ' to unlock' : ' products');
-    if (!count && !locked) {
-      var firstLevel = Math.min.apply(null, products.map(function (product) { return product.level || 1; }));
-      detail = 'Unlocks at level ' + firstLevel;
-    }
-    var imageIds = art.images;
-    var levelBadge = '';
-    if (locked) {
-      var nextLevel = Math.min.apply(null, available.map(function (product) { return product.level; }));
-      var alternateArt = available.filter(function (product) { return !art.images.includes(product.id); });
-      var previews = alternateArt.length ? alternateArt : available;
-      imageIds = previews.slice().sort(function (a, b) { return a.level - b.level; }).slice(0, 3).map(function (product) { return product.id; });
-      levelBadge = '<span class="category-level">Level ' + nextLevel + '</span>';
-    }
-    var images = imageIds.map(function (product) {
-      return '<img src="' + assetUrl('assets/products/' + product + '.png') + '" alt="" width="82" height="82">';
-    }).join('');
-    return '<button type="button" class="category-tile" data-group="' + id + '" style="--category-bg:' +
-      art.background + ';--category-edge:' + art.edge + '"><span class="category-art" aria-hidden="true">' + images +
-      '</span>' + levelBadge + '<span class="category-copy"><strong>' + art.name + '</strong><small>' + detail +
-      '</small><span class="category-arrow" aria-hidden="true">›</span></span></button>';
-  }).join('');
-  target.style.setProperty('--category-rows', Math.max(1, Math.ceil(visibleCount / 3)));
+function catalogLock(level){
+  return '<span class="catalog-lock-ribbon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14v3"/></svg><strong>Lv. '+level+'</strong></span>';
 }
+function renderCategories(target, locked) {
+  var groups=['all'].concat(PRODUCT_GROUPS.map(function(group){return group.id;}));
+  target.innerHTML=groups.map(function(id){
+    var art=CATEGORY_ART[id];
+    var products=PRODUCTS.filter(function(product){return id==='all'||product.group===id;});
+    var available=products.filter(function(product){return product.level<=business.storeLevel;});
+    var firstLevel=Math.min.apply(null,products.map(function(product){return product.level;}));
+    var closed=available.length===0;
+    var detail=closed?'Unlocks at level '+firstLevel:available.length===products.length?products.length+' products':available.length+' / '+products.length+' unlocked';
+    var images=art.images.map(function(product){return '<img src="'+assetUrl('assets/products/'+product+'.png')+'" alt="" width="82" height="82">';}).join('');
+    return '<button type="button" class="category-tile'+(closed?' catalog-locked':'')+'" data-group="'+id+'" style="--category-bg:'+art.background+';--category-edge:'+art.edge+'"><span class="category-art" aria-hidden="true">'+images+(closed?catalogLock(firstLevel):'')+'</span><span class="category-copy"><strong>'+art.name+'</strong><small>'+detail+'</small><span class="category-arrow" aria-hidden="true">›</span></span></button>';
+  }).join('');
+  target.style.setProperty('--category-rows',Math.max(1,Math.ceil(groups.length/3)));
+}
+
 var activeGroup = 'categories';
 var shopPausedPlay = false;
 var cheapestCase = Math.min.apply(null, PRODUCTS.map(function (product) { return product.caseCost; }));
@@ -6880,15 +6888,15 @@ function renderStockCapacity(target, units, interior) {
     '" aria-label="Stock capacity used"></meter>' + (caseBlocked ? '<p>' + fullMessage + guide + '</p>' : '');
 }
 
-function productCard(product, locked, hasRoom) {
-  var detail = locked ? 'Sells for ' + money(product.price) + ' · Case of ' + CASE_SIZE
-    : '<strong>' + business.stock[product.id] + '</strong> in stock · Sells for ' + money(sellingPrice(product));
-  if(!locked && business.cart[product.id]) detail += ' · '+business.cart[product.id]+' in cart';
-  if (!locked && pendingStockUnits(product.id)) detail += ' · ' + pendingStockUnits(product.id) + ' incoming';
-  var action = locked ? '<p class="unlock-cost">Case price ' + money(product.caseCost) + '</p>'
-    : buyButton(product.id, marketCasesRemaining(product,true)<1 ? (marketCasesRemaining(product,false)<1?'Sold out':'All in cart') : hasRoom ? 'Add case' : 'No shelf space', product.caseCost,
-                hasRoom && marketCasesRemaining(product,true)>0 && committedStockUnits()+cartUnits()+CASE_SIZE<=equippedItem('backgrounds').capacity);
-  return '<article class="supply-card"><div class="supply-image"><img alt="" src="' + assetUrl('assets/products/' + product.id + '.png') + '"></div><h4>' + product.name + '</h4>' + retailRiskBadges(product) + (!locked?marketStockBadge(product):'') + '<p>' + detail + '</p>' + action + '</article>';
+function productCard(product,locked,hasRoom){
+  locked=Boolean(locked||product.level>business.storeLevel);
+  var detail=locked?'Sells for '+money(product.price):'<strong>'+business.stock[product.id]+'</strong> in stock · Sells for '+money(sellingPrice(product));
+  if(!locked&&business.cart[product.id])detail+=' · '+business.cart[product.id]+' in cart';
+  if(!locked&&pendingStockUnits(product.id))detail+=' · '+pendingStockUnits(product.id)+' incoming';
+  var action=locked?buyButton(product.id,'Level '+product.level,product.caseCost,false):
+    buyButton(product.id,marketCasesRemaining(product,true)<1?(marketCasesRemaining(product,false)<1?'Sold out':'All in cart'):hasRoom?'Add case':'No shelf space',product.caseCost,
+      hasRoom&&marketCasesRemaining(product,true)>0&&committedStockUnits()+cartUnits()+CASE_SIZE<=equippedItem('backgrounds').capacity);
+  return '<article class="supply-card catalog-product'+(locked?' catalog-locked':'')+'" data-product-level="'+product.level+'"><div class="supply-image"><img alt="" src="'+assetUrl('assets/products/'+product.id+'.png')+'">'+(locked?catalogLock(product.level):'')+'</div><h4>'+product.name+'</h4>'+(!locked?retailRiskBadges(product)+marketStockBadge(product):'')+'<p>'+detail+'</p>'+action+'</article>';
 }
 
 function lockedProducts(products) {
@@ -6941,8 +6949,9 @@ function renderSupply(message) {
   supplyStatus.textContent = message || 'Weekly supply · Restocks '+calendarDate(marketRestockDay())+' · Delivery 2–3 days';
   supplyItems.dataset.kind = 'products';
   supplyItems.innerHTML = PRODUCTS.filter(function (product) {
-    return (activeGroup === 'all' || product.group === activeGroup) && (product.level || 1) <= business.storeLevel;
-  }).map(function (product) { return productCard(product, false, hasRoom); }).join('');
+    return activeGroup==='all'||product.group===activeGroup;
+  }).sort(function(a,b){return Number(a.level>business.storeLevel)-Number(b.level>business.storeLevel)||a.level-b.level||a.price-b.price;})
+    .map(function(product){return productCard(product,product.level>business.storeLevel,hasRoom);}).join('');
 }
 
 function buySupply(id) {
@@ -6958,7 +6967,7 @@ function renderLocked() {
   var hasLocked = PRODUCTS.some(function (product) { return (product.level || 1) > business.storeLevel; });
   var overview = lockedGroup === 'categories' && hasLocked;
   officeLocked.querySelector('.supply-body').classList.toggle('catalog-overview', overview);
-  lockedProgress.textContent = 'Level ' + business.storeLevel + ' / 10 · ' + business.reputation + ' REP';
+  lockedProgress.textContent = 'Level ' + business.storeLevel + ' / ' + STORE_LEVELS.length + ' · ' + business.reputation + ' REP';
   lockedTitle.textContent = !hasLocked ? 'All products unlocked' : overview ? 'Unlock by category' : CATEGORY_ART[lockedGroup].name;
   lockedBack.hidden = overview || !hasLocked;
   lockedCategories.hidden = !overview;
@@ -7154,7 +7163,7 @@ function renderExpansion() {
   var interior = equippedItem('backgrounds');
   if (!next) {
     equipmentItems.innerHTML = html + '<div class="growth-max" aria-label="Maximum store level reached">' +
-      expansionIcon('trophy') + '<strong>10 / 10</strong>' + expansionShop(current, currentStore().name, interior, false) +
+      expansionIcon('trophy') + '<strong>' + current + ' / ' + STORE_LEVELS.length + '</strong>' + expansionShop(current, currentStore().name, interior, false) +
       '</div></section>';
     return;
   }
@@ -7465,6 +7474,7 @@ officeAuction.addEventListener('click',function(event){
 officeCalendar.addEventListener('click',function(event){var link=event.target.closest('[data-calendar-auction]');if(link){auctionView='live';showOffice('auction');}});
 
 function showOffice(page) {
+  if(page==='locked'){activeGroup='categories';page='market';}
   if (!canManageShop() && !(S.screen === 'menu' && page === 'settings')) return;
   playUiSound(page==='desktop'?'close':'open');
   syncOrientation(true);
@@ -7542,7 +7552,7 @@ shopLaunch.addEventListener('click', function () {
   showOffice('desktop');
 });
 marketShortcut.addEventListener('click', function () { activeGroup = 'categories'; showOffice('market'); });
-lockedShortcut.addEventListener('click', function () { lockedGroup = 'categories'; showOffice('locked'); });
+lockedShortcut.addEventListener('click', function () { activeGroup='categories';showOffice('market'); });
 upgradesShortcut.addEventListener('click', function () { showOffice('upgrades'); });
 upgradeItems.addEventListener('click', function (event) {
   var button = event.target.closest('[data-item]');
@@ -7637,13 +7647,6 @@ productFilters.addEventListener('click', function (event) {
   var button = event.target.closest('[data-group]');
   if (!button || !productFilters.contains(button)) return;
   activeGroup = button.dataset.group;
-  if (activeGroup !== 'all' && !PRODUCTS.some(function (product) {
-    return product.group === activeGroup && (product.level || 1) <= business.storeLevel;
-  })) {
-    lockedGroup = activeGroup;
-    showOffice('locked');
-    return;
-  }
   renderSupply();
   officeMarket.querySelector('.supply-body').scrollTop = 0;
   supplyCategory.focus({ preventScroll: true });
