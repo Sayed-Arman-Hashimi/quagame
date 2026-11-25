@@ -1204,6 +1204,99 @@
   .total-receipt { padding:9px; }
 }
 
+
+/* Phone toolbars: one 44px row; scrolling belongs to the product list. */
+html[data-compact-shop=true] .supply {
+  width:calc(100% - max(6px,env(safe-area-inset-left)) - max(6px,env(safe-area-inset-right)));
+  height:calc(var(--shop-visible-height,100dvh) - 12px); max-width:none; max-height:none; margin:auto;
+  border-width:3px; padding:1px; border-radius:13px;
+}
+html[data-compact-shop=true] .supply .office { grid-template-rows:44px minmax(0,1fr); border-radius:8px; }
+html[data-compact-shop=true] .supply .tablet-bezel { display:none; }
+html[data-compact-shop=true] .supply .office-bar { padding:0 8px; }
+html[data-compact-shop=true] .supply .office-bar::after { display:none; }
+html[data-compact-shop=true] .supply .office-title { font-size:14px; }
+html[data-compact-shop=true] .supply .office-bar button { min-height:40px; min-width:44px; font-size:14px; }
+html[data-compact-shop=true] .supply .office-bar .supply-close { width:44px; font-size:24px; }
+html[data-compact-shop=true] .supply .supply-site { min-height:0; min-width:0; grid-template-columns:minmax(0,1fr); grid-template-rows:44px minmax(0,1fr); overflow:hidden; }
+html[data-compact-shop=true] .supply .supply-header { min-height:44px; height:44px; padding:0 8px; gap:8px; flex-wrap:nowrap; }
+html[data-compact-shop=true] .supply .supply-header h2 { font-size:16px; line-height:1.1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+html[data-compact-shop=true] .supply .supply-balance { font-size:13px; padding:4px 7px; border-radius:8px; }
+html[data-compact-shop=true] .supply .supply-body { padding:8px; min-height:0; min-width:0; overflow:auto; scroll-padding:8px; }
+html[data-compact-shop=true] .supply .stock-header { position:relative; display:block; padding:0 8px; }
+html[data-compact-shop=true] .supply .stock-topline { height:44px; gap:8px; flex-wrap:nowrap; }
+html[data-compact-shop=true] .supply .stock-topline h2 { font-size:16px; }
+html[data-compact-shop=true] .supply .stock-topline .category-back { min-height:40px; max-width:44px; overflow:hidden; gap:0; font-size:0; padding:0 12px; }
+html[data-compact-shop=true] .supply .category-back span { font-size:22px; }
+html[data-compact-shop=true] .supply .stock-pack { display:none; }
+html[data-compact-shop=true] .supply #stock-cart-open { min-height:40px; padding:4px 8px; font-size:14px; }
+html[data-compact-shop=true] .supply .stock-capacity { flex:none; min-width:0; width:auto; display:block; padding:4px 7px; margin:0; border-radius:8px; }
+html[data-compact-shop=true] .supply .stock-capacity .capacity-line { flex-wrap:nowrap; gap:0; }
+html[data-compact-shop=true] .supply .stock-capacity :is(.capacity-label,.capacity-free,meter,p) { display:none; }
+html[data-compact-shop=true] .supply .capacity-count { gap:3px; font-size:13px; }
+html[data-compact-shop=true] .supply .capacity-count b { font-size:14px; }
+html[data-compact-shop=true] .supply .capacity-count span { font-size:12px; }
+html[data-compact-shop=true] .supply #supply-status:not([data-feedback]) { display:none; }
+html[data-compact-shop=true] .supply #supply-status[data-feedback] { position:absolute; top:46px; left:8px; right:8px; z-index:3; max-width:400px; padding:8px; border:1px solid var(--game-edge); border-radius:9px; background:var(--game-paper); color:var(--game-ink); font-size:13px; box-shadow:0 3px 12px #17221f33; pointer-events:none; }
+html[data-compact-shop=true] .supply .catalog-overview .category-grid { flex:none; min-height:0; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); grid-template-rows:none; grid-auto-rows:116px; gap:8px; }
+html[data-compact-shop=true] .supply .category-tile { min-width:0; height:116px; border-radius:13px; }
+html[data-compact-shop=true] .supply .category-art { flex:none; height:70px; min-height:70px; overflow:hidden; }
+html[data-compact-shop=true] .supply .category-art img { width:66px; height:66px; bottom:0; }
+html[data-compact-shop=true] .supply .category-art img:nth-child(1) { left:calc(50% - 70px); }
+html[data-compact-shop=true] .supply .category-art img:nth-child(2) { left:calc(50% - 33px); }
+html[data-compact-shop=true] .supply .category-art img:nth-child(3) { left:calc(50% + 6px); }
+html[data-compact-shop=true] .supply .category-copy { padding:4px 9px; }
+html[data-compact-shop=true] .supply .category-copy strong { font-size:14px; line-height:17px; }
+html[data-compact-shop=true] .supply .category-copy small { font-size:11px; line-height:14px; }
+html[data-compact-shop=true] .supply .category-arrow { width:24px; height:24px; }
+html[data-compact-shop=true] .supply #supply-items[data-kind=products] { grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr)); gap:8px; align-items:stretch; }
+html[data-compact-shop=true] .supply #supply-items[data-kind=products] > .supply-card { display:grid; grid-template-columns:76px minmax(0,1fr); grid-template-rows:auto auto 1fr auto; gap:5px 8px; min-height:172px; padding:9px; }
+html[data-compact-shop=true] .supply #supply-items[data-kind=products] .supply-image { grid-column:1; grid-row:1/4; height:100%; max-height:110px; min-height:78px; margin:0; }
+html[data-compact-shop=true] .supply #supply-items[data-kind=products] .supply-image img { width:100%; height:100%; padding:3px; object-fit:contain; }
+html[data-compact-shop=true] .supply #supply-items[data-kind=products] h4 { grid-column:2; font-size:15px; margin:0; line-height:18px; }
+html[data-compact-shop=true] .supply #supply-items[data-kind=products] p { grid-column:2; font-size:12px; line-height:16px; margin:0; }
+html[data-compact-shop=true] .supply #supply-items[data-kind=products] .market-stock { grid-column:2; gap:0; padding:0; margin:0; background:none; font-size:11px; }
+html[data-compact-shop=true] .supply .market-stock :is(meter,small) { display:none; }
+html[data-compact-shop=true] .supply #supply-items[data-kind=products] .retail-risk { grid-column:2; margin:0; font-size:11px; }
+html[data-compact-shop=true] .supply .retail-risk small { display:none; }
+html[data-compact-shop=true] .supply #supply-items[data-kind=products] .supply-buy { grid-column:1/-1; min-height:44px; margin:0; padding:6px 9px; font-size:14px; }
+html[data-compact-shop=true] .supply .inventory-site .supply-header { justify-content:flex-start; }
+html[data-compact-shop=true] .supply .inventory-site h2 { margin-right:auto; }
+html[data-compact-shop=true] .supply #inventory-filters { flex:none; display:flex; gap:5px; padding:0; margin:0; }
+html[data-compact-shop=true] .supply #inventory-filters button { min-height:40px; padding:4px 9px; font-size:12px; }
+html[data-compact-shop=true] .supply #inventory-count { display:none; }
+html[data-compact-shop=true] .supply #inventory-safety:not([data-unsafe]),html[data-compact-shop=true] .supply #inventory-price-status:not([data-feedback]) { display:none; }
+html[data-compact-shop=true] .supply #inventory-safety[data-unsafe] { padding:6px 8px; margin-bottom:8px; gap:6px; font-size:13px; }
+html[data-compact-shop=true] .supply #inventory-price-status[data-feedback] { margin:0 0 8px; padding:5px; font-size:12px; }
+html[data-compact-shop=true] .supply .inventory-body { width:100%; padding:6px 8px; }
+html[data-compact-shop=true] .supply .inventory-table { width:100%; font-size:14px; }
+html[data-compact-shop=true] .supply .inventory-table thead { display:none; }
+html[data-compact-shop=true] .supply .inventory-table :is(th,td) { padding:5px 8px; }
+html[data-compact-shop=true] .supply .inventory-table th[scope=rowgroup] { padding:3px 8px; font-size:12px; }
+html[data-compact-shop=true] .supply .inventory-product { display:flex; align-items:center; gap:8px; font-size:14px; }
+html[data-compact-shop=true] .supply .inventory-product img { width:40px; height:40px; object-fit:contain; }
+html[data-compact-shop=true] .supply .inventory-price-input { height:40px; }
+html[data-compact-shop=true] .supply .inventory-price-input input { width:74px; font-size:16px; }
+html[data-compact-shop=true] .supply .inventory-price-form button { min-height:40px; min-width:44px; font-size:13px; }
+html[data-compact-shop=true] .supply .inventory-price-note:not([data-high]) { display:none; }
+html[data-compact-shop=true] .supply .equipment-site > .supply-nav { display:none; }
+html[data-compact-shop=true] .supply .equipment-picker { display:block; flex:1; min-width:120px; max-width:220px; }
+html[data-compact-shop=true] .supply .equipment-picker select { min-height:40px; width:100%; border:1px solid var(--game-edge); border-radius:8px; padding:4px 8px; background:var(--game-paper); color:var(--game-ink); font:800 14px Nunito,system-ui,sans-serif; }
+html[data-compact-shop=true] .supply #equipment-category,html[data-compact-shop=true] .supply #equipment-status:not([data-feedback]) { display:none; }
+html[data-compact-shop=true] .supply .equipment-site .supply-grid:not([data-department=expansion]) { grid-template-columns:repeat(auto-fill,minmax(min(250px,100%),1fr)); gap:8px; align-items:stretch; }
+html[data-compact-shop=true] .supply .equipment-site .gear-card { display:grid; grid-template-columns:92px minmax(0,1fr); grid-template-rows:auto 1fr auto; gap:6px 8px; min-height:178px; padding:9px; }
+html[data-compact-shop=true] .supply .gear-card .equipment-preview { grid-column:1; grid-row:1/3; height:110px; margin:0; }
+html[data-compact-shop=true] .supply .gear-card h4 { grid-column:2; font-size:15px; line-height:18px; margin:0; }
+html[data-compact-shop=true] .supply .gear-card .equipment-perks { grid-column:2; align-self:end; margin:0; gap:3px; grid-auto-rows:68px; }
+html[data-compact-shop=true] .supply .gear-card .equipment-perks li { height:68px; padding:3px 1px; border-radius:8px; }
+html[data-compact-shop=true] .supply .gear-card .gear-stat-icon { height:21px; }
+html[data-compact-shop=true] .supply .gear-card .gear-stat-icon svg { width:18px; height:18px; margin:0; }
+html[data-compact-shop=true] .supply .gear-card .equipment-perks strong { font-size:15px; line-height:18px; }
+html[data-compact-shop=true] .supply .gear-card .gear-stat-label { font-size:10px; line-height:11px; min-height:22px; margin:0; }
+html[data-compact-shop=true] .supply .gear-card .supply-buy { grid-column:1/-1; min-height:44px; padding:5px 8px; margin:0; font-size:14px; }
+html[data-compact-shop=true] .supply .equipment-preview .gear-level { inset:3px 3px auto auto; padding:2px 4px; font-size:10px; }
+
+html[data-compact-shop=true] .supply :is(.office-bar button,.stock-topline .category-back,#stock-cart-open,#inventory-filters button,.equipment-picker select) { min-height:44px; }
 </style>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27%23377560%27/%3E%3Ctext x=%2732%27 y=%2747%27 text-anchor=%27middle%27 font-size=%2746%27 fill=%27%23ffcf58%27%3E%24%3C/text%3E%3C/svg%3E">
 <script id="cashier-embedded-assets">/* Standalone Cashier Rush assets. Assets are served from the adjacent assets folder. */
@@ -2909,6 +3002,7 @@ function payCalendarBill(id, automatic, day) {
   business.cash -= bill.amount;
   bill.status = 'paid';
   bill.paidDay = paymentDay;
+  if(!automatic)playUiSound('purchase');
   return true;
 }
 
@@ -3014,7 +3108,7 @@ function addCartCase(id) {
   if(!canManageShop())return false;
   var product=PRODUCTS.find(function(product){return product.id===id;});
   if(!product||product.level>business.storeLevel||marketCasesRemaining(product,true)<1||committedStockUnits()+cartUnits()+CASE_SIZE>equippedItem('backgrounds').capacity)return false;
-  business.cart[id]=(business.cart[id]||0)+1;saveBusiness();return true;
+  business.cart[id]=(business.cart[id]||0)+1;saveBusiness();playUiSound('cart');return true;
 }
 function checkoutStockCart(speed) {
   if(!canManageShop()||!['standard','express'].includes(speed))return null;
@@ -3030,7 +3124,7 @@ function checkoutStockCart(speed) {
       status:'pending',deliveredDay:0,delayed:false,credit:false};
     business.orders.push(order);ids.push(order.id);
   });
-  business.cash-=quote.total;business.cart={};saveBusiness();
+  business.cash-=quote.total;business.cart={};saveBusiness();playUiSound('purchase');
   return {ids:ids,dueDay:due,units:quote.units,total:quote.total,fee:quote.fee};
 }
 
@@ -3338,7 +3432,7 @@ function bidAuction(eventKey,lotId){
  var event=business.auctions.events[eventKey],lot=event&&event.lots.find(function(l){return l.id===lotId;});
  if(!canManageShop()||!event||event.day!==business.day||!lot||lot.status!=='open'||lot.leader==='you'||event.practice&&!visualTest)return false;
  var bid=auctionNextBid(lot);if(lot.leader&&bid<=lot.price||business.cash<bid+auctionFee(bid))return false;
- lot.price=bid;lot.leader='you';lot.timer=2.4;saveBusiness();return true;
+ lot.price=bid;lot.leader='you';lot.timer=2.4;saveBusiness();playUiSound('click');return true;
 }
 function passAuction(eventKey,lotId){
  var event=business.auctions.events[eventKey],lot=event&&event.lots.find(function(l){return l.id===lotId;});
@@ -4322,10 +4416,42 @@ document.getElementById('supply-items').addEventListener('click',function(event)
 
 
 /* ---------------- audio ---------------- */
+
+// Short interface samples from the user's 400 Sounds Pack. Existing music/payment audio stays intact.
+var UI_SOUNDS={click:['ui-click',.42],open:['panel-open',.30],close:['ui-close',.36],cart:['cart-add',.48],purchase:['purchase',.42],equip:['equip',.40],upgrade:['upgrade',.34],on:['toggle-on',.32],off:['toggle-off',.32],bag:['bag-pickup',.38]};
+var uiSoundPools={},uiSoundLast={},uiSoundActive=[];
+function stopUiSounds(){uiSoundActive.forEach(function(a){a.pause();a.currentTime=0;});uiSoundActive=[];}
+function playUiSound(name){
+  var spec=UI_SOUNDS&&UI_SOUNDS[name];
+  if(!spec||!business.sound||business.effectsVolume<=0||document.hidden||portraitBlocked||Portal.muted())return false;
+  var now=performance.now();if(uiSoundLast[name]!==undefined&&now-uiSoundLast[name]<55)return false;
+  uiSoundLast[name]=now;
+  try{
+    var pool=uiSoundPools[name]||(uiSoundPools[name]=[]);
+    var sample=pool.find(function(a){return a.paused||a.ended;});
+    if(!sample&&pool.length<2){sample=document.createElement('audio');sample.src='assets/sfx/'+spec[0]+'.wav';sample.preload='auto';pool.push(sample);}
+    if(!sample)sample=pool[0];
+    uiSoundActive=uiSoundActive.filter(function(a){return a!==sample&&!a.paused&&!a.ended;});
+    if(uiSoundActive.length>=4){var oldest=uiSoundActive.shift();oldest.pause();}
+    sample.currentTime=0;sample.volume=Math.min(1,spec[1]*business.effectsVolume);uiSoundActive.push(sample);
+    var pending=sample.play();if(pending&&pending.catch)pending.catch(function(){});return true;
+  }catch(error){return false;}
+}
+document.addEventListener('click',function(event){
+  var button=event.target.closest&&event.target.closest('button');if(!button||button.disabled)return;
+  if(button.closest('.supply-filters')||button.closest('.supply-nav')||button.closest('.auction-tabs')||button.closest('.category-grid')||button.hasAttribute('data-cart-step')||button.hasAttribute('data-cart-remove')||button.hasAttribute('data-auction-tier')||button.hasAttribute('data-auction-view')||button.id==='stock-cart-open'||button.id==='category-back'||button.id==='locked-back'||button.id==='title-play'||button.id==='play-menu')playUiSound('click');
+});
+document.addEventListener('change',function(event){
+  if(event.target.matches&&event.target.matches('#office-settings input[type=checkbox]'))playUiSound(event.target.checked?'on':'off');
+  else if(event.target.id==='equipment-department-select')playUiSound('click');
+});
+document.addEventListener('visibilitychange',function(){if(document.hidden)stopUiSounds();});
+
 var backgroundMusic = document.getElementById("background-music");
 backgroundMusic.volume = business.musicVolume;
 var musicStarted = false, musicPending = false, musicBlocked = false;
 function syncBackgroundMusic(fromGesture) {
+  if(!business.sound||document.hidden||Portal.muted()||portraitBlocked)stopUiSounds();
   backgroundMusic.volume=business.musicVolume;
   paymentChime.volume=business.effectsVolume;
   if (!business.sound || document.hidden || Portal.muted() || portraitBlocked) paymentChime.pause();
@@ -4914,6 +5040,7 @@ function totalEntryKey(key) {
     if(S.phase==='total'){totalEntryText='';totalEntryError='Check the receipt total and try again.';syncTotalEntryPanel();}
     return;
   }
+  playUiSound('click');
   if(key==='C')totalEntryText='';
   else if(key==='backspace')totalEntryText=totalEntryText.slice(0,-1);
   else if(key==='.' && !totalEntryText.includes('.'))totalEntryText=(totalEntryText||'0')+'.';
@@ -5011,6 +5138,7 @@ function down(p, pointerId) {
     if (S.bagDrag || !S.bag.length) return;
     if (hit(packTarget(), p)) {
       var bag = packPos();
+      playUiSound('bag');
       S.bagDrag = { pointerId: pointerId, x: bag.x, y: bag.y, dx: bag.x - p.x, dy: bag.y - p.y };
     }
     return;
@@ -6276,7 +6404,8 @@ function buyCosmeticSet(id) {
   if((price>0&&!canSpendOnEquipment(price))||parts.some(function(part){return (part.item.level||1)>business.storeLevel}))return;
   business.cash-=price;
   parts.forEach(function(part){if(!business.owned[part.category].includes(part.item.id))business.owned[part.category].push(part.item.id);business.equipped[part.category]=part.item.id});
-  saveBusiness();renderCosmeticSets();equipmentBalance.textContent=money(business.cash)+' · '+business.reputation+' REP';
+  playUiSound(price?'purchase':'equip');
+  saveBusiness();renderCosmeticSets();equipmentBalance.textContent=compactMoney(business.cash);
 }
 
 
@@ -6499,6 +6628,10 @@ var supplyCategory = document.getElementById('supply-category');
 var supplyItems = document.getElementById('supply-items');
 var productFilters = document.getElementById('product-filters');
 var categoryBack = document.getElementById('category-back');
+officeMarket.querySelector('.stock-topline').insertBefore(supplyCapacity,document.getElementById('stock-cart-open'));
+var inventoryToolbar=officeInventory.querySelector('.supply-header');
+inventoryToolbar.insertBefore(document.getElementById('inventory-filters'),inventoryCount);
+inventoryToolbar.insertBefore(inventoryCapacity,inventoryCount);
 var CATEGORY_ART = {
   all: { name: 'All products', images: ['milk', 'red-apple', 'chips'], background: '#e8eee5', edge: '#d1dfcd' },
   dairy: { name: 'Dairy & eggs', images: ['cheese', 'milk', 'eggs'], background: '#e7efff', edge: '#d4e0f5' },
@@ -6574,6 +6707,8 @@ function renderStockCapacity(target, units, interior) {
     ? 'Sell stock to make room for a case.' : 'Sell stock or equip a larger interior in Gamazon.';
   var fullMessage = occupied > capacity ? (occupied - capacity) + ' units over capacity. ' :
     'A case needs ' + CASE_SIZE + ' free slots. ';
+  target.setAttribute('aria-label',occupied+' of '+capacity+' shelf slots used; '+Math.max(0,capacity-occupied)+' free');
+  target.title=occupied+' / '+capacity+' shelf slots'+(reserved?' · '+reserved+' incoming':'');
   target.toggleAttribute('data-full', caseBlocked);
   var free = Math.max(0, capacity - occupied);
   target.innerHTML = '<div class="capacity-line"><span class="capacity-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18m18-18v18M3 9h18M3 17h18M6 4h5v5H6zm8 8h4v5h-4z"/></svg>Shelf space</span>' +
@@ -6616,7 +6751,11 @@ function lockedProducts(products) {
 
 function renderSupply(message) {
   updateCartBadge();
-  supplyBalance.textContent = money(business.cash);
+  supplyStatus.toggleAttribute('data-feedback',Boolean(message));
+  clearTimeout(supplyStatus.feedbackTimer);
+  if(message)supplyStatus.feedbackTimer=setTimeout(function(){supplyStatus.removeAttribute('data-feedback');},2400);
+  supplyBalance.title=money(business.cash);
+  supplyBalance.textContent = compactMoney(business.cash);
   document.getElementById('supply-case-size').textContent = '×' + CASE_SIZE;
   if(activeGroup==='cart'){supplyStatus.hidden=false;supplyStatus.textContent=message||'Review your cases and choose a delivery speed.';renderStockCart();return;}
   var overview = activeGroup === 'categories';
@@ -6708,6 +6847,7 @@ function buyUpgrade(id) {
   if (level >= UPGRADE_LIMIT || level >= business.storeLevel || !canSpendOnEquipment(price)) return;
   business.cash -= price;
   business.upgrades[id]++;
+  playUiSound('upgrade');
   saveBusiness();
   renderUpgrades(upgrade.name+' · '+upgradeValue(id,business.upgrades[id]));
   var refreshed = upgradeItems.querySelector('[data-item="' + id + '"]');
@@ -6900,11 +7040,13 @@ function renderExpansion() {
 
 
 function renderEquipment(message) {
+  equipmentStatus.toggleAttribute('data-feedback',Boolean(message));
   syncEquipmentApp();
   departments.forEach(function(button){button.setAttribute('aria-pressed',String(button.dataset.department===department));});
   if (department === 'os') { equipmentBalance.textContent=money(business.cash); renderOperatingSystems(); return; }
   if (department === 'sets') { equipmentBalance.textContent=money(business.cash); renderCosmeticSets(); return; }
-  equipmentBalance.textContent = money(business.cash) + ' · ' + business.reputation + ' REP';
+  equipmentBalance.title=money(business.cash)+' · '+business.reputation+' REP';
+  equipmentBalance.textContent = compactMoney(business.cash);
   equipmentCategory.textContent = departmentNames[department];
   departments.forEach(function (button) {
     button.setAttribute('aria-pressed', String(button.dataset.department === department));
@@ -6991,6 +7133,7 @@ equipmentItems.addEventListener('click', function (event) {
     if (department === 'tabletColors' || department === 'wallpapers') applyTabletAppearance();
     message = 'Equipped ' + item.name + '.';
   }
+  playUiSound(department==='expansion'?'upgrade':'equip');
   saveBusiness();
   renderEquipment(message);
   var refreshed = equipmentItems.querySelector('[data-item="' + id + '"]:not(:disabled)');
@@ -7060,6 +7203,7 @@ function renderInventory() {
   });
   var units = stockUnits(business.stock, business.storeLevel);
   inventoryCount.textContent = units + (units === 1 ? ' unit' : ' units');
+  inventoryCount.title=units+' units';
   renderStockCapacity(inventoryCapacity, units, equippedItem('backgrounds'));
   renderInventorySafety();
   inventoryFilters.forEach(function (button) {
@@ -7154,6 +7298,7 @@ officeCalendar.addEventListener('click',function(event){var link=event.target.cl
 
 function showOffice(page) {
   if (!canManageShop() && !(S.screen === 'menu' && page === 'settings')) return;
+  playUiSound(page==='desktop'?'close':'open');
   syncOrientation(true);
   supplyStore.classList.toggle('calendar-open',page==='calendar');
   officeCalendar.hidden = page !== 'calendar';
@@ -7269,6 +7414,7 @@ inventoryItems.addEventListener('submit', function (event) {
   var caption = document.getElementById('price-note-' + product.id);
   caption.toggleAttribute('data-high', Boolean(note.warning));
   caption.textContent = note.reference + (note.warning ? ' · ' + note.warning : '');
+  inventoryPriceStatus.setAttribute('data-feedback','');
   inventoryPriceStatus.textContent = product.name + ' saved at ' + money(price) + '. Applies to the next customer.';
 });
 reviewsShortcut.addEventListener('click', function () { showOffice('reviews'); });
@@ -7307,6 +7453,7 @@ shakeSetting.addEventListener('change', function () {
 });
 shopClose.addEventListener('click', function () { supplyStore.close(); });
 supplyStore.addEventListener('close', function () {
+  playUiSound('close');
   syncOrientation();
   var waitingForStock = S.screen === 'play' && S.phase === 'stock';
   if (waitingForStock) {
@@ -7509,6 +7656,9 @@ function syncOrientation(raiseNotice) {
   } else if (typeof window.orientation === 'number') {
     portrait = Math.abs(window.orientation) !== 90;
   } else portrait = W < H;
+  document.documentElement.dataset.compactShop=String(!portrait && (touch || H<=600));
+  var visibleShopHeight=window.visualViewport && window.visualViewport.height || H;
+  document.documentElement.style.setProperty('--shop-visible-height',Math.min(H,visibleShopHeight)+'px');
   var blocked = touch && Math.min(W, H) <= 1024 && portrait;
   if (blocked && !portraitBlocked) {
     portraitPausedPlay = S.screen === 'play' && S.phase !== 'stock' && !supplyStore.open;
