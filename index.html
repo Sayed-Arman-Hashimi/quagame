@@ -1376,6 +1376,21 @@ html[data-compact-shop=true] .supply .catalog-lock-ribbon { min-height:26px; pad
 html[data-compact-shop=true] .supply .catalog-lock-ribbon strong { font-size:12px; }
 html[data-compact-shop=true] .supply .catalog-lock-ribbon svg { width:16px; height:16px; }
 
+
+
+
+.auction-stock-label { display:block; font-size:11px; opacity:.84; }
+.supply .auction-body { background:linear-gradient(#23131b4a,#23131b54),url('assets/auction-room.webp') center / cover; }
+.supply .auction-body :is(.auction-session-title,.auction-empty,.auction-catalog-heading,.auction-vault-heading,.auction-lot-strip) { background:var(--auction-panel); border-radius:12px; padding:10px; }
+.supply .auction-body :is(.auction-stage,.auction-card,.auction-dates) { box-shadow:0 5px 16px #24101843; }
+#checkout-event { box-sizing:border-box; width:min(430px,calc(100% - 24px)); max-height:calc(100dvh - 20px); padding:18px; color:#3e3023; background:#fff6e3; border:2px solid #bf965d; border-radius:16px; box-shadow:0 12px 40px #190b0870; font:700 15px/1.45 Nunito,system-ui,sans-serif; }
+#checkout-event::backdrop { background:#0e161ab0; }
+#checkout-event h2 { margin:0; font-size:22px; }
+#checkout-event p { margin:8px 0 14px; }
+#checkout-event button { min-height:44px; flex:1 1 auto; }
+.supply .auction-body .auction-stage-art { background:linear-gradient(#2c172349,#2c172383),url('assets/auction-room.webp') center / cover; }
+.supply .auction-body .auction-waiting { background:linear-gradient(#25172169,#251721c7),url('assets/auction-room.webp') center / cover; color:#fff6e2; border-style:solid; }
+.supply .auction-body .auction-waiting :is(p,.auction-eyebrow) { color:#fff2d2; }
 </style>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27%23377560%27/%3E%3Ctext x=%2732%27 y=%2747%27 text-anchor=%27middle%27 font-size=%2746%27 fill=%27%23ffcf58%27%3E%24%3C/text%3E%3C/svg%3E">
 <script id="cashier-embedded-assets">/* Standalone Cashier Rush assets. Assets are served from the adjacent assets folder. */
@@ -1403,6 +1418,16 @@ CASHIER_ASSETS["assets/products/concert-grand-piano.png"]="assets/products/conce
 CASHIER_ASSETS["assets/products/ruby-necklace.png"]="assets/products/ruby-necklace.png";
 CASHIER_ASSETS["assets/products/diamond-tiara.png"]="assets/products/diamond-tiara.png";
 CASHIER_ASSETS["assets/products/crystal-sculpture.png"]="assets/products/crystal-sculpture.png";
+CASHIER_ASSETS['assets/interiors/starter.webp']='assets/interiors/starter.webp';
+CASHIER_ASSETS['assets/interiors/starter-low.webp']='assets/interiors/starter-low.webp';
+CASHIER_ASSETS['assets/interiors/daily.webp']='assets/interiors/daily.webp';
+CASHIER_ASSETS['assets/interiors/daily-low.webp']='assets/interiors/daily-low.webp';
+CASHIER_ASSETS['assets/interiors/city.webp']='assets/interiors/city.webp';
+CASHIER_ASSETS['assets/interiors/city-low.webp']='assets/interiors/city-low.webp';
+CASHIER_ASSETS['assets/interiors/gallery.webp']='assets/interiors/gallery.webp';
+CASHIER_ASSETS['assets/interiors/gallery-low.webp']='assets/interiors/gallery-low.webp';
+CASHIER_ASSETS['assets/interiors/flagship.webp']='assets/interiors/flagship.webp';
+CASHIER_ASSETS['assets/interiors/flagship-low.webp']='assets/interiors/flagship-low.webp';
 var CASHIER_RESOLVED_URLS = new Set(Object.values(CASHIER_ASSETS));
 function assetUrl(p){
   if(Object.prototype.hasOwnProperty.call(CASHIER_ASSETS,p))return CASHIER_ASSETS[p];
@@ -1488,6 +1513,11 @@ function assetUrl(p){
       <div id="help-impact" class="visitor-impact"></div><div id="help-actions" class="visitor-actions"></div>
     </section>
   </div>
+</dialog>
+<dialog id="checkout-event" aria-labelledby="checkout-event-title" aria-describedby="checkout-event-message">
+  <h2 id="checkout-event-title"></h2>
+  <p id="checkout-event-message"></p>
+  <div class="visitor-actions" id="checkout-event-actions"></div>
 </dialog>
 <dialog id="visitor-dialog" class="visitor-dialog" aria-labelledby="visitor-title" aria-describedby="visitor-message">
   <div class="visitor-layout">
@@ -1790,10 +1820,10 @@ var PRODUCT_GROUPS = [
 ];
 var PRODUCTS = [
   {"id":"milk","name":"Milk","price":175,"caseCost":305,"group":"dairy","level":2},
-  {"id":"soda","name":"Soda","price":90,"caseCost":90,"group":"drinks","startingStock":8,"level":1},
-  {"id":"chips","name":"Chips","price":150,"caseCost":165,"group":"snacks","startingStock":8,"level":1},
+  {"id":"soda","name":"Soda","price":90,"caseCost":90,"group":"drinks","startingStock":4,"level":1},
+  {"id":"chips","name":"Chips","price":150,"caseCost":165,"group":"snacks","startingStock":3,"level":1},
   {"id":"canned","name":"Tomatoes","price":1050,"caseCost":1825,"group":"pantry","level":5},
-  {"id":"choco","name":"Chocolate","price":175,"caseCost":195,"group":"snacks","startingStock":4,"level":1},
+  {"id":"choco","name":"Chocolate","price":175,"caseCost":195,"group":"snacks","startingStock":2,"level":1},
   {"id":"premium-juice","name":"Peach juice","price":415,"caseCost":720,"group":"drinks","level":2},
   {"id":"raspberry-yogurt","name":"Raspberry yogurt","price":735,"caseCost":1280,"group":"dairy","level":3},
   {"id":"premium-cake","name":"Shortcake","price":1630,"caseCost":2835,"group":"snacks","level":4},
@@ -2202,57 +2232,58 @@ var EQUIPMENT = {
   "backgrounds": [
     {
       "id": "neighborhood",
-      "name": "Neighborhood aisle",
+      "name": "Corner grocery",
       "price": 0,
       "level": 1,
-      "capacity": 48,
-      "image": assetUrl("assets/bg-anime.jpg"),
+      "capacity": 16,
+      "image": assetUrl("assets/interiors/starter.webp"),
+      "lowImage": assetUrl("assets/interiors/starter-low.webp"),
       "tier": 1,
-      "detail": "Supports expansion to store level 2."
+      "detail": "A small grocery with a wall nook and a single cooler. Supports store level 2."
     },
     {
       "id": "boutique",
-      "name": "Boutique aisle",
+      "name": "Neighborhood grocer",
       "price": 12500,
       "level": 2,
-      "capacity": 180,
-      "image": assetUrl("assets/bg-boutique.jpg"),
+      "capacity": 32,
+      "image": assetUrl("assets/interiors/daily.webp"),
+      "lowImage": assetUrl("assets/interiors/daily-low.webp"),
       "tier": 2,
-      "detail": "Supports expansion to store level 5."
+      "detail": "Produce crates, a wide window and painted cabinets. Supports store level 5."
     },
     {
       "id": "night",
-      "name": "Evening market",
+      "name": "City supermarket",
       "price": 95000,
       "level": 5,
-      "capacity": 360,
-      "image": assetUrl("assets/bg-night.jpg"),
+      "capacity": 64,
+      "image": assetUrl("assets/interiors/city.webp"),
+      "lowImage": assetUrl("assets/interiors/city-low.webp"),
       "tier": 3,
-      "detail": "Supports expansion to store level 7."
+      "detail": "Steel shelving and a refrigerated aisle. Supports store level 7."
     },
     {
       "id": "gallery",
-      "name": "Gallery supermarket",
+      "name": "Gourmet gallery",
       "price": 270000,
       "level": 7,
       "tier": 4,
-      "capacity": 600,
-      "image": assetUrl("assets/bg-boutique.jpg"),
-      "scene": "boutique",
-      "filter": "hue-rotate(16deg) saturate(.75)",
-      "detail": "Supports expansion to store level 9."
+      "capacity": 128,
+      "image": assetUrl("assets/interiors/gallery.webp"),
+      "lowImage": assetUrl("assets/interiors/gallery-low.webp"),
+      "detail": "An arched doorway and tall glass cabinets. Supports store level 9."
     },
     {
       "id": "flagship",
-      "name": "Grand flagship",
+      "name": "Collectors’ showroom",
       "price": 650000,
       "level": 9,
       "tier": 5,
-      "capacity": 900,
-      "image": assetUrl("assets/bg-night.jpg"),
-      "scene": "night",
-      "filter": "saturate(1.25) brightness(1.12)",
-      "detail": "Supports expansion through all 20 store levels."
+      "capacity": 256,
+      "image": assetUrl("assets/interiors/flagship.webp"),
+      "lowImage": assetUrl("assets/interiors/flagship-low.webp"),
+      "detail": "Walnut showcases, burgundy panels and brass trim. Supports all 20 store levels."
     }
   ],
   "counters": [
@@ -3016,7 +3047,7 @@ function readCalendarState(saved) {
   var orders = [], orderIds = new Set();
   (Array.isArray(saved.orders) ? saved.orders : []).forEach(function (entry) {
     if (!entry || typeof entry.id !== 'string' || !/^PO-\d+$/.test(entry.id) || orderIds.has(entry.id) ||
-        !PRODUCTS.some(function (product) { return product.id === entry.product; }) ||
+        !PRODUCTS.some(function (product) { return !product.auctionItem && product.id === entry.product; }) ||
         !Number.isSafeInteger(entry.quantity) || entry.quantity < 1 || entry.quantity > 9999 ||
         !Number.isSafeInteger(entry.orderedDay) || entry.orderedDay < 1 ||
         !Number.isSafeInteger(entry.dueDay) || entry.dueDay < entry.orderedDay ||
@@ -3029,7 +3060,7 @@ function readCalendarState(saved) {
       delayed:Boolean(entry.delayed), credit:Boolean(entry.credit), delivery:entry.delivery==='express'?'express':'standard', shippingFee:Number.isSafeInteger(entry.shippingFee)&&entry.shippingFee>=0?entry.shippingFee:0});
   });
   var cart = {};
-  if (saved.cart && typeof saved.cart === 'object') PRODUCTS.forEach(function(product){var count=saved.cart[product.id];if(Number.isInteger(count)&&count>0&&count<=1000)cart[product.id]=count;});
+  if (saved.cart && typeof saved.cart === 'object') PRODUCTS.forEach(function(product){if(product.auctionItem)return;var count=saved.cart[product.id];if(Number.isInteger(count)&&count>0&&count<=1000)cart[product.id]=count;});
   var bills = [], billIds = new Set();
   (Array.isArray(saved.bills) ? saved.bills : []).forEach(function (entry) {
     var type = entry && BILL_TYPES.find(function (type) { return type.id === entry.type; });
@@ -3131,6 +3162,7 @@ function marketWeekForDay(day) {
   return Math.floor((Math.max(1,day)-1)/7);
 }
 function marketCaseLimit(product) {
+  if (product.auctionItem) return 0;
   if (retailRule(product)) return 1;
   if (product.level>=9) return 2;
   if (product.level>=7) return 4;
@@ -3545,9 +3577,32 @@ var AUCTION_CATALOG=[
  ['royal-airliner','Royal private airliner','jet',850000000,5],
  ['legendary-regalia','Legendary royal regalia','crown',1000000000,5]
 ].map(function(row){return {id:row[0],name:row[1],art:row[2],value:row[3]*100,tier:row[4]};});
+// Auction lots share the store inventory, but are never sold by the wholesale supplier.
+var AUCTION_RETAIL_PREFIX = 'auction-stock-';
+AUCTION_CATALOG.forEach(function(item) {
+  var productId = AUCTION_RETAIL_PREFIX + item.id;
+  var imagePath = 'assets/products/' + productId + '.png';
+  CASHIER_ASSETS[imagePath] = assetUrl('assets/auction/' + item.art + '.png');
+  PRODUCTS.push({id:productId, name:item.name, group:'auction-stock', level:1,
+    price:Math.max(MIN_SALE_PRICE,item.value), caseCost:0, auctionItem:item.id});
+});
 var AUCTION_TIERS=['Discoveries','Vintage','Collector','Prestige','Sky & sea','Legends'];
 var AUCTION_WEALTH=[0,1000,25000,500000,10000000,100000000].map(function(n){return n*100;});
 function auctionItem(id){return AUCTION_CATALOG.find(function(item){return item.id===id;});}
+function auctionLabelPrice(entry) {
+  return Math.max(MIN_SALE_PRICE, entry.value);
+}
+function auctionCustomerOrder(customerId) {
+  var profile = CUSTOMER_PROFILES[customerId];
+  if (!profile || !profile.wealthy || Math.random() >= .35) return null;
+  var available = business.auctions.vault.filter(function(entry) { return entry.status === 'owned'; });
+  if (!available.length) return null;
+  var entry = pick(available);
+  var item = auctionItem(entry.item);
+  var price = auctionLabelPrice(entry);
+  return {products:[{id:AUCTION_RETAIL_PREFIX + item.id,name:item.name,level:1,price:price,
+    marketPrice:price,restricted:true,auctionLotId:entry.id}],budget:price,premium:true};
+}
 function auctionRandom(seed){var n=seed>>>0;return function(){n=(n+0x6D2B79F5)>>>0;var t=n;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return ((t^(t>>>14))>>>0)/4294967296;};}
 function auctionMoneyValid(n){return Number.isSafeInteger(n)&&n>=0&&n<=AUCTION_LIMIT*20;}
 function readAuctionState(saved){
@@ -3606,6 +3661,9 @@ function auctionFinishLot(event,lot,win){
  var paid=lot.price+auctionFee(lot.price);
  if(win&&lot.leader==='you'&&business.cash>=paid&&!business.auctions.vault.some(function(v){return v.id===lot.id;})){
   business.cash-=paid;lot.status='won';
+  var productId = AUCTION_RETAIL_PREFIX + lot.item;
+  business.stock[productId] = (business.stock[productId] || 0) + 1;
+  if (S) updateShelfStage();
   business.auctions.vault.push({id:lot.id,item:lot.item,paid:paid,value:lot.value,offer:Math.floor(lot.value*.95),day:event.day,status:'owned',soldFor:0,soldDay:0});
  }else lot.status='lost';
  lot.timer=0;saveBusiness();return lot.status==='won';
@@ -3636,11 +3694,6 @@ function expireAuctions(day){
    else lot.status='passed';
   });
  });
-}
-function sellAuctionItem(id){
- var item=business.auctions.vault.find(function(v){return v.id===id;});
- if(!canManageShop()||!item||item.status!=='owned'||!Number.isSafeInteger(business.cash+item.offer))return false;
- business.cash+=item.offer;item.status='sold';item.soldFor=item.offer;item.soldDay=business.day;auctionTier();saveBusiness();return true;
 }
 
 var business = loadBusiness();
@@ -3673,13 +3726,20 @@ function loadBusiness() {
     try { saved = JSON.parse((localStorage.getItem(BUSINESS_KEY) || (visualTest ? localStorage.getItem(NORMAL_BUSINESS_KEY) : null))) || {}; } catch (e) {}
   }
   var calendar = readCalendarState(saved);
+  var auctions = readAuctionState(saved);
   PRODUCTS.forEach(function (product) {
     var value = saved.stock && saved.stock[product.id];
     stock[product.id] = Number.isSafeInteger(value) && value >= 0 ? value : ((product.level || 1) === 1 ? product.startingStock || 0 : 0);
     var unsafe = saved.unsafeStock && saved.unsafeStock[product.id];
     unsafeStock[product.id] = Number.isSafeInteger(unsafe) && unsafe > 0 ? Math.min(unsafe, stock[product.id]) : 0;
     var price = saved.prices && saved.prices[product.id];
-    if (validSalePrice(price)) prices[product.id] = price;
+    if (validSalePrice(price) && !product.auctionItem) prices[product.id] = price;
+    if (product.auctionItem) {
+      stock[product.id] = auctions.vault.filter(function(entry) {
+        return entry.item === product.auctionItem && entry.status === 'owned';
+      }).length;
+      unsafeStock[product.id] = 0;
+    }
   });
   UPGRADES.forEach(function (upgrade) {
     var value = saved.upgrades && saved.upgrades[upgrade.id];
@@ -3709,7 +3769,7 @@ function loadBusiness() {
            stock: stock, unsafeStock: unsafeStock,
            orders:calendar.orders,cart:calendar.cart,bills:calendar.bills,nextOrderNo:calendar.nextOrderNo,
            marketSupply:readMarketSupply(saved,calendar.orders),
-           auctions:readAuctionState(saved),
+           auctions:auctions,
            financeStartDay:calendar.financeStartDay,processedDay:calendar.processedDay,supplierCredit:calendar.supplierCredit,
            trust: Number.isInteger(saved.trust) ? Math.max(0, Math.min(100, saved.trust)) : 100,
            heat: Number.isInteger(saved.heat) ? Math.max(0, Math.min(100, saved.heat)) : 0,
@@ -3744,9 +3804,11 @@ function stockAvailable() {
 }
 
 function buildOrder(customerId) {
+  var auctionOrder = auctionCustomerOrder(customerId);
+  if (auctionOrder) return auctionOrder;
   var profile=CUSTOMER_PROFILES[customerId];
   var stocked = PRODUCTS.filter(function (product) {
-    if (!(business.stock[product.id]>0) || product.level>business.storeLevel || !retailBuyerAllowed(product,customerId)) return false;
+    if (product.auctionItem || !(business.stock[product.id]>0) || product.level>business.storeLevel || !retailBuyerAllowed(product,customerId)) return false;
     if (profile && !profile.wealthy && !isBasicGrocery(product)) return false;
     var rule=retailRule(product);
     return !rule || Math.random()<rule.chance;
@@ -3879,20 +3941,13 @@ function loadAisleScenes(id) {
   if (backgrounds[id]) return backgrounds[id];
 
   var interior = EQUIPMENT.backgrounds.find(function (item) { return item.id === id; });
-  var prefix = 'assets/shelves-' + (interior.scene || id);
-  var sources = {
-    empty: prefix + '.jpg',
-    low: prefix + '-low.jpg',
-    medium: prefix + '-medium.jpg',
-    full: interior.image
-  };
-  var scenes = {};
-  SHELF_STAGES.forEach(function (stage) {
-    var image = new Image();
-    if (stage === business.shelfStage) image.fetchPriority = 'high';
-    image.src = assetUrl(sources[stage]);
-    scenes[stage] = image;
-  });
+  var sparse = new Image();
+  var stocked = new Image();
+  var lowStock = business.shelfStage === 'empty' || business.shelfStage === 'low';
+  (lowStock ? sparse : stocked).fetchPriority = 'high';
+  sparse.src = interior.lowImage;
+  stocked.src = interior.image;
+  var scenes = {empty:sparse, low:sparse, medium:stocked, full:stocked};
   backgrounds[id] = scenes;
   return scenes;
 }
@@ -3902,10 +3957,12 @@ function aisleBackground() {
   var image = scenes[business.shelfStage];
   if (image.complete && image.naturalWidth) return image;
   if (scenes.empty.complete && scenes.empty.naturalWidth) return scenes.empty;
+  if (scenes.full.complete && scenes.full.naturalWidth) return scenes.full;
   return null;
 }
 
 loadAisleScenes(business.equipped.backgrounds);
+
 (function () {
   for (var i = 0; i < PRODUCTS.length; i++) {
     (function (p) {
@@ -4214,12 +4271,114 @@ var helpDialog = document.getElementById('help-dialog');
 var helpStage = '';
 var helpCloseAction = '';
 
+var checkoutEventDialog = document.getElementById('checkout-event');
+var checkoutEventActions = document.getElementById('checkout-event-actions');
+
+function rollCheckoutEvent(order) {
+  if (S.day < 2 || !order.products.length || order.complaint || order.refused ||
+      S.financialRequest || order.products.some(function(product) { return product.restricted; })) return null;
+  var roll = Math.random();
+  if (roll < .09) return {kind:'bargain'};
+  if (roll < .145) return {kind:'cashless'};
+  if (S.day >= 3 && roll < .21 && order.products.length >= 2) return {kind:'theft'};
+  return null;
+}
+
+function openCheckoutEvent(title, message, actions) {
+  document.getElementById('checkout-event-title').textContent = title;
+  document.getElementById('checkout-event-message').textContent = message;
+  checkoutEventActions.innerHTML = actions.map(function(action) {
+    return '<button type="button" data-checkout-action="' + action.id + '">' + action.label + '</button>';
+  }).join('');
+  Portal.stop();
+  checkoutEventDialog.showModal();
+}
+
+function offerBargain(event) {
+  var product = pick(S.scanned.filter(function(item) { return item.price > MIN_SALE_PRICE; }));
+  if (!product) return;
+  event.product = product;
+  event.discount = Math.min(product.price - MIN_SALE_PRICE, Math.max(1, Math.round(product.price * .10)));
+  openCheckoutEvent('A little discount?', 'Could you do ' + money(product.price - event.discount) + ' for ' + product.name + '?', [
+    {id:'accept',label:'Accept · ' + money(S.total - event.discount)},
+    {id:'keep',label:'Keep price · ' + money(S.total)}
+  ]);
+}
+
+function takeBeltItem(event) {
+  if (event.stolen) return;
+  var item = beltWindow().items.find(function(entry) { return !entry.scanned && !entry.p.restricted; });
+  if (!item || business.stock[item.p.id] < 1) return;
+  advanceBelt(item);
+  S.items.splice(S.items.indexOf(item), 1);
+  event.stolen = item.p;
+  event.unsafe = business.unsafeStock[item.p.id] > 0;
+  business.stock[item.p.id]--;
+  if (event.unsafe) business.unsafeStock[item.p.id]--;
+  saveBusiness();
+  playUiSound('bag');
+}
+
+function catchShoplifter() {
+  var event = S.checkoutEvent;
+  if (!event || !event.stolen || !['carry','total','card'].includes(S.phase)) return false;
+  openCheckoutEvent('Caught shoplifting', 'You found ' + event.stolen.name + ' from the belt. The item will be returned to stock.', [
+    {id:'return',label:'Take back item'},
+    {id:'police',label:'Report to police · +8 REP'}
+  ]);
+  return true;
+}
+
+function leaveWithoutPayment(message) {
+  closeTotalEntryPanel();
+  S.checkoutNotice = message;
+  S.items = []; S.scanned = []; S.bag = []; S.total = 0; S.typing = null;
+  S.tray = null; S.drag = null; S.dragCard = false; S.card = null; S.scannerPointer = null;
+  S.beltFeed = null; S.phase = 'leaving'; S.phaseTime = 2.6;
+  S.noBuyerVisits = (S.noBuyerVisits || 0) + 1;
+}
+
+function resolveCheckoutEvent(action) {
+  if (!checkoutEventDialog.open || !S.checkoutEvent) return;
+  var event = S.checkoutEvent;
+  if (event.kind === 'bargain' && ['accept','keep'].includes(action)) {
+    if (action === 'accept') {
+      event.product.price -= event.discount;
+      S.total -= event.discount;
+      playUiSound('click');
+    }
+  } else if (event.kind === 'theft' && event.stolen && ['return','police'].includes(action)) {
+    var id = event.stolen.id;
+    business.stock[id]++;
+    if (event.unsafe) business.unsafeStock[id]++;
+    if (action === 'police') {
+      var previous = S.shiftReputation;
+      adjustVisitReputation(8);
+      leaveWithoutPayment('The police have been notified.');
+      showReputationChange(S.shiftReputation - previous);
+    }
+    saveBusiness();
+  } else return;
+  S.checkoutEvent = null;
+  checkoutEventDialog.close();
+  if (!portraitBlocked) Portal.start();
+}
+
+checkoutEventActions.addEventListener('click', function(event) {
+  var button = event.target.closest('[data-checkout-action]');
+  if (button) resolveCheckoutEvent(button.dataset.checkoutAction);
+});
+checkoutEventDialog.addEventListener('cancel', function(event) {
+  event.preventDefault();
+  resolveCheckoutEvent(S.checkoutEvent && S.checkoutEvent.kind === 'theft' ? 'return' : 'keep');
+});
+
 function rollFinancialTrouble(order, customerId) {
   var profile=CUSTOMER_PROFILES[customerId];
   if(profile && profile.wealthy)return null;
   if (S.day < 3 || !order.products.length || order.refused || order.premium ||
       (business.lastHelpRequestDay && S.day - business.lastHelpRequestDay < 2) ||
-      Math.random() >= (profile?profile.helpChance:.015)) return null;
+      Math.random() >= (profile?profile.helpChance:.035)) return null;
   var groceries = order.products.every(function (entry) {
     var product = PRODUCTS.find(function (product) { return product.id === entry.id; });
     return product && ['drinks','snacks','dairy','pantry','produce','bakery','frozen'].includes(product.group);
@@ -4950,6 +5109,8 @@ function nextCustomer(skipVisitor) {
   }
   S.queue--;
   S.financialRequest = rollFinancialTrouble(order,S.cur);
+  S.checkoutEvent = rollCheckoutEvent(order);
+  S.checkoutNotice = '';
   S.charityApproved = false;
   S.paymentApproved = false;
   S.customerBudget = order.budget;
@@ -5155,6 +5316,7 @@ function placeOnMachine(it) {
   advanceBelt(it);
   S.total += it.p.price;
   S.scanned.push(it.p);
+  if (S.checkoutEvent && S.checkoutEvent.kind === 'theft') takeBeltItem(S.checkoutEvent);
   sfxScan();
   S.flash = .28;
   var tp = trayPos();
@@ -5175,6 +5337,7 @@ function placeOnMachine(it) {
     S.phase = 'total';
     S.typing = { val: '' };
     sfxCard();
+    if (S.checkoutEvent && S.checkoutEvent.kind === 'bargain') offerBargain(S.checkoutEvent);
   }
 }
 
@@ -5277,12 +5440,17 @@ function chargeCard() {
   if (S.phase !== 'card') return;
   S.phase = 'charge';
   S.phaseTime = .7 * (1 - (equippedItem('terminals').paymentSpeed || 0) / 100);
-  if (!S.financialRequest) primePaymentChime();
+  if (!S.financialRequest && (!S.checkoutEvent || S.checkoutEvent.kind !== 'cashless')) primePaymentChime();
   sfxCard();
 }
 
 function finishCardPayment() {
   S.card = null;
+  if (S.checkoutEvent && S.checkoutEvent.kind === 'cashless') {
+    sfxError();
+    leaveWithoutPayment(pick(['My balance is too low. Sorry!', 'I forgot my money. I have to go.', 'My card is empty. Maybe next time.']));
+    return;
+  }
   if (S.financialRequest) {
     sfxError();
     showHelpRequest();
@@ -5305,7 +5473,7 @@ function down(p, pointerId) {
   ensureAudio();
   S.pos = p;
   if (S.screen === 'menu') return;
-  if (S.screen === 'result') return;
+  if (S.screen === 'result' || checkoutEventDialog.open) return;
 
   if (S.phase === 'card' && S.card) {
     var cardTouchRadius=Math.max(itemSize()*.7,document.documentElement.dataset.touch==='true'?28:0);
@@ -5314,6 +5482,7 @@ function down(p, pointerId) {
       return;
     }
   }
+  if (hit(UI.customerHit, p) && catchShoplifter()) return;
   if (S.phase === 'total') {
     if(hit(UI.pos,p))openTotalEntryPanel();
     return;
@@ -5625,6 +5794,14 @@ function giveBag() {
   // Genuine help trust is awarded once, together with its review.
   S.scanned.forEach(function (product) {
     business.stock[product.id]--;
+    if (product.auctionLotId) {
+      var entry = business.auctions.vault.find(function(lot) { return lot.id === product.auctionLotId && lot.status === 'owned'; });
+      if (entry) {
+        entry.status = 'sold';
+        entry.soldFor = product.price;
+        entry.soldDay = S.day;
+      }
+    }
     if (business.unsafeStock[product.id] > 0) business.unsafeStock[product.id]--;
   });
   saveBusiness();
@@ -6010,6 +6187,7 @@ function customerMood(patience) {
 }
 
 function drawCustomer() {
+  UI.customerHit = null;
   if (!S.cur) return;
   var cx = UI.cust.x + UI.cust.w * .5 + (1 - ease(S.custEnter)) * W * .29;
   var patience = Math.max(0, Math.min(1, S.patience / S.patienceMax));
@@ -6024,6 +6202,7 @@ function drawCustomer() {
   var width = expressions ? height * frameWidth / expressions.height
     : portrait ? height * portrait.width / portrait.height : height * .64;
   var top = base - visibleHeight;
+  UI.customerHit = {x:cx-width/2, y:top, w:width, h:visibleHeight};
 
   if (expressions) {
     ctx.drawImage(expressions, frameWidth * mood, 0, frameWidth, expressions.height,
@@ -6057,7 +6236,8 @@ function drawCustomer() {
 
   if(S.vipCustomer){star(cx-width*.42,top+height*.23,8,C.gold);star(cx+width*.43,top+height*.38,6,C.gold);}
   var greeting = S.vipCustomer ? 'VIP · ' + money(S.customerBudget) : S.premiumCustomer ? 'Premium · ' + money(S.customerBudget) : 'Budget ' + money(S.customerBudget);
-  var line = S.phase === 'leaving' && S.refusedPrice ? "Too pricey. I'll pass."
+  var line = S.phase === 'leaving' && S.checkoutNotice ? S.checkoutNotice
+           : S.phase === 'leaving' && S.refusedPrice ? "Too pricey. I'll pass."
            : S.phase === 'carry' ? (S.priceComplaint ? 'These prices are high!' : greeting)
            : S.phase === 'card' ? 'Take my card'
            : S.phase === 'bag' ? (S.priceComplaint ? 'Still pricey.' : 'Thanks!') : '';
@@ -6398,7 +6578,8 @@ function drawFx() {
 function drawBottom() {
   if(business.hints===false)return;
   var msg = '';
-  if (S.phase === 'carry') {
+  if (S.checkoutEvent && S.checkoutEvent.stolen && ['carry','total','card'].includes(S.phase)) msg = 'Something went missing. Tap the customer!';
+  else if (S.phase === 'carry') {
     if (!S.tray) msg = 'Drag a product into the tray';
     else if (S.scannerPointer === null) msg = 'Press and hold the scanner';
     else msg = 'Keep holding and aim at the product';
@@ -6843,7 +7024,7 @@ function renderCategories(target, locked) {
   var groups=['all'].concat(PRODUCT_GROUPS.map(function(group){return group.id;}));
   target.innerHTML=groups.map(function(id){
     var art=CATEGORY_ART[id];
-    var products=PRODUCTS.filter(function(product){return id==='all'||product.group===id;});
+    var products=PRODUCTS.filter(function(product){return !product.auctionItem && (id==='all'||product.group===id);});
     var available=products.filter(function(product){return product.level<=business.storeLevel;});
     var firstLevel=Math.min.apply(null,products.map(function(product){return product.level;}));
     var closed=available.length===0;
@@ -6856,7 +7037,7 @@ function renderCategories(target, locked) {
 
 var activeGroup = 'categories';
 var shopPausedPlay = false;
-var cheapestCase = Math.min.apply(null, PRODUCTS.map(function (product) { return product.caseCost; }));
+var cheapestCase = Math.min.apply(null, PRODUCTS.filter(function(product) { return !product.auctionItem; }).map(function(product) { return product.caseCost; }));
 
 function buyButton(id, label, price, enabled) {
   return '<button type="button" class="supply-buy" data-item="' + id + '"' +
@@ -6874,7 +7055,7 @@ function renderStockCapacity(target, units, interior) {
   var occupied = units + reserved;
   var caseBlocked = capacity - occupied < CASE_SIZE;
   var guide = capacity === EQUIPMENT.backgrounds[EQUIPMENT.backgrounds.length - 1].capacity
-    ? 'Sell stock to make room for a case.' : 'Sell stock or equip a larger interior in Gamazon.';
+    ? 'Sell stock to make room for a case.' : 'Sell stock or equip a larger interior in Decor.';
   var fullMessage = occupied > capacity ? (occupied - capacity) + ' units over capacity. ' :
     'A case needs ' + CASE_SIZE + ' free slots. ';
   target.setAttribute('aria-label',occupied+' of '+capacity+' shelf slots used; '+Math.max(0,capacity-occupied)+' free');
@@ -6949,7 +7130,7 @@ function renderSupply(message) {
   supplyStatus.textContent = message || 'Weekly supply · Restocks '+calendarDate(marketRestockDay())+' · Delivery 2–3 days';
   supplyItems.dataset.kind = 'products';
   supplyItems.innerHTML = PRODUCTS.filter(function (product) {
-    return activeGroup==='all'||product.group===activeGroup;
+    return !product.auctionItem && (activeGroup==='all'||product.group===activeGroup);
   }).sort(function(a,b){return Number(a.level>business.storeLevel)-Number(b.level>business.storeLevel)||a.level-b.level||a.price-b.price;})
     .map(function(product){return productCard(product,product.level>business.storeLevel,hasRoom);}).join('');
 }
@@ -7376,7 +7557,7 @@ function renderReviews() {
 
 function renderInventory() {
   var products = PRODUCTS.filter(function (product) {
-    return (product.level || 1) <= business.storeLevel || business.stock[product.id] > 0;
+    return product.auctionItem ? business.stock[product.id] > 0 : (product.level || 1) <= business.storeLevel || business.stock[product.id] > 0;
   });
   var units = stockUnits(business.stock, business.storeLevel);
   inventoryCount.textContent = units + (units === 1 ? ' unit' : ' units');
@@ -7386,13 +7567,23 @@ function renderInventory() {
   inventoryFilters.forEach(function (button) {
     button.setAttribute('aria-pressed', String(button.dataset.inventory === inventoryScope));
   });
-  var sections = PRODUCT_GROUPS.map(function (group) {
+  var sections = PRODUCT_GROUPS.concat([{id:'auction-stock',name:'Auction finds'}]).map(function (group) {
     var groupProducts = products.filter(function (product) {
       return product.group === group.id && (inventoryScope === 'all' || business.stock[product.id] > 0);
     });
     if (!groupProducts.length) return '';
     groupProducts.sort(function (a, b) { return a.name.localeCompare(b.name); });
     var rows = groupProducts.map(function (product) {
+      if (product.auctionItem) {
+        var image = assetUrl('assets/products/' + product.id + '.png');
+        return business.auctions.vault.filter(function(entry) {
+          return entry.status === 'owned' && entry.item === product.auctionItem;
+        }).map(function(entry) {
+          return '<tr><th scope="row"><span class="inventory-product"><img src="' + image + '" alt="" width="36" height="36">' + product.name +
+            '</span></th><td class="inventory-quantity">1</td><td class="inventory-price-cell">' + money(auctionLabelPrice(entry)) +
+            '<small class="auction-stock-label">Label price</small></td></tr>';
+        }).join('');
+      }
       var count = business.stock[product.id];
       return '<tr data-stock-product="' + product.id + '"' + (count ? '' : ' data-empty') +
         '><th scope="row"><span class="inventory-product"><img src="' + assetUrl('assets/products/' + product.id + '.png') + '" alt="" width="36" height="36">' + product.name +
@@ -7429,8 +7620,8 @@ function renderAuction(){
  var body=document.getElementById('auction-body');
  if(auctionView==='vault'){
   var sold=vault.filter(function(v){return v.status==='sold';}),profit=sold.reduce(function(sum,v){return sum+v.soldFor-v.paid;},0);
-  body.innerHTML='<div class="auction-vault-heading"><div><h3>Your collection</h3><p>Sell an item once. Offers include the selling fee.</p></div><span class="auction-profit '+(profit<0?'is-loss':'')+'">'+(profit>=0?'+':'−')+auctionPrice(Math.abs(profit))+'<small>Realized profit / loss</small></span></div>'+
-   (!vault.length?'<div class="auction-empty">'+AUCTION_GAVEL+'<h3>Your next discovery goes here</h3><p>Win a lot to see its appraisal and resale offer.</p></div>':'<div class="auction-grid">'+vault.slice().reverse().map(function(v){var item=auctionItem(v.item),net=(v.status==='sold'?v.soldFor:v.offer)-v.paid;return '<article class="auction-card"><div class="auction-art">'+auctionImage(item)+'<span class="auction-rarity">'+(v.status==='sold'?'Sold':AUCTION_TIERS[item.tier])+'</span></div><h3>'+item.name+'</h3><div class="auction-two-prices"><span>Paid<strong>'+auctionPrice(v.paid)+'</strong></span><span>'+(v.status==='sold'?'Sold for':'Buyer offer')+'<strong>'+auctionPrice(v.status==='sold'?v.soldFor:v.offer)+'</strong></span></div><span class="auction-profit '+(net<0?'is-loss':'')+'">'+(net>=0?'+':'−')+auctionPrice(Math.abs(net))+'</span>'+(v.status==='owned'?'<button class="auction-primary" type="button" data-auction-sell="'+v.id+'">Sell · '+auctionPrice(v.offer)+'</button>':'<div class="auction-sold">'+calendarIcon('check')+' Sold · '+calendarDate(v.soldDay)+'</div>')+'</article>';}).join('')+'</div>');
+  body.innerHTML='<div class="auction-vault-heading"><div><h3>Your collection</h3><p>Won lots go straight into My Stock. Collectors can buy them at checkout.</p></div><span class="auction-profit '+(profit<0?'is-loss':'')+'">'+(profit>=0?'+':'−')+auctionPrice(Math.abs(profit))+'<small>Realized profit / loss</small></span></div>'+
+   (!vault.length?'<div class="auction-empty">'+AUCTION_GAVEL+'<h3>Your next discovery goes here</h3><p>Win a lot to add it to your shop stock.</p></div>':'<div class="auction-grid">'+vault.slice().reverse().map(function(v){var item=auctionItem(v.item),net=(v.status==='sold'?v.soldFor:auctionLabelPrice(v))-v.paid;return '<article class="auction-card"><div class="auction-art">'+auctionImage(item)+'<span class="auction-rarity">'+(v.status==='sold'?'Sold':AUCTION_TIERS[item.tier])+'</span></div><h3>'+item.name+'</h3><div class="auction-two-prices"><span>Paid<strong>'+auctionPrice(v.paid)+'</strong></span><span>'+(v.status==='sold'?'Sold for':'Label price')+'<strong>'+auctionPrice(v.status==='sold'?v.soldFor:auctionLabelPrice(v))+'</strong></span></div><span class="auction-profit '+(net<0?'is-loss':'')+'">'+(net>=0?'+':'−')+auctionPrice(Math.abs(net))+'</span>'+(v.status==='owned'?'<div class="auction-sold">'+calendarIcon('parcel')+' In shop stock</div>':'<div class="auction-sold">'+calendarIcon('check')+' Sold · '+calendarDate(v.soldDay)+'</div>')+'</article>';}).join('')+'</div>');
   return;
  }
  if(auctionView==='catalog'){
@@ -7447,7 +7638,7 @@ function renderAuction(){
   live='<div class="auction-session-title"><span class="auction-eyebrow">'+(event.practice?'VISUAL TEST SESSION':'AUCTION DAY')+'</span><strong>'+calendarDate(event.day)+'</strong><span>'+results.length+' / 3 lots closed</span></div>';
   if(lot){var item=auctionItem(lot.item),bid=auctionNextBid(lot),fee=auctionFee(bid),canBid=lot.leader!=='you'&&(!lot.leader||bid>lot.price)&&business.cash>=bid+fee;
    live+='<article class="auction-stage"><div class="auction-stage-art">'+auctionImage(item)+'<span class="auction-rarity">'+AUCTION_TIERS[item.tier]+'</span>'+(lot.bargain?'<span class="auction-deal">−20% starting bids</span>':'')+'<span class="auction-unverified">? Unverified value</span></div><div class="auction-bidding"><h3>'+item.name+'</h3><span class="auction-estimate">Estimate '+auctionPrice(Math.round(item.value*.65))+'–'+auctionPrice(Math.min(AUCTION_LIMIT,Math.round(item.value*1.35)))+'</span><div class="auction-current-price"><span>'+(lot.leader?'Current bid':'Opening bid')+'</span><strong>'+auctionPrice(lot.price)+'</strong><small class="auction-bid-state" aria-live="polite">'+(lot.leader==='you'?'You lead · hammer soon':lot.leader==='rival'?'Another bidder is ahead':'Waiting for the first bid')+'</small></div><div class="auction-countdown" id="auction-countdown">'+(lot.leader?Math.ceil(lot.timer)+'s':'No bid yet')+'</div><button class="auction-primary" type="button" data-auction-bid="'+lot.id+'" data-event="'+event.key+'"'+(!canBid?' disabled':'')+'>'+(lot.leader==='you'?'You are leading':business.cash<bid+fee?'Need '+compactMoney(bid+fee):'Bid '+compactMoney(bid))+'</button><span class="auction-fee">'+(lot.leader==='you'?'Total if won '+money(lot.price+auctionFee(lot.price)):'With fee '+money(bid+fee))+'</span><button class="auction-pass" type="button" data-auction-pass="'+lot.id+'" data-event="'+event.key+'"'+(lot.leader==='you'?' disabled':'')+'>Pass this lot</button></div></article>';
-  }else live+='<div class="auction-empty">'+calendarIcon('check')+'<h3>Hammer down!</h3><p>Won lots are waiting in your collection.</p><button class="auction-primary" type="button" data-auction-view="vault">Open collection</button></div>';
+  }else live+='<div class="auction-empty">'+calendarIcon('check')+'<h3>Hammer down!</h3><p>Won lots are now in your shop stock.</p><button class="auction-primary" type="button" data-auction-view="vault">Open collection</button></div>';
   live+='<div class="auction-lot-strip">'+event.lots.map(function(l,index){var it=auctionItem(l.item);return '<div class="'+(l.status==='won'?'lot-won':'')+'">'+auctionImage(it)+'<span>Lot '+(index+1)+'</span><strong>'+(l.status==='won'?'Won!':l.status==='lost'?'Outbid':l.status==='passed'?'Passed':l===lot?'Live':'Up next')+'</strong></div>';}).join('')+'</div>';
  }
  body.innerHTML='<div class="auction-live-layout"><div class="auction-live">'+live+'</div>'+sidebar+'</div>';
@@ -7468,7 +7659,6 @@ officeAuction.addEventListener('click',function(event){
  if(button.dataset.auctionCalendar){auctionCalendarLink(Number(button.dataset.auctionCalendar));return;}
  if(button.dataset.auctionBid)bidAuction(button.dataset.event,button.dataset.auctionBid);
  if(button.dataset.auctionPass)passAuction(button.dataset.event,button.dataset.auctionPass);
- if(button.dataset.auctionSell)sellAuctionItem(button.dataset.auctionSell);
  renderAuction();
 });
 officeCalendar.addEventListener('click',function(event){var link=event.target.closest('[data-calendar-auction]');if(link){auctionView='live';showOffice('auction');}});
@@ -7544,7 +7734,7 @@ titleSettings.addEventListener('click', function () {
 });
 shopLaunch.addEventListener('click', function () {
   if (!canManageShop()) return;
-  if (S.screen === 'menu' || supplyStore.open || visitorDialog.open || helpDialog.open || S.drag || S.dragCard || S.bagDrag || S.scannerPointer !== null) return;
+  if (S.screen === 'menu' || supplyStore.open || visitorDialog.open || helpDialog.open || checkoutEventDialog.open || S.drag || S.dragCard || S.bagDrag || S.scannerPointer !== null) return;
   if (S.phase === 'stock') activeGroup = 'categories';
   shopPausedPlay = S.screen === 'play' && S.phase !== 'stock';
   if (shopPausedPlay) Portal.stop();
@@ -7573,7 +7763,7 @@ inventoryItems.addEventListener('submit', function (event) {
   if (!canManageShop() || !supplyStore.open || officeInventory.hidden) return;
   var form = event.target;
   var product = PRODUCTS.find(function (entry) { return entry.id === form.dataset.priceProduct; });
-  if (!product || !business.stock[product.id]) return;
+  if (!product || product.auctionItem || !business.stock[product.id]) return;
 
   var input = form.elements.price;
   var value = input.value.trim().replace(',', '.');
@@ -7682,7 +7872,7 @@ supplyItems.addEventListener('click', function (event) {
 /* ---------------- loop ---------------- */
 function update(dt) {
   tickAuction(dt);
-  if (supplyStore.open || visitorDialog.open || helpDialog.open || portraitBlocked || S.phase === 'visit' || S.phase === 'help' || S.phase === 'help-result') return;
+  if (supplyStore.open || visitorDialog.open || helpDialog.open || checkoutEventDialog.open || portraitBlocked || S.phase === 'visit' || S.phase === 'help' || S.phase === 'help-result') return;
   S.frame++;
   if (S.screen !== 'play' || S.phase === 'stock') return;
 
