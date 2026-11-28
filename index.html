@@ -1428,6 +1428,16 @@ CASHIER_ASSETS['assets/interiors/gallery.webp']='assets/interiors/gallery.webp';
 CASHIER_ASSETS['assets/interiors/gallery-low.webp']='assets/interiors/gallery-low.webp';
 CASHIER_ASSETS['assets/interiors/flagship.webp']='assets/interiors/flagship.webp';
 CASHIER_ASSETS['assets/interiors/flagship-low.webp']='assets/interiors/flagship-low.webp';
+CASHIER_ASSETS['assets/interiors/kiosk.webp']='assets/interiors/kiosk.webp';
+CASHIER_ASSETS['assets/interiors/kiosk-low.webp']='assets/interiors/kiosk-low.webp';
+CASHIER_ASSETS['assets/interiors/bakery.webp']='assets/interiors/bakery.webp';
+CASHIER_ASSETS['assets/interiors/bakery-low.webp']='assets/interiors/bakery-low.webp';
+CASHIER_ASSETS['assets/interiors/arcade.webp']='assets/interiors/arcade.webp';
+CASHIER_ASSETS['assets/interiors/arcade-low.webp']='assets/interiors/arcade-low.webp';
+CASHIER_ASSETS['assets/interiors/atelier.webp']='assets/interiors/atelier.webp';
+CASHIER_ASSETS['assets/interiors/atelier-low.webp']='assets/interiors/atelier-low.webp';
+CASHIER_ASSETS['assets/interiors/atrium.webp']='assets/interiors/atrium.webp';
+CASHIER_ASSETS['assets/interiors/atrium-low.webp']='assets/interiors/atrium-low.webp';
 var CASHIER_RESOLVED_URLS = new Set(Object.values(CASHIER_ASSETS));
 function assetUrl(p){
   if(Object.prototype.hasOwnProperty.call(CASHIER_ASSETS,p))return CASHIER_ASSETS[p];
@@ -2242,6 +2252,17 @@ var EQUIPMENT = {
       "detail": "A small grocery with a wall nook and a single cooler. Supports store level 2."
     },
     {
+      "id": "kiosk",
+      "name": "Corner kiosk",
+      "price": 3500,
+      "level": 1,
+      "capacity": 24,
+      "image": assetUrl("assets/interiors/kiosk.webp"),
+      "lowImage": assetUrl("assets/interiors/kiosk-low.webp"),
+      "tier": 1,
+      "detail": "A compact kiosk with a soda cooler and a painted service door."
+    },
+    {
       "id": "boutique",
       "name": "Neighborhood grocer",
       "price": 12500,
@@ -2251,6 +2272,17 @@ var EQUIPMENT = {
       "lowImage": assetUrl("assets/interiors/daily-low.webp"),
       "tier": 2,
       "detail": "Produce crates, a wide window and painted cabinets. Supports store level 5."
+    },
+    {
+      "id": "bakery",
+      "name": "Bakery market",
+      "price": 42000,
+      "level": 4,
+      "capacity": 48,
+      "image": assetUrl("assets/interiors/bakery.webp"),
+      "lowImage": assetUrl("assets/interiors/bakery-low.webp"),
+      "tier": 2,
+      "detail": "A neighborhood bakery with bread baskets and a tiled oven alcove."
     },
     {
       "id": "night",
@@ -2264,12 +2296,23 @@ var EQUIPMENT = {
       "detail": "Steel shelving and a refrigerated aisle. Supports store level 7."
     },
     {
+      "id": "arcade",
+      "name": "Covered market",
+      "price": 165000,
+      "level": 6,
+      "capacity": 88,
+      "image": assetUrl("assets/interiors/arcade.webp"),
+      "lowImage": assetUrl("assets/interiors/arcade-low.webp"),
+      "tier": 3,
+      "detail": "Produce tables under an arched iron canopy."
+    },
+    {
       "id": "gallery",
       "name": "Gourmet gallery",
       "price": 270000,
       "level": 7,
       "tier": 4,
-      "capacity": 128,
+      "capacity": 112,
       "image": assetUrl("assets/interiors/gallery.webp"),
       "lowImage": assetUrl("assets/interiors/gallery-low.webp"),
       "detail": "An arched doorway and tall glass cabinets. Supports store level 9."
@@ -2280,10 +2323,32 @@ var EQUIPMENT = {
       "price": 650000,
       "level": 9,
       "tier": 5,
-      "capacity": 256,
+      "capacity": 144,
       "image": assetUrl("assets/interiors/flagship.webp"),
       "lowImage": assetUrl("assets/interiors/flagship-low.webp"),
       "detail": "Walnut showcases, burgundy panels and brass trim. Supports all 20 store levels."
+    },
+    {
+      "id": "atelier",
+      "name": "Design atelier",
+      "price": 1800000,
+      "level": 12,
+      "capacity": 192,
+      "image": assetUrl("assets/interiors/atelier.webp"),
+      "lowImage": assetUrl("assets/interiors/atelier-low.webp"),
+      "tier": 5,
+      "detail": "A modern showroom with walnut plinths and muted blue tiles."
+    },
+    {
+      "id": "atrium",
+      "name": "Skylight gallery",
+      "price": 18000000,
+      "level": 16,
+      "capacity": 256,
+      "image": assetUrl("assets/interiors/atrium.webp"),
+      "lowImage": assetUrl("assets/interiors/atrium-low.webp"),
+      "tier": 5,
+      "detail": "A collectors’ gallery with wide stone arches and low glass display cases."
     }
   ],
   "counters": [
